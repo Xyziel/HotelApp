@@ -1,4 +1,4 @@
-#HotelApp
+# HotelApp
 
 ## Build
 mvn clean install
