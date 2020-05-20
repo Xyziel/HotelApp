@@ -1,0 +1,41 @@
+target/
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+### frontend ###
+src/main/frontend/node_modules
+src/main/frontend/node
+src/main/frontend/.pnp
+src/main/frontend/.pnp.js
+src/main/frontend/build
+src/main/frontend/npm-debug.log*
+src/main/frontend/.env.local
+src/main/frontend/.env.development.local
+src/main/frontend/.env.test.local
+src/main/frontend/.env.production.local
