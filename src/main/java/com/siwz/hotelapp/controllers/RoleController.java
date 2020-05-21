@@ -1,21 +1,38 @@
 package com.siwz.hotelapp.controllers;
 
-import com.siwz.hotelapp.entity.Role;
 import com.siwz.hotelapp.repository.RoleRepo;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/roles")
+@RestController()
 public class RoleController
 {
+    @Autowired
     private final RoleRepo roleRepo;
 
     public RoleController(RoleRepo roleRepo)
     {
         this.roleRepo=roleRepo;
     }
+
+
+//    @GetMapping("/${name}")
+//    public ResponseEntity<Role> readRoleByName(@PathVariable String name)
+//    {
+//        return roleRepo.findByName(name).
+//                map(role -> ResponseEntity.ok(role)).
+//                orElse(ResponseEntity.notFound().build());
+//    }
+//
+//    @PostMapping
+//    public ResponseEntity<?> createRole(@RequestBody  Role role)
+//    {
+//        Role result = roleRepo.save(role);
+//        URI location = URI.create(new String("/roles/"+ result.getRoleId()));
+//        return ResponseEntity.created(location).body(result);
+//    }
+
+
 
 
 }
