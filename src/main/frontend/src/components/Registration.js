@@ -1,12 +1,25 @@
 import React from "react";
-import "../styles/css/Registration.css"
+import "../styles/css/Registration.css";
+import Buttons from "./buttons/Buttons"
 
 class Registration extends React.Component
 {
-    render()
+    renderButton(i,j)
     {
-        return (<div> dupa </div>)
+        return (<Buttons variant={i} value={j}></Buttons>);
     }
+
+
+            render()
+            {
+                return this.renderButton("dark","submit");
+            }
+
+
+
+
+
+
 }
 
-export default Registration
+export default Registration;
