@@ -1,10 +1,10 @@
-package com.siwz.hotelapp.entity;
+package com.siwz.hotelapp.model.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="Roles")
+@Table(name="roles")
 public class Role
 {
     @GeneratedValue(strategy = GenerationType.AUTO)

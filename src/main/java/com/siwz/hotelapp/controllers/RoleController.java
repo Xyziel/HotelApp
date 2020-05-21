@@ -1,13 +1,11 @@
 package com.siwz.hotelapp.controllers;
 
-import com.siwz.hotelapp.repository.RoleRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.siwz.hotelapp.model.repository.RoleRepo;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController()
+@RestController
 public class RoleController
 {
-    @Autowired
     private final RoleRepo roleRepo;
 
     public RoleController(RoleRepo roleRepo)
