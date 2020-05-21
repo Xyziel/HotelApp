@@ -1,0 +1,14 @@
+h2 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.column {
+    flex: 50%;
+}
