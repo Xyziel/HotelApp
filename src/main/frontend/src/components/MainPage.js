@@ -3,7 +3,7 @@ import Slider from "./Slider";
 import About from "./About";
 import {Container} from "react-bootstrap";
 
-class MainName extends React.Component {
+class MainPage extends React.Component {
 
     render() {
         return (
@@ -15,4 +15,4 @@ class MainName extends React.Component {
     }
 }
 
-export default MainName;
+export default MainPage;
