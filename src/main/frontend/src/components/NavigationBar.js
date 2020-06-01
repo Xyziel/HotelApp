@@ -28,6 +28,9 @@ class NavigationBar extends React.Component {
                             <Nav.Item>
                                 <Link to={""} className="nav-link">Gallery</Link>
                             </Nav.Item>
+                            <Nav.Item>
+                                <Link to={"/reservation"} className="nav-link">Reservation</Link>
+                            </Nav.Item>
                         </Nav>
                         <Nav>
                             <Nav.Item>

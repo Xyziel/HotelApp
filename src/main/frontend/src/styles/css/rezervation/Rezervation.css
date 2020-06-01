@@ -1,0 +1,17 @@
+h3 {
+    text-align: center;
+}
+
+Form {
+    width: 50%;
+    margin: auto;
+}
+
+.form-row {
+    margin-top: 20px;
+}
+
+#checkButton {
+    margin-top: 20px;
+    font-weight: bold;
+}
