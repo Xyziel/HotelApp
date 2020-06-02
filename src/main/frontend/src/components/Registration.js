@@ -10,15 +10,10 @@ class Registration extends React.Component
     }
 
 
-            render()
-            {
-                return this.renderButton("dark","submit");
-            }
-
-
-
-
-
+    render()
+    {
+        return this.renderButton("dark","submit");
+    }
 
 }
 
