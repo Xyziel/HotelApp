@@ -42,7 +42,7 @@ public class User
     @JoinColumn(name = "id_role",referencedColumnName = "role_id")
     private Role role;
 
-    private boolean enabled = true;
+//    private boolean enabled = true;
 
 
     public User()
@@ -130,13 +130,13 @@ public class User
         this.role = role;
     }
 
-    public boolean isEnabled()
-    {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled)
-    {
-        this.enabled = enabled;
-    }
+//    public boolean isEnabled()
+//    {
+//        return enabled;
+//    }
+//
+//    public void setEnabled(boolean enabled)
+//    {
+//        this.enabled = enabled;
+//    }
 }
