@@ -21,6 +21,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         return new MyUserDetailsService();
     }
 
+
+
     @Bean
     public DaoAuthenticationProvider authenticationProvider()
     {
@@ -45,18 +47,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
 //        http.authorizeRequests().anyRequest().authenticated().antMatchers("/**");
-        http.cors().and().csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
+//        http.cors().and().csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
 //        http.authorizeRequests().anyRequest().permitAll();
 
-//        http.authorizeRequests()
-//                .antMatchers("/**").hasAuthority("admin").anyRequest().authenticated().
-//                and().
-//                formLogin().
-////                loginPage().
-////                loginProcessingUrl("/perform_login").
-////                defaultSuccessUrl("/users").
-//                permitAll().
-//                and().
-//                logout().permitAll();
+        http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers("/**").hasAuthority("admin").anyRequest().authenticated().
+                and().
+                formLogin().
+//                loginPage().
+//                loginProcessingUrl("/perform_login").
+//                defaultSuccessUrl("/users").
+                permitAll().
+                and().
+                logout().permitAll().
+                and().
+                httpBasic();
     }
 }

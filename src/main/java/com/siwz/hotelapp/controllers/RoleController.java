@@ -1,7 +1,12 @@
 package com.siwz.hotelapp.controllers;
 
+import com.siwz.hotelapp.model.entity.Role;
 import com.siwz.hotelapp.model.repository.RoleRepo;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class RoleController
@@ -11,6 +16,12 @@ public class RoleController
     public RoleController(RoleRepo roleRepo)
     {
         this.roleRepo=roleRepo;
+    }
+
+    @GetMapping("role/all")
+    ResponseEntity<List<Role>> findAllRoles()
+    {
+        return ResponseEntity.ok(roleRepo.findAll());
     }
 
 

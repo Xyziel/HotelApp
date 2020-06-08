@@ -1,8 +1,6 @@
 package com.siwz.hotelapp.service;
 
-import com.siwz.hotelapp.model.entity.Role;
 import com.siwz.hotelapp.model.entity.User;
-import com.siwz.hotelapp.model.repository.RoleRepo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +12,8 @@ import java.util.List;
 public class MyUserDetails implements UserDetails
 {
     private User user;
-    private RoleRepo roleRepo;
+//    @Autowired
+//    private RoleRepo roleRepo;
 
     public MyUserDetails(User user)
     {
@@ -24,13 +23,16 @@ public class MyUserDetails implements UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
     {
-        List<Role> roles = roleRepo.findAll();
+//        List<Role> roles = roleRepo.findAll();
+//        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//
+//        for(Role role : roles)
+//        {
+//            authorities.add(new SimpleGrantedAuthority(role.getName()));
+//        }
+//        return authorities;
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-
-        for(Role role : roles)
-        {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
+        authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
         return authorities;
     }
 
