@@ -2,7 +2,9 @@ package com.siwz.hotelapp.controllers;
 
 //import com.siwz.hotelapp.model.entity.User;
 
+import com.siwz.hotelapp.model.entity.Role;
 import com.siwz.hotelapp.model.entity.User;
+import com.siwz.hotelapp.model.repository.RoleRepo;
 import com.siwz.hotelapp.model.repository.UserRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController
 {
     private final UserRepo userRepo;
+    private final RoleRepo roleRepo;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserController(UserRepo userRepo,BCryptPasswordEncoder bCryptPasswordEncoder)
+    public UserController(UserRepo userRepo,BCryptPasswordEncoder bCryptPasswordEncoder,RoleRepo roleRepo)
     {
         this.userRepo = userRepo;
+        this.roleRepo= roleRepo;
         this.bCryptPasswordEncoder=bCryptPasswordEncoder;
     }
 
@@ -35,8 +39,21 @@ public class UserController
     @PostMapping("/registered")
     ResponseEntity<?> registerUser(@RequestBody User user)
     {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        Role role = user.getRole();
+        if(role == null)
+        {
+            user.setRole(roleRepo.findById(1));
+        }
+        userRepo.save(user);
         return ResponseEntity.ok().body(HttpStatus.OK);
+    }
+
+    @PostMapping("/hej")
+
+    String test(@RequestBody String test)
+    {
+        return test;
     }
 
     @GetMapping("/user/check")
