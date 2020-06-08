@@ -36,17 +36,22 @@ public class UserController
 //    }
 
 
-    @PostMapping("/registered")
+    @PostMapping("/register")
     ResponseEntity<?> registerUser(@RequestBody User user)
     {
-//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        if(userRepo.findUserByUserName(user.getUserName())!=null)
+        {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Role role = user.getRole();
         if(role == null)
         {
-            user.setRole(roleRepo.findById(1));
+            user.setRole(roleRepo.findById(2));
         }
         userRepo.save(user);
-        return ResponseEntity.ok().body(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/hej")
