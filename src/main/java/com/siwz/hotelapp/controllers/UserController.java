@@ -32,7 +32,7 @@ public class UserController
 //    }
 
 
-    @PostMapping("/register")
+    @PostMapping("/registered")
     ResponseEntity<?> registerUser(@RequestBody User user)
     {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
