@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -17,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Bean
     public UserDetailsService userDetailsService()
     {
-        return new MyUserDetailsService() ;
+        return new MyUserDetailsService();
     }
 
     @Bean
@@ -25,7 +26,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     {
         DaoAuthenticationProvider authenticationProvider= new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -42,7 +49,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http.authorizeRequests()
                 .antMatchers("/**").hasAuthority("admin").anyRequest().authenticated().
                 and().
-                formLogin().permitAll().
+                formLogin().
+//                loginPage().
+//                loginProcessingUrl("/perform_login").
+//                defaultSuccessUrl("/users").
+                permitAll().
                 and().
                 logout().permitAll();
     }
