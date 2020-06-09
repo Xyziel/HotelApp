@@ -2,6 +2,7 @@ package com.siwz.hotelapp.model.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "rooms")
@@ -45,6 +46,9 @@ public class Room {
     @ManyToOne(targetEntity = Building.class)
     @JoinColumn(name = "id_building", referencedColumnName = "building_id")
     private Building building;
+
+    @OneToMany(mappedBy = "room", targetEntity = Reservation.class)
+    private List<Reservation> reservations;
 
     public Room() {
     }

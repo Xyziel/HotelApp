@@ -3,6 +3,7 @@ package com.siwz.hotelapp.model.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -41,6 +42,9 @@ public class User
     @ManyToOne(targetEntity = Role.class)
     @JoinColumn(name = "id_role",referencedColumnName = "role_id")
     private Role role;
+
+    @OneToMany(targetEntity = Reservation.class)
+    private List<Reservation> reservations;
 
     public User()
     {
