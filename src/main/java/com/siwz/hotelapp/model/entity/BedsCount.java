@@ -2,10 +2,11 @@ package com.siwz.hotelapp.model.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "beds_counts")
-public class BedsCounts {
+public class BedsCount {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
@@ -27,6 +28,13 @@ public class BedsCounts {
     @NotNull
     @Column(name = "additional_double")
     private int additionaDouble;
+
+    @OneToMany(mappedBy = "bedsCount", targetEntity = Room.class)
+    private List<Room> rooms;
+
+
+    public BedsCount() {
+    }
 
     public int getBedsCountsId() {
         return bedsCountsId;

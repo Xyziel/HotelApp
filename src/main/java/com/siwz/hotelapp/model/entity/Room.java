@@ -38,6 +38,13 @@ public class Room {
     @Column(name = "description")
     private String description;
 
+    @ManyToOne(targetEntity = BedsCount.class)
+    @JoinColumn(name = "id_beds_count", referencedColumnName = "beds_count_id")
+    private BedsCount bedsCount;
+
+    public Room() {
+    }
+
     public int getRoomId() {
         return roomId;
     }
