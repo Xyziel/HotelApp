@@ -19,6 +19,8 @@ class Registration extends React.Component
 
     sendFormData(event)
     {
+        //TODO change fetch to axios
+        
         event.preventDefault();
         const data = new FormData(event.target);
         // for(var pair of data.entries())
