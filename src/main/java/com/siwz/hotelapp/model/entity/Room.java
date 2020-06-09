@@ -28,8 +28,8 @@ public class Room {
     private int idBuilding;
 
     // is it necessary?
-    @Column(name = "id_standard")
-    private int idStandard;
+//    @Column(name = "id_standard")
+//    private int idStandard;
 
     @NotNull
     @Column(name = "price")
@@ -41,6 +41,10 @@ public class Room {
     @ManyToOne(targetEntity = BedsCount.class)
     @JoinColumn(name = "id_beds_count", referencedColumnName = "beds_count_id")
     private BedsCount bedsCount;
+
+    @ManyToOne(targetEntity = Building.class)
+    @JoinColumn(name = "id_building", referencedColumnName = "building_id")
+    private Building building;
 
     public Room() {
     }
@@ -85,13 +89,13 @@ public class Room {
         this.idBuilding = idBuilding;
     }
 
-    public int getIdStandard() {
-        return idStandard;
-    }
-
-    public void setIdStandard(int idStandard) {
-        this.idStandard = idStandard;
-    }
+//    public int getIdStandard() {
+//        return idStandard;
+//    }
+//
+//    public void setIdStandard(int idStandard) {
+//        this.idStandard = idStandard;
+//    }
 
     public double getPrice() {
         return price;
