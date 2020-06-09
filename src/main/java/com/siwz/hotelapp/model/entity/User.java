@@ -34,7 +34,7 @@ public class User
     private String email;
 
     @NotNull
-    @Size(min=9,message = "Wrong size of phoneNumber")
+    @Size(min=1,message = "Wrong size of phoneNumber")
     @Column(name="phone_number")
     private String phoneNumber;
 

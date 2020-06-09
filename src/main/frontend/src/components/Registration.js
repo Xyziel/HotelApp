@@ -21,9 +21,23 @@ class Registration extends React.Component
     {
         event.preventDefault();
         const data = new FormData(event.target);
+        // for(var pair of data.entries())
+        // {
+        //     window.alert(pair);
+        // }
+        // data.append("role",null);
+        var object = {};
+        data.forEach((value,key)=>{
+            object[key]=value;
+        });
+        var json = JSON.stringify(object);
+        // window.alert(json);
         fetch("/register",{
             method:"POST",
-            data: data
+            body: json,
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
 
     }
