@@ -40,7 +40,8 @@ class Registration extends React.Component
             url: 'http://localhost:8080/api/users/register',
             data: json,
             headers:{
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             }
         }).
             then(res => {

@@ -6,6 +6,7 @@ import {Container} from "react-bootstrap";
 import NavigationBar from "./components/NavigationBar";
 import TestPage from "./components/TestPage"
 import Registration from "./components/Registration"
+import Login from "./components/Login"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
                 <Route path="/" exact component={MainName}/>
                 <Route path="/test" exact component={TestPage}/>
                 <Route path="/registration" exact component={Registration}/>
+                <Route path="/login" exact component={Login}/>
             </Switch>
         </Container>
     </Router>
