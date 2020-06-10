@@ -43,11 +43,11 @@ class Registration extends React.Component
         //     then(res => {
         //         console.log(res.data);
         // });
-
+        console.log(json);
         axios({
             method: 'post',
-            url: '/register',
-            body: json,
+            url: 'http://localhost:8080/register',
+            data: json,
             headers:{
                 'Content-Type': 'application/json'
             }
