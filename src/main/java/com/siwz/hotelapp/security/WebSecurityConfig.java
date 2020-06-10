@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         http.cors().and().csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
-1
+
 //        http.cors().and().csrf().disable().authorizeRequests()
 //                .antMatchers("/*").permitAll()
 //                .antMatchers("/dao/**").hasAuthority("admin").anyRequest().authenticated().
