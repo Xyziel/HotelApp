@@ -4,42 +4,60 @@ import Buttons from "./buttons/Buttons"
 import {Form} from "react-bootstrap"
 import {Row} from "react-bootstrap"
 import {Col} from "react-bootstrap"
+import axios from 'axios';
 
 class Registration extends React.Component
 {
     constructor()
     {
         super();
-        this.sendFormData=this.sendFormData.bind(this);
+        // this.sendFormData=this.sendFormData.bind(this);
+        // Ta linijka wydaje mi sie niepotrzebna
     }
-    renderButton(i,j)
-    {
-        return (<Buttons variant={i} value={j}></Buttons>);
-    }
+
 
     sendFormData(event)
     {
         //TODO change fetch to axios
-        
+
+        // console.log(event.target);
         event.preventDefault();
         const data = new FormData(event.target);
-        // for(var pair of data.entries())
-        // {
-        //     window.alert(pair);
-        // }
-        // data.append("role",null);
+        // console.log(data);
+        // console.log(data.entries().next());
         var object = {};
         data.forEach((value,key)=>{
             object[key]=value;
         });
         var json = JSON.stringify(object);
-        // window.alert(json);
-        fetch("/register",{
-            method:"POST",
+        // console.log(json);
+        // fetch("/register",{
+        //     method:"POST",
+        //     body: json,
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     }
+        // });
+
+        // axios.get("/user/check").
+        //     then(res => {
+        //         console.log(res.data);
+        // });
+
+        axios({
+            method: 'post',
+            url: '/register',
             body: json,
-            headers: {
-                "Content-Type": "application/json"
+            headers:{
+                'Content-Type': 'application/json'
             }
+        }).
+            then(res => {
+                console.log(res);
+                console.log(res.data);
+                window.location.replace("/");
+        },e => {
+                console.log(e);
         });
 
     }
