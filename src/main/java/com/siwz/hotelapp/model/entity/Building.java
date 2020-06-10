@@ -66,4 +66,12 @@ public class Building {
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
 }

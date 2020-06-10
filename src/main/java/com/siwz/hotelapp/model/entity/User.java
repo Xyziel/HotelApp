@@ -130,4 +130,12 @@ public class User
     {
         this.role = role;
     }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 }

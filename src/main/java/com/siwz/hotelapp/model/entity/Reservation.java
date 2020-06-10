@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "reservation")
+@Table(name = "reservations")
 public class Reservation {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,20 +14,12 @@ public class Reservation {
     private int ReservationId;
 
     @NotNull
-    @Column(name = "id_user")
-    private int idUser;
+    @Column(name = "date_from")
+    private Date dateFrom;
 
     @NotNull
-    @Column(name = "id_room")
-    private int idRoom;
-
-    @NotNull
-    @Column(name = "from")
-    private Date from;
-
-    @NotNull
-    @Column(name = "to")
-    private Date to;
+    @Column(name = "date_to")
+    private Date dateTo;
 
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "id_user", referencedColumnName = "user_id")
@@ -45,35 +37,35 @@ public class Reservation {
         ReservationId = reservationId;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public Date getDateFrom() {
+        return dateFrom;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
     }
 
-    public int getIdRoom() {
-        return idRoom;
+    public Date getDateTo() {
+        return dateTo;
     }
 
-    public void setIdRoom(int idRoom) {
-        this.idRoom = idRoom;
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
     }
 
-    public Date getFrom() {
-        return from;
+    public User getUser() {
+        return user;
     }
 
-    public void setFrom(Date from) {
-        this.from = from;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Date getTo() {
-        return to;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setTo(Date to) {
-        this.to = to;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }

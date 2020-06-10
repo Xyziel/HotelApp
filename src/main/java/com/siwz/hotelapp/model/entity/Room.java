@@ -8,8 +8,8 @@ import java.util.List;
 @Table(name = "rooms")
 public class Room {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "room_id")
     private int roomId;
 
@@ -19,18 +19,6 @@ public class Room {
 
     @Column(name = "floor")
     private int floor;
-
-    @NotNull
-    @Column(name = "id_beds_count")
-    private int idBedsCount;
-
-    @NotNull
-    @Column(name = "id_building")
-    private int idBuilding;
-
-    // is it necessary?
-//    @Column(name = "id_standard")
-//    private int idStandard;
 
     @NotNull
     @Column(name = "price")
@@ -46,6 +34,10 @@ public class Room {
     @ManyToOne(targetEntity = Building.class)
     @JoinColumn(name = "id_building", referencedColumnName = "building_id")
     private Building building;
+
+    @ManyToOne(targetEntity = Standard.class)
+    @JoinColumn(name = "id_standard", referencedColumnName = "standard_id")
+    private Standard standard;
 
     @OneToMany(mappedBy = "room", targetEntity = Reservation.class)
     private List<Reservation> reservations;
@@ -77,29 +69,37 @@ public class Room {
         this.floor = floor;
     }
 
-    public int getIdBedsCount() {
-        return idBedsCount;
+    public BedsCount getBedsCount() {
+        return bedsCount;
     }
 
-    public void setIdBedsCount(int idBedsCount) {
-        this.idBedsCount = idBedsCount;
+    public void setBedsCount(BedsCount bedsCount) {
+        this.bedsCount = bedsCount;
     }
 
-    public int getIdBuilding() {
-        return idBuilding;
+    public Building getBuilding() {
+        return building;
     }
 
-    public void setIdBuilding(int idBuilding) {
-        this.idBuilding = idBuilding;
+    public void setBuilding(Building building) {
+        this.building = building;
     }
 
-//    public int getIdStandard() {
-//        return idStandard;
-//    }
-//
-//    public void setIdStandard(int idStandard) {
-//        this.idStandard = idStandard;
-//    }
+    public Standard getStandard() {
+        return standard;
+    }
+
+    public void setStandard(Standard standard) {
+        this.standard = standard;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 
     public double getPrice() {
         return price;
