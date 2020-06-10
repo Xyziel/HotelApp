@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
+//TODO endpoint dla repo
 @Repository
 public interface UserRepo extends JpaRepository<User,Integer>
 {

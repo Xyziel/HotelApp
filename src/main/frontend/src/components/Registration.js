@@ -37,7 +37,7 @@ class Registration extends React.Component
         //urla na odpowiedni end point
         axios({
             method: 'post',
-            url: 'http://localhost:8080/register',
+            url: 'http://localhost:8080/api/users/register',
             data: json,
             headers:{
                 'Content-Type': 'application/json'

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 //TODO ten CORS trzeba bd sciagnac potem dla zabezpieczenia
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
+@RequestMapping("/api/users")
 public class UserController
 {
     private final UserRepo userRepo;
@@ -55,7 +56,6 @@ public class UserController
     }
 
     @PostMapping("/hej")
-
     String test(@RequestBody String test)
     {
         return test;
