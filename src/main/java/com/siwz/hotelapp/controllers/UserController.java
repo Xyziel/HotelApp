@@ -9,11 +9,11 @@ import com.siwz.hotelapp.model.repository.UserRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+
+//TODO ten CORS trzeba bd sciagnac potem dla zabezpieczenia
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class UserController
 {
