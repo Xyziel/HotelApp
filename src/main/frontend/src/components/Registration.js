@@ -18,8 +18,6 @@ class Registration extends React.Component
 
     sendFormData(event)
     {
-        //TODO change fetch to axios
-
         // console.log(event.target);
         event.preventDefault();
         const data = new FormData(event.target);
@@ -30,20 +28,13 @@ class Registration extends React.Component
             object[key]=value;
         });
         var json = JSON.stringify(object);
-        // console.log(json);
-        // fetch("/register",{
-        //     method:"POST",
-        //     body: json,
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     }
-        // });
-
         // axios.get("/user/check").
         //     then(res => {
         //         console.log(res.data);
         // });
         console.log(json);
+        //TODO po postawieniu wszystkiego na jednym serwerze, zmienic z pelnego
+        //urla na odpowiedni end point
         axios({
             method: 'post',
             url: 'http://localhost:8080/register',
@@ -55,7 +46,7 @@ class Registration extends React.Component
             then(res => {
                 console.log(res);
                 console.log(res.data);
-                window.location.replace("/");
+                // window.location.replace("/");
         },e => {
                 console.log(e);
         });
