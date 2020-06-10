@@ -6,6 +6,7 @@ import com.siwz.hotelapp.model.entity.Role;
 import com.siwz.hotelapp.model.entity.User;
 import com.siwz.hotelapp.model.repository.RoleRepo;
 import com.siwz.hotelapp.model.repository.UserRepo;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -52,13 +53,19 @@ public class UserController
             user.setRole(roleRepo.findById(2));
         }
         userRepo.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Access-Control-Allow-Origin","*");
+
+        return ResponseEntity.status(HttpStatus.CREATED).headers(responseHeaders).build();
     }
 
     @PostMapping("/hej")
-    String test(@RequestBody String test)
+    ResponseEntity<String> test(@RequestBody String test)
     {
-        return test;
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Access-Control-Allow-Origin","*");
+        return ResponseEntity.status(HttpStatus.OK).headers(responseHeaders).body(test);
     }
 
     @GetMapping("/user/check")

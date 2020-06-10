@@ -48,20 +48,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        http.cors().and().csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
+        //TODO co z Corsem, i jesli odpale front i back to ta configuracja nie
+        //obsluzy mi end pointow z fronta
 
-//        http.cors().and().csrf().disable().authorizeRequests()
-//                .antMatchers("/*").permitAll()
-//                .antMatchers("/dao/**").hasAuthority("admin").anyRequest().authenticated().
-//                and().
-//                formLogin().
-////                loginPage().
-////                loginProcessingUrl("/perform_login").
-//                defaultSuccessUrl("/").
-//                permitAll().
-//                and().
-//                logout().permitAll().
-//                and().
-//                httpBasic();
+//        http.cors().and().csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
+//        http.authorizeRequests().antMatchers("/**").permitAll();
+        http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers("/*").permitAll()
+                .antMatchers("/dao/**").hasAuthority("admin").anyRequest().authenticated().
+                and().
+                formLogin().
+                loginPage("/login").
+                loginProcessingUrl("/perform_login").
+                defaultSuccessUrl("/",true).
+                permitAll().
+                and().
+                logout().permitAll().
+                and().
+                httpBasic();
     }
 }
