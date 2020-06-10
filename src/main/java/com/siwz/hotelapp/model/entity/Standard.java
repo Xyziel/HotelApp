@@ -17,8 +17,8 @@ public class Standard {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "standard", targetEntity = Room.class)
-    private List<Room> rooms;
+//    @OneToMany(mappedBy = "standard", targetEntity = Room.class)
+//    private List<Room> rooms;
 
     public int getStandardId() {
         return standardId;
@@ -35,12 +35,12 @@ public class Standard {
     public void setName(String name) {
         this.name = name;
     }
-
-    public List<Room> getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
-    }
+//
+//    public List<Room> getRooms() {
+//        return rooms;
+//    }
+//
+//    public void setRooms(List<Room> rooms) {
+//        this.rooms = rooms;
+//    }
 }

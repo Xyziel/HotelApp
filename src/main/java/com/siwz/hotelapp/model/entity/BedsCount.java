@@ -29,8 +29,8 @@ public class BedsCount {
     @Column(name = "additional_double")
     private int additionalDouble;
 
-    @OneToMany(mappedBy = "bedsCount", targetEntity = Room.class)
-    private List<Room> rooms;
+//    @OneToMany(mappedBy = "bedsCount", targetEntity = Room.class)
+//    private List<Room> rooms;
 
 
     public BedsCount() {
@@ -76,11 +76,11 @@ public class BedsCount {
         this.additionalDouble = additionalDouble;
     }
 
-    public List<Room> getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
-    }
+//    public List<Room> getRooms() {
+//        return rooms;
+//    }
+//
+//    public void setRooms(List<Room> rooms) {
+//        this.rooms = rooms;
+//    }
 }

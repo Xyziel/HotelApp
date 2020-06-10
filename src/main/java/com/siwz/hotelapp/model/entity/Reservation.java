@@ -1,5 +1,7 @@
 package com.siwz.hotelapp.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -23,10 +25,12 @@ public class Reservation {
 
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "id_user", referencedColumnName = "user_id")
+    @JsonIgnoreProperties("reservations")
     private User user;
 
     @ManyToOne(targetEntity = Room.class)
     @JoinColumn(name = "id_room", referencedColumnName = "room_id")
+    @JsonIgnoreProperties("reservations")
     private Room room;
 
     public int getReservationId() {

@@ -43,8 +43,8 @@ public class User
     @JoinColumn(name = "id_role",referencedColumnName = "role_id")
     private Role role;
 
-    @OneToMany(targetEntity = Reservation.class)
-    private List<Reservation> reservations;
+//    @OneToMany(mappedBy = "user", targetEntity = Reservation.class)
+//    private List<Reservation> reservations;
 
     public User()
     {
@@ -131,11 +131,11 @@ public class User
         this.role = role;
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
-    }
+//    public List<Reservation> getReservations() {
+//        return reservations;
+//    }
+//
+//    public void setReservations(List<Reservation> reservations) {
+//        this.reservations = reservations;
+//    }
 }

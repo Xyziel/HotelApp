@@ -1,5 +1,7 @@
 package com.siwz.hotelapp.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -29,18 +31,21 @@ public class Room {
 
     @ManyToOne(targetEntity = BedsCount.class)
     @JoinColumn(name = "id_beds_count", referencedColumnName = "beds_count_id")
+    @JsonIgnoreProperties("rooms")
     private BedsCount bedsCount;
 
     @ManyToOne(targetEntity = Building.class)
     @JoinColumn(name = "id_building", referencedColumnName = "building_id")
+    @JsonIgnoreProperties("rooms")
     private Building building;
 
     @ManyToOne(targetEntity = Standard.class)
     @JoinColumn(name = "id_standard", referencedColumnName = "standard_id")
+    @JsonIgnoreProperties("rooms")
     private Standard standard;
 
-    @OneToMany(mappedBy = "room", targetEntity = Reservation.class)
-    private List<Reservation> reservations;
+//    @OneToMany(mappedBy = "room", targetEntity = Reservation.class)
+//    private List<Reservation> reservations;
 
     public Room() {
     }
@@ -93,13 +98,13 @@ public class Room {
         this.standard = standard;
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
-    }
+//    public List<Reservation> getReservations() {
+//        return reservations;
+//    }
+//
+//    public void setReservations(List<Reservation> reservations) {
+//        this.reservations = reservations;
+//    }
 
     public double getPrice() {
         return price;
