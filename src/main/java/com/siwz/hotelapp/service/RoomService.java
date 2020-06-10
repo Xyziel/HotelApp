@@ -17,7 +17,7 @@ public class RoomService {
         this.roomRepo = roomRepo;
     }
 
-    public List<Room> findFreeRooms() {
-        return roomRepo.findFreeRooms();
+    public List<Room> findFreeRooms(String dateFrom, String dateTo) {
+        return roomRepo.findFreeRooms(dateFrom, dateTo);
     }
 }
