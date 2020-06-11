@@ -16,6 +16,7 @@ class Reservation extends React.Component{
             numberOfRooms: 1,
             connectionError: '',
             dateError: '',
+            imageURL: ''
         }
     }
 
@@ -77,6 +78,16 @@ class Reservation extends React.Component{
         });
     };
 
+    loadImage(room) {
+        try {
+            const url = require('../../styles/img/rooms/room'+room+'.jpg');
+            return require('../../styles/img/rooms/room'+room+'.jpg');
+        } catch(error) {
+            console.log("zlapalem");
+            return '';
+        }
+    }
+
     render() {
         return (
             <Container>
@@ -86,22 +97,22 @@ class Reservation extends React.Component{
                     <Form.Row>
                         <Col>
                             <Form.Label>Check in</Form.Label>
-                            <Form.Control type="date" name="dateFrom" onChange={this.handleChange}></Form.Control>
+                            <Form.Control type="date" name="dateFrom" onChange={this.handleChange}/>
                             <p className="dateError">{this.state.dateError}</p>
                         </Col>
                         <Col>
                             <Form.Label>Check out</Form.Label>
-                            <Form.Control type="date" name="dateTo" onChange={this.handleChange}></Form.Control>
+                            <Form.Control type="date" name="dateTo" onChange={this.handleChange}/>
                         </Col>
                     </Form.Row>
                     <Form.Row>
                         <Col>
                             <Form.Label>Room</Form.Label>
-                            <Form.Control type="number" defaultValue="1" name="numberOfRooms" onChange={this.handleChange}></Form.Control>
+                            <Form.Control type="number" defaultValue="1" name="numberOfRooms" onChange={this.handleChange}/>
                         </Col>
                         <Col>
                             <Form.Label>Person</Form.Label>
-                            <Form.Control type="number" defaultValue="1" name="numberOfPersons" onChange={this.handleChange}></Form.Control>
+                            <Form.Control type="number" defaultValue="1" name="numberOfPersons" onChange={this.handleChange}/>
                         </Col>
                     </Form.Row>
                     <Button type="submit" id="checkButton">Check</Button>
@@ -111,12 +122,12 @@ class Reservation extends React.Component{
                     : null
                 }
                 {this.state.rooms.length === 0 && this.state.displayCom ?
-                    <p>no rooms</p>
+                    <p>No rooms available</p>
                     :
                     this.state.rooms.map((room, id) => (
                         <div className="bookRoomContainer">
                             <div className="roomInfo">
-                                <Image src={require('../../styles/img/rooms/room1.jpg')} className="roomImage"/>
+                                <Image src={this.loadImage(room.number)} className="roomImage" alt="No Image"/>
                                 <div key={id} className="room">
                                     <p>Room number: {room.number}</p>
                                     <p>Floor: {room.floor}</p>
