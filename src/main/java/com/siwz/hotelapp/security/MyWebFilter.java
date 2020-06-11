@@ -25,6 +25,7 @@ public class MyWebFilter implements Filter
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         request.getContentType();
         HttpServletResponse httpServletResponse=(HttpServletResponse)response;
+
 //        httpServletResponse.addHeader("Access-Control-Allow-Origin","*");
         String temp = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
@@ -32,6 +33,7 @@ public class MyWebFilter implements Filter
 //        httpServletResponse.setHeader("Access-Control-Max-Age", "3600");
         httpServletResponse.setHeader("Access-Control-Allow-Headers", "Content-Type");
         chain.doFilter(httpServletRequest,httpServletResponse);
+
     }
 
     @Override

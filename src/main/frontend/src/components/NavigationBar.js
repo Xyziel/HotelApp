@@ -29,6 +29,9 @@ class NavigationBar extends React.Component {
                         <Nav.Item>
                             <Link to={"registration"} className="nav-link">Sign-Up</Link>
                         </Nav.Item>
+                        <Nav.Item>
+                            <Link to={"front_login"} className="nav-link">Login</Link>
+                        </Nav.Item>
                     </Nav>
                 </Navbar>
             </Container>

@@ -23,18 +23,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         return new MyUserDetailsService();
     }
 
-
-//    @Bean
-//    CorsConfigurationSource corsConfigurationSource()
-//    {
-//        CorsConfiguration corsConfiguration = new CorsConfiguration();
-//        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-//        corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST"));
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**",corsConfiguration);
-//        return source;
-//    }
-
     @Bean
     MyWebFilter myWebFilter()
     {
@@ -63,6 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
         auth.authenticationProvider(authenticationProvider());
+//        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -87,12 +76,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 formLogin().
                 usernameParameter("username").
                 passwordParameter("password").
-                loginProcessingUrl("/login").
+                loginProcessingUrl("/perform_login").
                 defaultSuccessUrl("/",true).
                 permitAll().
                 and().
-                logout().permitAll().
-                and().
-                httpBasic();
+                logout().permitAll();
     }
 }

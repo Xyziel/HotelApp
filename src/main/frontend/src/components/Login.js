@@ -13,12 +13,18 @@ class Login extends React.Component
     {
         event.preventDefault();
         const data=new FormData(event.target);
+        console.log(data);
         var object={};
+        var encoded='';
         data.forEach((value,key)=>{
            object[key]=value;
+           encoded+=key+"="+value+"&";
         });
         var json=JSON.stringify(object);
         console.log(json);
+        console.log(encoded);
+        encoded=encoded.slice(0,encoded.length-1);
+        console.log(encoded);
 
         // axios.get("http://localhost:8080/dao/users",{
         //     // headers: {
@@ -40,9 +46,12 @@ class Login extends React.Component
         //     console.log(e);
         // });
 
-        axios.post("http://localhost:8080/login",json,{
+        //TODO moze problem jest z encodowaniem do urlencoded
+        
+        axios.post("http://localhost:8080/perform_login",encoded,{
             headers: {
                 // 'Content-Type': 'application/json',
+                'Accept': '*/*',
                 'Content-Type': 'application/x-www-form-urlencoded',
             }
         }).then(res=>{
@@ -58,11 +67,11 @@ class Login extends React.Component
             <form onSubmit={this.handleLogIn}>
                 <div className="form-group row">
                     <label className="form-label" htmlFor="username_id">Username</label>
-                    <input className="form-control" type="text" id="username_id" name="username"/>
+                    <input className="form-control" type="text" id="username" name="username"/>
                 </div>
                 <div className="form-group row">
                     <label className="form-label" htmlFor="password_id">Password</label>
-                    <input className="form-control" type="password" id="password_id" name="password"/>
+                    <input className="form-control" type="password" id="password" name="password"/>
                 </div>
                 <button className="btn btn-primary">Login</button>
             </form>
