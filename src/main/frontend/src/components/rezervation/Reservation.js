@@ -59,6 +59,11 @@ class Reservation extends React.Component{
         var json = JSON.stringify(object);
         console.log(json);
 
+
+
+
+        
+
         axios({
             method: 'post',
             url: 'http://localhost:8080/reservation/check',
