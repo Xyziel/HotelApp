@@ -63,9 +63,10 @@ public class UserController
     @PostMapping("/hej")
     ResponseEntity<String> test(@RequestBody String test)
     {
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("Access-Control-Allow-Origin","*");
-        return ResponseEntity.status(HttpStatus.OK).headers(responseHeaders).body(test);
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        responseHeaders.set("Access-Control-Allow-Origin","*");
+
+        return ResponseEntity.status(HttpStatus.OK).body(test);
     }
 
     @GetMapping("/user/check")

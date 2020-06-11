@@ -21,19 +21,32 @@ class Login extends React.Component
         console.log(json);
 
         // axios.get("http://localhost:8080/dao/users",{
-        //     headers: {
-        //         'Access-Control-Allow-Origin': true
-        //     }
+        //     // headers: {
+        //         // 'Access-Control-Allow-Origin': true
+        //     // }
         // })
-        //     .then(res=>{console.log(res)},e=>{console.log(e)});
+        //     .then(res=>{console.log(res.data)},e=>{console.log(e)});
+
+        // var object2 = {};
+        // object2["test"]="test";
+        // var json2=JSON.stringify(object2);
+        // axios.post("http://localhost:8080/api/users/hej",json2,{
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // }).then(res=>{
+        //     console.log(res.data);
+        // },e=>{
+        //     console.log(e);
+        // });
 
         axios.post("http://localhost:8080/login",json,{
             headers: {
-                'Content-Type': 'application/json',
-                // 'Access-Control-Allow-Origin': '*'
+                // 'Content-Type': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
             }
         }).then(res=>{
-            console.log(res)
+            console.log(res);
         },e=>{
            console.log(e);
         });
@@ -45,7 +58,7 @@ class Login extends React.Component
             <form onSubmit={this.handleLogIn}>
                 <div className="form-group row">
                     <label className="form-label" htmlFor="username_id">Username</label>
-                    <input className="form-control" type="text" id="username_id" name="userName"/>
+                    <input className="form-control" type="text" id="username_id" name="username"/>
                 </div>
                 <div className="form-group row">
                     <label className="form-label" htmlFor="password_id">Password</label>

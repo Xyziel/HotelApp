@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
 
 @Configuration
@@ -77,14 +76,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
 //        http.cors().and().csrf().and().addFilterBefore(myWebFilter(), SessionManagementFilter.class).authorizeRequests()
 
-        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().
+//        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().
+        //TODO there was simply crsf problem, i need to add it in header in react to make it work
+
+        http.csrf().disable().
         addFilterBefore(myWebFilter(), CsrfFilter.class).authorizeRequests()
-                .antMatchers("/*").permitAll()
-                .antMatchers("/dao/**").hasAuthority("admin").anyRequest().authenticated().
+                .antMatchers("/**").permitAll().
+//                .antMatchers("/dao/**").hasAuthority("admin").anyRequest().authenticated().
                 and().
                 formLogin().
-//                loginPage("/login").
-//                loginProcessingUrl("/perform_login").
+                usernameParameter("username").
+                passwordParameter("password").
+                loginProcessingUrl("/login").
                 defaultSuccessUrl("/",true).
                 permitAll().
                 and().
