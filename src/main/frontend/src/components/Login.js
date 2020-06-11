@@ -20,14 +20,19 @@ class Login extends React.Component
         var json=JSON.stringify(object);
         console.log(json);
 
-        axios.get("http://localhost:8080/dao/users",{
-            headers: {
-                'Access-Control-Allow-Origin': true
-            }
-        })
-            .then(res=>{console.log(res)},e=>{console.log(e)});
+        // axios.get("http://localhost:8080/dao/users",{
+        //     headers: {
+        //         'Access-Control-Allow-Origin': true
+        //     }
+        // })
+        //     .then(res=>{console.log(res)},e=>{console.log(e)});
 
-        axios.post("http://localhost:8080/login",json).then(res=>{
+        axios.post("http://localhost:8080/login",json,{
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Access-Control-Allow-Origin': '*'
+            }
+        }).then(res=>{
             console.log(res)
         },e=>{
            console.log(e);

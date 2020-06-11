@@ -10,17 +10,38 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfFilter;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
+
     @Bean
     public UserDetailsService userDetailsService()
     {
         return new MyUserDetailsService();
     }
 
+
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource()
+//    {
+//        CorsConfiguration corsConfiguration = new CorsConfiguration();
+//        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+//        corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST"));
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**",corsConfiguration);
+//        return source;
+//    }
+
+    @Bean
+    MyWebFilter myWebFilter()
+    {
+        MyWebFilter myWebFilter = new MyWebFilter();
+        return myWebFilter;
+    }
 
 
     @Bean
@@ -53,13 +74,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
 //        http.cors().and().csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
 //        http.authorizeRequests().antMatchers("/**").permitAll();
-        http.cors().and().csrf().disable().authorizeRequests()
+
+//        http.cors().and().csrf().and().addFilterBefore(myWebFilter(), SessionManagementFilter.class).authorizeRequests()
+
+        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().
+        addFilterBefore(myWebFilter(), CsrfFilter.class).authorizeRequests()
                 .antMatchers("/*").permitAll()
                 .antMatchers("/dao/**").hasAuthority("admin").anyRequest().authenticated().
                 and().
                 formLogin().
-                loginPage("/login").
-                loginProcessingUrl("/perform_login").
+//                loginPage("/login").
+//                loginProcessingUrl("/perform_login").
                 defaultSuccessUrl("/",true).
                 permitAll().
                 and().
