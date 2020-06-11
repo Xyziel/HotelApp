@@ -6,9 +6,10 @@ import com.siwz.hotelapp.model.entity.Role;
 import com.siwz.hotelapp.model.entity.User;
 import com.siwz.hotelapp.model.repository.RoleRepo;
 import com.siwz.hotelapp.model.repository.UserRepo;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,11 +55,24 @@ public class UserController
         }
         userRepo.save(user);
 
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("Access-Control-Allow-Origin","*");
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        responseHeaders.set("Access-Control-Allow-Origin","*");
 
-        return ResponseEntity.status(HttpStatus.CREATED).headers(responseHeaders).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @GetMapping("isLoggedIn")
+    ResponseEntity<?> isLoggedIn()
+    {
+        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getPrincipal());
+        System.out.println(auth.isAuthenticated());
+        System.out.println(auth.getDetails());
+        System.out.println(auth.getName());
+        System.out.println(auth.getCredentials());
+        return ResponseEntity.ok().build();
+    }
+
 
     @PostMapping("/hej")
     ResponseEntity<String> test(@RequestBody String test)

@@ -57,16 +57,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        //TODO co z Corsem, i jesli odpale front i back to ta configuracja nie
-        //obsluzy mi end pointow z fronta
+
 
 //        http.cors().and().csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
-//        http.authorizeRequests().antMatchers("/**").permitAll();
+        //TODO do formularza moge dodac token crsf jak bedzie czas
 
-//        http.cors().and().csrf().and().addFilterBefore(myWebFilter(), SessionManagementFilter.class).authorizeRequests()
-
-//        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().
-        //TODO there was simply crsf problem, i need to add it in header in react to make it work
 
         http.csrf().disable().
         addFilterBefore(myWebFilter(), CsrfFilter.class).authorizeRequests()
@@ -77,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 usernameParameter("username").
                 passwordParameter("password").
                 loginProcessingUrl("/perform_login").
-                defaultSuccessUrl("/",true).
+//                defaultSuccessUrl("http://localhost:3000/test",true).
                 permitAll().
                 and().
                 logout().permitAll();

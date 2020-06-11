@@ -1,6 +1,7 @@
-import React, {Component} from "react";
+import React from "react";
 import "../styles/css/Login.css";
 import axios from 'axios';
+import querystring from 'querystring'
 
 class Login extends React.Component
 {
@@ -13,52 +14,30 @@ class Login extends React.Component
     {
         event.preventDefault();
         const data=new FormData(event.target);
-        console.log(data);
+
         var object={};
-        var encoded='';
         data.forEach((value,key)=>{
            object[key]=value;
-           encoded+=key+"="+value+"&";
         });
-        var json=JSON.stringify(object);
-        console.log(json);
-        console.log(encoded);
-        encoded=encoded.slice(0,encoded.length-1);
-        console.log(encoded);
 
-        // axios.get("http://localhost:8080/dao/users",{
-        //     // headers: {
-        //         // 'Access-Control-Allow-Origin': true
-        //     // }
-        // })
-        //     .then(res=>{console.log(res.data)},e=>{console.log(e)});
-
-        // var object2 = {};
-        // object2["test"]="test";
-        // var json2=JSON.stringify(object2);
-        // axios.post("http://localhost:8080/api/users/hej",json2,{
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // }).then(res=>{
-        //     console.log(res.data);
-        // },e=>{
-        //     console.log(e);
-        // });
+        var query=querystring.stringify(object);
 
         //TODO moze problem jest z encodowaniem do urlencoded
-        
-        axios.post("http://localhost:8080/perform_login",encoded,{
+
+        axios.post("http://localhost:8080/perform_login",query,{
             headers: {
                 // 'Content-Type': 'application/json',
                 'Accept': '*/*',
                 'Content-Type': 'application/x-www-form-urlencoded',
             }
         }).then(res=>{
-            console.log(res);
+            console.log(res.headers);
         },e=>{
            console.log(e);
         });
+
+        console.log("xd");
+        // window.location.replace("http://localhost:3000/");
     }
 
     renderFormLogin()
