@@ -4,10 +4,11 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import MainName from "./components/MainName";
 import {Container} from "react-bootstrap";
 import NavigationBar from "./components/NavigationBar";
-import TestPage from "./components/TestPage"
-import Registration from "./components/Registration"
-import Login from "./components/Login"
+import TestPage from "./components/TestPage";
+import Registration from "./components/Registration";
+import Login from "./components/Login";
 import Authenticated from "./components/Authenticated";
+import Logout from "./components/Logout";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/registration" exact component={Registration}/>
                 <Route path="/front_login" exact component={Login}/>
                 <Route path="/authenticated" exact component={Authenticated}/>
+                <Route path="/logout" exact component={Logout}/>
             </Switch>
         </Container>
     </Router>

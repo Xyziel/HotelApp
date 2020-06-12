@@ -8,9 +8,9 @@ import axios from 'axios';
 
 class Registration extends React.Component
 {
-    constructor()
+    constructor(props)
     {
-        super();
+        super(props);
         // this.sendFormData=this.sendFormData.bind(this);
         // Ta linijka wydaje mi sie niepotrzebna
     }

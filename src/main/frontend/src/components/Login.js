@@ -5,9 +5,9 @@ import querystring from 'querystring'
 
 class Login extends React.Component
 {
-    constructor()
+    constructor(props)
     {
-        super();
+        super(props);
     }
 
     handleLogIn(event)
