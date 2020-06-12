@@ -1,6 +1,7 @@
 package com.siwz.hotelapp.security;
 
 import com.siwz.hotelapp.service.MyUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CsrfFilter;
@@ -16,6 +18,12 @@ import org.springframework.security.web.csrf.CsrfFilter;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
+
+    @Autowired
+    private MyUrlAuthenticationSuccessHandler myUrlAuthenticationSuccessHandler;
+
+    @Autowired
+    private MyUrlLogoutHandler myUrlLogoutHandler;
 
     @Bean
     public UserDetailsService userDetailsService()
@@ -63,7 +71,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         //TODO do formularza moge dodac token crsf jak bedzie czas
 
 
-        http.csrf().disable().
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS).
+                and().csrf().disable().
         addFilterBefore(myWebFilter(), CsrfFilter.class).authorizeRequests()
                 .antMatchers("/**").permitAll().
 //                .antMatchers("/dao/**").hasAuthority("admin").anyRequest().authenticated().
@@ -72,9 +81,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 usernameParameter("username").
                 passwordParameter("password").
                 loginProcessingUrl("/perform_login").
+                successHandler(myUrlAuthenticationSuccessHandler).
 //                defaultSuccessUrl("http://localhost:3000/test",true).
                 permitAll().
                 and().
-                logout().permitAll();
+                logout().
+                logoutSuccessHandler(myUrlLogoutHandler).
+                permitAll();
     }
 }

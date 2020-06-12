@@ -7,6 +7,7 @@ import NavigationBar from "./components/NavigationBar";
 import TestPage from "./components/TestPage"
 import Registration from "./components/Registration"
 import Login from "./components/Login"
+import Authenticated from "./components/Authenticated";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/test" exact component={TestPage}/>
                 <Route path="/registration" exact component={Registration}/>
                 <Route path="/front_login" exact component={Login}/>
+                <Route path="/authenticated" exact component={Authenticated}/>
             </Switch>
         </Container>
     </Router>

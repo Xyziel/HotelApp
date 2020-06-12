@@ -6,12 +6,14 @@ import com.siwz.hotelapp.model.entity.Role;
 import com.siwz.hotelapp.model.entity.User;
 import com.siwz.hotelapp.model.repository.RoleRepo;
 import com.siwz.hotelapp.model.repository.UserRepo;
+import com.siwz.hotelapp.security.ActiveUsersStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 //TODO ten CORS trzeba bd sciagnac potem dla zabezpieczenia
@@ -23,6 +25,9 @@ public class UserController
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private ActiveUsersStore activeUsersStore;
 
     public UserController(UserRepo userRepo,BCryptPasswordEncoder bCryptPasswordEncoder,RoleRepo roleRepo)
     {
@@ -62,15 +67,10 @@ public class UserController
     }
 
     @GetMapping("isLoggedIn")
-    ResponseEntity<?> isLoggedIn()
+    ResponseEntity<List<String>> isLoggedIn()
     {
-        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getPrincipal());
-        System.out.println(auth.isAuthenticated());
-        System.out.println(auth.getDetails());
-        System.out.println(auth.getName());
-        System.out.println(auth.getCredentials());
-        return ResponseEntity.ok().build();
+        List<String> users=activeUsersStore.getUsers();
+        return ResponseEntity.ok(users);
     }
 
 
