@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/css/Login.css";
 import axios from 'axios';
 import querystring from 'querystring'
+import Cookies from 'js-cookie'
 
 class Login extends React.Component
 {
@@ -25,6 +26,7 @@ class Login extends React.Component
         //TODO moze problem jest z encodowaniem do urlencoded
 
         axios.post("http://localhost:8080/perform_login",query,{
+            // withCredentials: true,
             headers: {
                 // 'Content-Type': 'application/json',
                 'Accept': '*/*',
@@ -32,6 +34,8 @@ class Login extends React.Component
             }
         }).then(res=>{
             console.log(res.headers);
+            console.log(res.data);
+            // Cookies.set('JSESSIONID',res.data)
         },e=>{
            console.log(e);
         });
