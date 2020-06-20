@@ -4,14 +4,14 @@ import querystring from 'querystring'
 
 class Authenticated extends React.Component
 {
-    constructor()
+    constructor(props)
     {
-        super();
+        super(props);
     }
 
     handleClick()
     {
-        axios.get('http://localhost:8080/api/users/isLoggedIn').then(res=>{
+        axios.get('http://localhost:8080/isLoggedIn').then(res=>{
             console.log(res.data);
         },e=>{
             console.log(e);
