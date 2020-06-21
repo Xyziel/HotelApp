@@ -19,14 +19,14 @@ public class MyUrlLogoutHandler implements LogoutSuccessHandler
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException
     {
 //        System.out.println(authentication.getName());
-        HttpSession session=httpServletRequest.getSession();
-        LoggedUser loggedUser=(LoggedUser)session.getAttribute("name");
-        List<String> users=loggedUser.getActiveUsersStore().getUsers();
-//        users.remove(users.indexOf(loggedUser.getUsername()));
-        if(session!=null)
-        {
-            users.remove(users.indexOf(loggedUser.getUsername()));
-            session.removeAttribute("user");
-        }
+//        HttpSession session=httpServletRequest.getSession(false);
+//        LoggedUser loggedUser=(LoggedUser)session.getAttribute("name");
+//        List<String> users=loggedUser.getActiveUsersStore().getUsers();
+////        users.remove(users.indexOf(loggedUser.getUsername()));
+//        if(session!=null)
+//        {
+//            users.remove(users.indexOf(loggedUser.getUsername()));
+//            session.removeAttribute("user");
+//        }
     }
 }

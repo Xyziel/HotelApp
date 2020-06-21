@@ -25,8 +25,7 @@ public class MyUrlAuthenticationSuccessHandler implements AuthenticationSuccessH
         {
             LoggedUser loggedUser =new LoggedUser(authentication.getName(),activeUsersStore);
             session.setAttribute("user",loggedUser);
+            System.out.println(session.getId());
         }
-//        System.out.println(authentication.getName());
-//        session.setAttribute("user",);
     }
 }
