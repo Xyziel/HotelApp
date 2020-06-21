@@ -6,7 +6,6 @@ import com.siwz.hotelapp.model.entity.Role;
 import com.siwz.hotelapp.model.entity.User;
 import com.siwz.hotelapp.model.repository.RoleRepo;
 import com.siwz.hotelapp.model.repository.UserRepo;
-import com.siwz.hotelapp.security.ActiveUsersStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +26,7 @@ public class UserController
     private final RoleRepo roleRepo;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private ActiveUsersStore activeUsersStore;
+
 
     public UserController(UserRepo userRepo,BCryptPasswordEncoder bCryptPasswordEncoder,RoleRepo roleRepo)
     {
@@ -67,14 +65,7 @@ public class UserController
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("isLoggedIn")
-    ResponseEntity<List<String>> isLoggedIn()
-    {
-        //TODO sesja jest taka sama, pytanie czy zmienia sie przy logowaniu etc czy nie i jak to wykorzystac
-        System.out.println(RequestContextHolder.currentRequestAttributes().getSessionId());
-        List<String> users=activeUsersStore.getUsers();
-        return ResponseEntity.ok(users);
-    }
+
 
 
     @PostMapping("/hej")

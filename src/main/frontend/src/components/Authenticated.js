@@ -11,11 +11,22 @@ class Authenticated extends React.Component
 
     handleClick()
     {
+        var userRole;
         axios.get('http://localhost:8080/isLoggedIn').then(res=>{
             console.log(res.data);
         },e=>{
             console.log(e);
         });
+
+        axios.get('http://localhost:8080/getUserRole').then(res=>{
+            console.log(res.data);
+            userRole=res.data;
+        },e=>{
+            console.log(e);
+        });
+
+
+        console.log(userRole);
     }
 
     render()

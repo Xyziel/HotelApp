@@ -14,18 +14,16 @@ import java.io.IOException;
 @Component
 public class MyUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler
 {
-    @Autowired
-    private ActiveUsersStore activeUsersStore;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException
     {
         HttpSession session = httpServletRequest.getSession(false);
-        if(session != null)
-        {
-            LoggedUser loggedUser =new LoggedUser(authentication.getName(),activeUsersStore);
-            session.setAttribute("user",loggedUser);
-            System.out.println(session.getId());
-        }
+//        if(session != null)
+//        {
+//            LoggedUser loggedUser =new LoggedUser(authentication.getName(),activeUsersStore);
+//            session.setAttribute("user",loggedUser);
+//            System.out.println(session.getId());
+//        }
     }
 }

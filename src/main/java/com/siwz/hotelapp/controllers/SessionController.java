@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -36,5 +37,23 @@ public class SessionController
 
 
         return ResponseEntity.ok(false);
+    }
+
+
+    @GetMapping("getUserRole")
+    ResponseEntity<?> getUserRole()
+    {
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        String role="none";
+        if(authentication.getPrincipal() instanceof UserDetails)
+        {
+            List<SimpleGrantedAuthority> authorityList= (List<SimpleGrantedAuthority>) authentication.getAuthorities();
+            if(authorityList.isEmpty()==false)
+            {
+                role=authorityList.get(0).getAuthority();
+                return ResponseEntity.ok(role);
+            }
+        }
+        return ResponseEntity.ok("none");
     }
 }
