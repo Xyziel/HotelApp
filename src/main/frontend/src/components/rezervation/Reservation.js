@@ -46,11 +46,11 @@ class Reservation extends React.Component{
             this.setState({dateError: 'Wrong date!'});
         } else {
             this.setState({dateError: ''});
-            this.send(event);
+            this.findFreeRooms(event);
         }
     };
 
-    send(event) {
+    findFreeRooms(event) {
         const data = new FormData(event.target);
         var object = {};
         data.forEach((value,key)=>{
@@ -58,11 +58,6 @@ class Reservation extends React.Component{
         });
         var json = JSON.stringify(object);
         console.log(json);
-
-
-
-
-        
 
         axios({
             method: 'post',
@@ -76,7 +71,6 @@ class Reservation extends React.Component{
             console.log(res);
             this.setState({rooms: res.data});
             this.setState({displayCom: true});
-            console.log(this.state.rooms);
         },e => {
             console.log(e);
             this.setState({connectionError: e.message})
@@ -88,9 +82,12 @@ class Reservation extends React.Component{
             const url = require('../../styles/img/rooms/room'+room+'.jpg');
             return require('../../styles/img/rooms/room'+room+'.jpg');
         } catch(error) {
-            console.log("zlapalem");
             return '';
         }
+    }
+
+    addReservation() {
+
     }
 
     render() {
@@ -136,7 +133,7 @@ class Reservation extends React.Component{
                                 <div key={id} className="room">
                                     <p>Room number: {room.number}</p>
                                     <p>Floor: {room.floor}</p>
-                                    <p>Price: {room.price}</p>
+                                    <p>Price per night: {room.price}</p>
                                     <p>Beds: {room.bedsCount.single === 0 ? '' : 'Single x' + room.bedsCount.single}
                                         {room.bedsCount.doublee === 0 ? '' : ' Double x' + room.bedsCount.doublee}</p>
                                     <p>Description : {room.description}</p>
