@@ -63,3 +63,7 @@ p {
 .bookButton:active {
     background-color: #2aa800;
 }
+
+.bookButton:focus {
+    outline: none;
+}

@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface ReservationRepo extends JpaRepository<Reservation, Integer> {
 
     //add query
-    @Query
+    @Query(value = "select * from reservation", nativeQuery = true)
     void addReservation(int idUser, int idRoom, String dateFrom, String dateTo);
 }

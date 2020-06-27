@@ -1,4 +1,5 @@
 import React from "react";
+import PopUp from "./PopUp";
 import {Container, Form, Col, Button, Image} from "react-bootstrap";
 import '../../styles/css/rezervation/Rezervation.css';
 import axios from 'axios';
@@ -16,7 +17,9 @@ class Reservation extends React.Component{
             numberOfRooms: 1,
             connectionError: '',
             dateError: '',
-            imageURL: ''
+            imageURL: '',
+            isLoggedIn: false,
+            showPopup: false,
         }
     }
 
@@ -42,7 +45,7 @@ class Reservation extends React.Component{
         if(dateFrom.length === 0 || dateTo.length === 0) {
             this.setState({dateError: 'Wrong date!'});
         }
-        else if(dateFrom.getTime() < currentTime.getTime() || dateTo.getTime() <= dateFrom.getTime()){
+        else if(dateFrom.getDate() < currentTime.getDate() || dateTo.getTime() <= dateFrom.getTime()){
             this.setState({dateError: 'Wrong date!'});
         } else {
             this.setState({dateError: ''});
@@ -54,6 +57,7 @@ class Reservation extends React.Component{
         const data = new FormData(event.target);
         var object = {};
         data.forEach((value,key)=>{
+            console.log(value, key);
             object[key]=value;
         });
         var json = JSON.stringify(object);
@@ -88,6 +92,12 @@ class Reservation extends React.Component{
 
     addReservation() {
 
+    }
+
+    togglePopup() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
     }
 
     render() {
@@ -139,9 +149,21 @@ class Reservation extends React.Component{
                                     <p>Description : {room.description}</p>
                                 </div>
                             </div>
-                            <button type="submit" className="bookButton">BOOK NOW</button>
+                            <button type="submit" className="bookButton" onClick={this.togglePopup.bind(this)}>BOOK NOW</button>
                         </div>
                     ))
+                }
+                {this.state.showPopup ?
+                    <PopUp
+                        from={this.state.dateFrom.getDate() + '-' +
+                        ((this.state.dateFrom.getMonth() + 1) < 10 ? '0' + (this.state.dateFrom.getMonth() + 1) : (this.state.dateFrom.getMonth() + 1)) + '-' +
+                        this.state.dateFrom.getFullYear()}
+                        to={this.state.dateTo.getDate() + '-' +
+                        ((this.state.dateTo.getMonth() + 1) < 10 ? '0' + (this.state.dateTo.getMonth() + 1) : (this.state.dateTo.getMonth() + 1)) + '-' +
+                        this.state.dateTo.getFullYear()}
+                        closePopup={this.togglePopup.bind(this)}
+                    />
+                    : null
                 }
             </Container>
         )
