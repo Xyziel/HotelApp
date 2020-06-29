@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -82,6 +83,22 @@ public class UserController
     {
         User user = userRepo.findUserByUserName("dupa");
         return ResponseEntity.ok().body(user);
+    }
+
+    @DeleteMapping("")
+    ResponseEntity<?> deleteUserById(@RequestParam("userName") String userName)
+    {
+        User user = userRepo.findUserByUserName(userName);
+        System.out.println(user.getUserName());
+        if(user!=null)
+        {
+            System.out.println(userName);
+            System.out.println(user.getUserId());
+            userRepo.deleteUserByUserId(user.getUserId());
+            System.out.println(user.getUserId());
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.ok(false);
     }
 
 

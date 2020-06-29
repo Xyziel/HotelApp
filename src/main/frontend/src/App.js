@@ -9,6 +9,7 @@ import Registration from "./components/Registration";
 import Login from "./components/Login";
 import Authenticated from "./components/Authenticated";
 import Logout from "./components/Logout";
+import AdminPanel from "./components/AdminPanel";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/front_login" exact component={Login}/>
                 <Route path="/authenticated" exact component={Authenticated}/>
                 <Route path="/logout" exact component={Logout}/>
+                <Route path="/admin_panel" exact component={AdminPanel}/>
             </Switch>
         </Container>
     </Router>
