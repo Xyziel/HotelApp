@@ -1,6 +1,8 @@
 package com.siwz.hotelapp.controllers;
 
 
+import com.siwz.hotelapp.model.entity.User;
+import com.siwz.hotelapp.model.repository.UserRepo;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +23,10 @@ import java.util.List;
 @RestController
 public class SessionController
 {
-    public SessionController()
+    private final UserRepo userRepo;
+    public SessionController(UserRepo userRepo)
     {
-
+        this.userRepo=userRepo;
     }
 
     @GetMapping("/isLoggedIn")
@@ -56,5 +59,17 @@ public class SessionController
             }
         }
         return ResponseEntity.ok("none");
+    }
+
+    @GetMapping("getUserId")
+    ResponseEntity<Integer> getUserId()
+    {
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        if(authentication.getPrincipal() instanceof UserDetails)
+        {
+            User user=userRepo.findUserByUserName(authentication.getName());
+            return ResponseEntity.ok(user.getUserId());
+        }
+        return ResponseEntity.ok(-1);
     }
 }
