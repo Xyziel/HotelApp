@@ -10,7 +10,7 @@ import java.util.List;
 public class User
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")
     private int userId;
 
@@ -35,13 +35,15 @@ public class User
     private String email;
 
     @NotNull
-    @Size(min=9,message = "Wrong size of phoneNumber")
+    @Size(min=1,message = "Wrong size of phoneNumber")
     @Column(name="phone_number")
     private String phoneNumber;
 
     @ManyToOne(targetEntity = Role.class)
     @JoinColumn(name = "id_role",referencedColumnName = "role_id")
     private Role role;
+
+//    private boolean enabled = true;
 
 //    @OneToMany(mappedBy = "user", targetEntity = Reservation.class)
 //    private List<Reservation> reservations;
@@ -130,6 +132,15 @@ public class User
     {
         this.role = role;
     }
+
+//    public boolean isEnabled()
+//    {
+//        return enabled;
+//    }
+//
+//    public void setEnabled(boolean enabled)
+//    {
+//        this.enabled = enabled;
 
 //    public List<Reservation> getReservations() {
 //        return reservations;
