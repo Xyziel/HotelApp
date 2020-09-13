@@ -2,10 +2,11 @@ import React from "react";
 import axios from "axios"
 import ReactPaginate from 'react-paginate'
 import '../styles/css/AdminPanel.css'
+import AdminPanelNavbar from "./AdminPanelNavbar";
 
 
 
-class AdminPanel extends React.Component
+class AdminPanelUsers extends React.Component
 {
     constructor(props)
     {
@@ -13,16 +14,21 @@ class AdminPanel extends React.Component
         this.state={
             offset: 0,
             data: [],
-            perPage:10,
+            perPage:2,
             currentPage:0
         };
+
+        this.handlePageClick = this
+            .handlePageClick
+            .bind(this);
+
 
     }
 
     handlePageClick(e)
     {
         const selectedPage=e.selected;
-        const offset = selectedPage*this.state.perPage;
+        const offset = selectedPage*(this.state.perPage);
 
         this.setState({
             currentPage: selectedPage,
@@ -59,7 +65,7 @@ class AdminPanel extends React.Component
                     pageCount: Math.ceil(data.length/this.state.perPage),postData
                 });
             },
-                e=>{console.log(e)});
+            e=>{console.log(e)});
     }
 
     deleteUser(userName)
@@ -74,32 +80,39 @@ class AdminPanel extends React.Component
             })
     }
 
-
+    renderAdminNaviationBar()
+    {
+        return <AdminPanelNavbar></AdminPanelNavbar>;
+    }
 
     render()
     {
-        return (<div>
+        return (
+            <div>
+                {this.renderAdminNaviationBar()}
+                <hr style={{visibility:"hidden"}}/>
             {this.state.postData}
             <div className="row pageDiv">
-            <ReactPaginate
-                className="page"
-                previousLabel={"prev"}
-                nextLabel={"next"}
-                breakLabel={"..."}
-                breakClassName={"break-me"}
-                pageCount={this.state.pageCount}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
-                onPageChange={this.handlePageClick}
-                containerClassName={"pagination"}
-                subContainerClassName={"pages pagination"}
-                activeClassName={"active"}/>
+                <ReactPaginate
+                    className="page"
+                    previousLabel={"prev"}
+                    nextLabel={"next"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={this.state.pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"}/>
             </div>
         </div>);
+
     }
 }
 
 
 
 
-export default  AdminPanel;
+export default  AdminPanelUsers;
