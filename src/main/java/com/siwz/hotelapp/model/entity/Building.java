@@ -24,8 +24,8 @@ public class Building {
     @Column(name = "country")
     private String country;
 
-    @OneToMany(mappedBy = "building", targetEntity = Room.class)
-    private List<Room> rooms;
+//    @OneToMany(mappedBy = "building", targetEntity = Room.class)
+//    private List<Room> rooms;
 
     public int getBuildingId() {
         return buildingId;
@@ -59,11 +59,19 @@ public class Building {
         this.country = country;
     }
 
-    public List<Room> getRooms() {
-        return rooms;
+//    public List<Room> getRooms() {
+//        return rooms;
+//    }
+//
+//    public void setRooms(List<Room> rooms) {
+//        this.rooms = rooms;
+//    }
+
+    public String getPostcode() {
+        return postcode;
     }
 
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
     }
 }

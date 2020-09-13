@@ -10,7 +10,7 @@ public class BedsCount {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "beds_counts_id")
+    @Column(name = "beds_count_id")
     private int bedsCountsId;
 
     @NotNull
@@ -27,10 +27,10 @@ public class BedsCount {
 
     @NotNull
     @Column(name = "additional_double")
-    private int additionaDouble;
+    private int additionalDouble;
 
-    @OneToMany(mappedBy = "bedsCount", targetEntity = Room.class)
-    private List<Room> rooms;
+//    @OneToMany(mappedBy = "bedsCount", targetEntity = Room.class)
+//    private List<Room> rooms;
 
 
     public BedsCount() {
@@ -68,11 +68,19 @@ public class BedsCount {
         this.additionalSingle = additionalSingle;
     }
 
-    public int getAdditionaDouble() {
-        return additionaDouble;
+    public int getAdditionalDouble() {
+        return additionalDouble;
     }
 
-    public void setAdditionaDouble(int additionaDouble) {
-        this.additionaDouble = additionaDouble;
+    public void setAdditionalDouble(int additionalDouble) {
+        this.additionalDouble = additionalDouble;
     }
+
+//    public List<Room> getRooms() {
+//        return rooms;
+//    }
+//
+//    public void setRooms(List<Room> rooms) {
+//        this.rooms = rooms;
+//    }
 }
