@@ -2,8 +2,27 @@ import React from 'react';
 import {Navbar, Nav, Container, Button} from "react-bootstrap";
 import '../styles/css/NavigationBar.css';
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 class NavigationBar extends React.Component {
+
+
+    constructor(props)
+    {
+        super(props);
+    }
+
+    handleLogout()
+    {
+        axios.get("http://localhost:8080/logout").
+        then(res=>{
+            console.log(res.data);
+            console.log("ok");
+
+        },e=>{
+            console.log(e);
+        })
+    }
 
     render() {
         return (
@@ -40,7 +59,7 @@ class NavigationBar extends React.Component {
                                 <Link to={"front_login"} className="nav-link">Login</Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link to={"logout"} className="nav-link">Logout</Link>
+                                <Link onClick={this.handleLogout} className="nav-link">Logout</Link>
                             </Nav.Item>
                         </Nav>
                     </Navbar.Collapse>
