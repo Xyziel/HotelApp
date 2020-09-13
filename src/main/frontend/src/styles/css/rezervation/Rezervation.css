@@ -67,3 +67,7 @@ p {
 .bookButton:focus {
     outline: none;
 }
+
+.col {
+    border: none;
+}
