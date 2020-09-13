@@ -17,3 +17,35 @@ img {
 .container {
     margin-bottom: 1em;
 }
+
+.btn {
+    border: #7f7f7f 2px solid;
+    background-color: white;
+    outline: #7f7f7f 2px;
+    color: rgba(0,0,0,.5);
+    margin-right: 20px;
+}
+
+.btn:hover {
+    border: #7f7f7f 2px solid;
+    background-color: #fafafa;
+    color: #4a4a4a;
+}
+
+.btn:not(:disabled):not(.disabled):active {
+    border: #7f7f7f 2px solid;
+    background-color: #fafafa;
+    box-shadow: none;
+    color: #4a4a4a;
+}
+
+.btn:focus {
+    border: #7f7f7f 2px solid;
+    background-color: #fafafa;
+    box-shadow: none;
+    color: #4a4a4a;
+}
+
+.btn:not(:disabled):not(.disabled):active:focus {
+    box-shadow: 0 0 0 0.2rem lightgray;
+}
