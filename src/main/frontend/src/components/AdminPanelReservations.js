@@ -54,13 +54,14 @@ class AdminPanelReservations extends React.Component
                 // const slice=data.slice(this.state.offset,this.state.offset+this.state.perPage);
                 const postData = res.data.map(pd => <React.Fragment>
                     <div className="d-flex flex-row">
-                        <p className="col">{pd.ReservationId}</p>
+                        <p className="col">{pd.reservationId}</p>
                         <p className="col">{pd.dateFrom}</p>
                         <p className="col">{pd.dateTo}</p>
                         <p className="col">{pd.user.userName}</p>
                         <p className="col">{pd.user.lastName}</p>
                         <p className="col">{pd.room.number}</p>
                         <p className="col">{pd.room.standard.name}</p>
+                        <button className="col btn-xsm btn-dark h-25" onClick={()=>this.deleteReservation(pd.reservationId)}>Delete</button>
                     </div>
                 </React.Fragment>);
                 this.setState({
@@ -70,7 +71,13 @@ class AdminPanelReservations extends React.Component
             e=>{console.log(e)});
     }
 
+    deleteReservation(id)
+    {
+        console.log(id);
+        const url="http://localhost:8080/reservations?reservationId="+id;
+        axios.delete(url);
 
+    }
 
 
     renderAdminNaviationBar()
