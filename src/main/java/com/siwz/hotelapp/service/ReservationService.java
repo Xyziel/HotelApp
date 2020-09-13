@@ -26,5 +26,8 @@ public class ReservationService {
     public List<Reservation> findAll(){
         return reservationRepo.findAll();
     }
+    public void delete(Integer integer){
+        this.reservationRepo.deleteUserByUserId(integer);
+    }
 
 }
