@@ -55,3 +55,11 @@
     width: 3em;
     height: 1.8em;
 }
+
+.yesButton:focus {
+    outline: none;
+}
+
+.noButton:focus {
+    outline: none;
+}

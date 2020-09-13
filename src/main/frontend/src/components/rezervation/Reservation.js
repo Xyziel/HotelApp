@@ -20,6 +20,7 @@ class Reservation extends React.Component{
             imageURL: '',
             isLoggedIn: false,
             showPopup: false,
+            roomId: 0
         }
     }
 
@@ -90,13 +91,12 @@ class Reservation extends React.Component{
         }
     }
 
-    addReservation() {
-
-    }
-
-    togglePopup() {
+    togglePopup(room_id) {
         this.setState({
             showPopup: !this.state.showPopup
+        });
+        this.setState({
+            roomId: room_id
         });
     }
 
@@ -149,7 +149,7 @@ class Reservation extends React.Component{
                                     <p>Description : {room.description}</p>
                                 </div>
                             </div>
-                            <button type="submit" className="bookButton" onClick={this.togglePopup.bind(this)}>BOOK NOW</button>
+                            <button type="submit" className="bookButton" onClick={()=>this.togglePopup(room.roomId)}>BOOK NOW</button>
                         </div>
                     ))
                 }
@@ -161,6 +161,7 @@ class Reservation extends React.Component{
                         to={this.state.dateTo.getDate() + '-' +
                         ((this.state.dateTo.getMonth() + 1) < 10 ? '0' + (this.state.dateTo.getMonth() + 1) : (this.state.dateTo.getMonth() + 1)) + '-' +
                         this.state.dateTo.getFullYear()}
+                        roomId={this.state.roomId}
                         closePopup={this.togglePopup.bind(this)}
                     />
                     : null
