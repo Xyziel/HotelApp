@@ -90,6 +90,16 @@ class AdminPanelReservations extends React.Component
         return (
             <div>
                 {this.renderAdminNaviationBar()}
+                <div className="d-flex flex-row">
+                    <p className="col">ID</p>
+                    <p className="col">Rezerwacja od</p>
+                    <p className="col">Rezerwacja do</p>
+                    <p className="col">Imie</p>
+                    <p className="col">Nazwisko</p>
+                    <p className="col">Numer pokoju</p>
+                    <p className="col">Standard</p>
+                    <p className="col">Usuń</p>
+                </div>
                 <hr style={{visibility:"hidden"}}/>
                 {this.state.postData}
                 <div className="row pageDiv">
