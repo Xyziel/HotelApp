@@ -2,7 +2,6 @@ package com.siwz.hotelapp.model.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity
 @Table(name="roles")
@@ -16,8 +15,8 @@ public class Role
     @NotNull
     private String name;
 
-    @OneToMany(mappedBy = "role",targetEntity = User.class)
-    private List<User> users;
+//    @OneToMany(mappedBy = "role",targetEntity = User.class)
+//    List<User> users;
 
 
 

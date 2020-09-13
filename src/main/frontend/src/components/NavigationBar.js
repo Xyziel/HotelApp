@@ -34,10 +34,13 @@ class NavigationBar extends React.Component {
                         </Nav>
                         <Nav>
                             <Nav.Item>
-                                <Link to={""} className="nav-link">Sign In</Link>
+                                <Link to={"registration"} className="nav-link">Sign-Up</Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Button type="submit" className="btn">Sign Up</Button>
+                                <Link to={"front_login"} className="nav-link">Login</Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Link to={"logout"} className="nav-link">Logout</Link>
                             </Nav.Item>
                         </Nav>
                     </Navbar.Collapse>

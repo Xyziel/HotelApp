@@ -35,7 +35,7 @@ p {
     flex-direction: row;
     border: #7f7f7f 1px solid;
     border-radius: 20px;
-    width: 50%;
+    width: 70%;
     margin: 2rem 0 0.3rem 0;
     align-items: center;
 }
@@ -62,4 +62,8 @@ p {
 
 .bookButton:active {
     background-color: #2aa800;
+}
+
+.bookButton:focus {
+    outline: none;
 }

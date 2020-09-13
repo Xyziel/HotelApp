@@ -1,0 +1,57 @@
+.popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0,0,0, 0.5);
+}
+
+.popupInner {
+    position: absolute;
+    left: 40%;
+    right: 40%;
+    top: 40%;
+    bottom: 40%;
+    margin: auto;
+    background: white;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.popupQuestion {
+    padding-top: 20px;
+}
+
+.close {
+    border: none;
+    background-color: white;
+    margin-right: 10px;
+}
+
+.close:focus {
+    outline: none;
+}
+
+.yesButton {
+    background-color: green;
+    color: white;
+    border: darkgreen;
+    border-radius: 7px;
+    margin-right: 20%;
+    margin-top: 20px;
+    width: 3em;
+    height: 1.8em;
+}
+
+.noButton {
+    background-color: red;
+    color: white;
+    border: red;
+    border-radius: 7px;
+    width: 3em;
+    height: 1.8em;
+}
