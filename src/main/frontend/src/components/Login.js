@@ -38,6 +38,7 @@ class Login extends React.Component
             console.log(res.status);
             console.log(res.headers);
             window.location.replace("http://localhost:3000/");
+
             // Cookies.set('JSESSIONID',res.data)
         },e=>{
            console.log(e);

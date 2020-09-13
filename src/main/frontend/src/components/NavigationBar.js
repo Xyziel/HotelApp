@@ -10,6 +10,39 @@ class NavigationBar extends React.Component {
     constructor(props)
     {
         super(props);
+        this.state={
+            login:'',
+            signUp:'',
+            logout: '',
+        };
+        this.isLoggedIn();
+    }
+
+    isLoggedIn()
+    {
+        axios.get("/isLoggedIn").
+        then(res=>{
+            console.log(res.data);
+            if(res.data===true)
+            {
+                this.setState({
+                    login:'',
+                    logout:'Logout',
+                    signUp:''
+                });
+            }
+            else
+            {
+                this.setState({
+                    login:'Login',
+                    logout:'',
+                    signUp:'Sign-up'
+                });
+            }
+        },e=>{
+            console.log(e);
+
+        });
     }
 
     handleLogout()
@@ -17,11 +50,10 @@ class NavigationBar extends React.Component {
         axios.get("http://localhost:8080/logout").
         then(res=>{
             console.log(res.data);
-            console.log("ok");
-
+            window.location.replace("http://localhost:3000/");
         },e=>{
             console.log(e);
-        })
+        });
     }
 
     render() {
@@ -53,13 +85,13 @@ class NavigationBar extends React.Component {
                         </Nav>
                         <Nav>
                             <Nav.Item>
-                                <Link to={"registration"} className="nav-link">Sign-Up</Link>
+                                <Link to={"registration"} className="nav-link">{this.state.signUp}</Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link to={"front_login"} className="nav-link">Login</Link>
+                                <Link to={"front_login"} className="nav-link">{this.state.login}</Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link onClick={this.handleLogout} className="nav-link">Logout</Link>
+                                <Link onClick={this.handleLogout} className="nav-link">{this.state.logout}</Link>
                             </Nav.Item>
                         </Nav>
                     </Navbar.Collapse>

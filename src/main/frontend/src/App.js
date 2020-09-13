@@ -7,7 +7,6 @@ import TestPage from "./components/TestPage";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
 import Authenticated from "./components/Authenticated";
-import Logout from "./components/Logout";
 import AdminPanelNavbar from "./components/AdminPanelNavbar";
 import AdminPanelUsers from "./components/AdminPanelUsers";
 // import AdminPanel from "./components/AdminPanel";
