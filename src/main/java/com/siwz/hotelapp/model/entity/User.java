@@ -3,6 +3,7 @@ package com.siwz.hotelapp.model.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -44,6 +45,8 @@ public class User
 
 //    private boolean enabled = true;
 
+//    @OneToMany(mappedBy = "user", targetEntity = Reservation.class)
+//    private List<Reservation> reservations;
 
     public User()
     {
@@ -138,5 +141,12 @@ public class User
 //    public void setEnabled(boolean enabled)
 //    {
 //        this.enabled = enabled;
+
+//    public List<Reservation> getReservations() {
+//        return reservations;
+//    }
+//
+//    public void setReservations(List<Reservation> reservations) {
+//        this.reservations = reservations;
 //    }
 }

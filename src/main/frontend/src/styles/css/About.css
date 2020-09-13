@@ -1,6 +1,7 @@
 h2 {
     margin-top: 2em;
     margin-bottom: 1em;
+    text-align: center;
 }
 
 .info {
@@ -11,4 +12,8 @@ h2 {
 
 .column {
     flex: 50%;
+}
+
+.column h3{
+    text-align: center;
 }
