@@ -10,6 +10,7 @@ import Authenticated from "./components/Authenticated";
 import Logout from "./components/Logout";
 import AdminPanelNavbar from "./components/AdminPanelNavbar";
 import AdminPanelUsers from "./components/AdminPanelUsers";
+import AdminPanelReservations from "./components/AdminPanelReservations";
 import Footer from "./components/Footer";
 import Reservation from "./components/rezervation/Reservation";
 
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/logout" exact component={Logout}/>
                 <Route path="/admin_panel" exact component={AdminPanelNavbar}/>
                 <Route path="/admin_panel/users" exact component={AdminPanelUsers}/>
+                <Route path="/admin_panel/reservations" exact component={AdminPanelReservations}/>
                 <Route path="/reservation" exact component={Reservation}/>
             </Switch>
         <Footer/>
