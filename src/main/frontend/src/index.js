@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 axios.defaults.withCredentials=true;
 
 ReactDOM.render(

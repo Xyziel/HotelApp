@@ -1,105 +1,218 @@
-import React from "react";
+import React, {useState} from "react";
 import "../styles/css/Registration.css";
-import Buttons from "./buttons/Buttons"
-import {Form} from "react-bootstrap"
-import {Row} from "react-bootstrap"
-import {Col} from "react-bootstrap"
 import axios from 'axios';
+import Container from "react-bootstrap/Container";
+import InputGroup from 'react-bootstrap/InputGroup'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCalendarDay, faEnvelope, faGlobeEurope, faPhone, faUnlock, faUser} from "@fortawesome/free-solid-svg-icons";
+import Form from 'react-bootstrap/Form'
+import FormControl from "react-bootstrap/esm/FormControl";
+import Button from "react-bootstrap/Button";
 
-class Registration extends React.Component
-{
-    constructor(props)
-    {
-        super(props);
-        // this.sendFormData=this.sendFormData.bind(this);
-        // Ta linijka wydaje mi sie niepotrzebna
-    }
+export default function Registration(props){
 
+    const [email,setEmail] = useState("");
+    const [username,setUsername] = useState("");
+    const [firstName,setFirstName] = useState("");
+    const [lastName,setLastName] = useState("");
+    const [phoneNumber,setPhoneNumber] = useState("");
+    const [password,setPassword] = useState("");
+    const [repeatPassword,setRepeatPassword] = useState("");
+    const [termsAgreement,setTermsAgreement] = useState(false);
 
-    sendFormData(event)
-    {
-        // console.log(event.target);
-        event.preventDefault();
-        const data = new FormData(event.target);
-        // console.log(data);
-        // console.log(data.entries().next());
-        var object = {};
-        data.forEach((value,key)=>{
-            object[key]=value;
-        });
-        var json = JSON.stringify(object);
-        // axios.get("/user/check").
-        //     then(res => {
-        //         console.log(res.data);
-        // });
-        console.log(json);
-        //TODO po postawieniu wszystkiego na jednym serwerze, zmienic z pelnego
-        //urla na odpowiedni end point
-        axios({
-            method: 'post',
-            url: 'http://localhost:8080/api/users/register',
-            data: json,
-            headers:{
-                'Content-Type': 'application/json',
-                // 'Access-Control-Allow-Origin': '*'
-            }
-        }).
-            then(res => {
-                console.log(res);
-                console.log(res.data);
-                // window.location.replace("/");
-        },e => {
-                console.log(e);
-        });
+    const onFormSubmit = () => {
 
-    }
+        const PostUrl = 'http://localhost:8080/api/users/register';
 
-    renderForm()
-    {
-        return (
-            <form onSubmit={this.sendFormData}>
-                <div className="form-group row">
-                    <div className="col">
-                        <label htmlFor="email_input">Email</label>
-                        <input id="email_input" name="email" type="text" className="form-control"/>
-                    </div>
-                    <div className="col">
-                        <label htmlFor="username_input">Username</label>
-                        <input name="userName" id="username_input" type="text"  className="form-control"/>
-                    </div>
+        const user = {
+            email : email,
+            username: username,
+            firstName : firstName,
+            lastName : lastName,
+            phoneNumber : phoneNumber,
+            password: password,
+            repeatPassword : repeatPassword,
+            termsAgreement : termsAgreement
+        };
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        };
+
+        fetch(PostUrl,requestOptions)
+
+            .then((res) => {
+
+                if (!res.ok){
+                    throw new Error(res.status);
+                }
+
+                else return res.json()
+            })
+
+            .then(res => {
+                localStorage.setItem("userLogged", "true");
+                window.location.reload();
+            })
+
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    return(
+
+        <Container>
+
+            <InputGroup className="mb-3">
+
+                <InputGroup.Prepend>
+                    <InputGroup.Text id="emailInputText">
+                        <FontAwesomeIcon id="email-icon" icon={faEnvelope}/>
+                    </InputGroup.Text>
+                </InputGroup.Prepend>
+
+                <FormControl
+                    type="email"
+                    placeholder="Please, write your email..."
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    onChange = {(e) => setEmail(e.target.value)}
+                    className={"FormInputField"}
+                />
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+
+                <InputGroup.Prepend>
+                    <InputGroup.Text id="usernameInputText">
+                        <FontAwesomeIcon id="username-icon" icon={faUser}/>
+                    </InputGroup.Text>
+                </InputGroup.Prepend>
+
+                <FormControl
+                    className={"FormInputField"}
+                    placeholder="Please, write your username..."
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    onChange = {(e) => setUsername(e.target.value)}
+                />
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+
+                <InputGroup.Prepend>
+                    <InputGroup.Text id="usernameInputText">
+                        <FontAwesomeIcon id="username-icon" icon={faUser}/>
+                    </InputGroup.Text>
+                </InputGroup.Prepend>
+
+                <FormControl
+                    className={"FormInputField"}
+                    placeholder="Please, write your first name..."
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    onChange = {(e) => setFirstName(e.target.value)}
+                />
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+
+                <InputGroup.Prepend>
+                    <InputGroup.Text id="usernameInputText">
+                        <FontAwesomeIcon id="username-icon" icon={faUser}/>
+                    </InputGroup.Text>
+                </InputGroup.Prepend>
+
+                <FormControl
+                    className={"FormInputField"}
+                    placeholder="Please, write your last name..."
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    onChange = {(e) => setLastName(e.target.value)}
+                />
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+
+                <InputGroup.Prepend>
+                    <InputGroup.Text id="passwordInputText">
+                        <FontAwesomeIcon id="password-icon" icon={faUnlock}/>
+                    </InputGroup.Text>
+                </InputGroup.Prepend>
+
+                <FormControl
+                    className={"FormInputField"}
+                    type="password"
+                    placeholder="Please, write your password..."
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    onChange = {(e) => setPassword(e.target.value)}
+                />
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+
+                <InputGroup.Prepend>
+                    <InputGroup.Text id="passwordInputText">
+                        <FontAwesomeIcon id="password-icon" icon={faUnlock}/>
+                    </InputGroup.Text>
+                </InputGroup.Prepend>
+
+                <FormControl
+                    className={"FormInputField"}
+                    type="password"
+                    placeholder="Please, repeat your password..."
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    onChange = {(e) => setRepeatPassword(e.target.value)}
+
+                />
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+
+                <InputGroup.Prepend>
+                    <InputGroup.Text id="passwordInputText">
+                        <FontAwesomeIcon id="password-icon" icon={faPhone}/>
+                    </InputGroup.Text>
+                </InputGroup.Prepend>
+
+                <FormControl
+                    className={"FormInputField"}
+                    type="password"
+                    placeholder="Please, write your phone number..."
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    onChange = {(e) => setPhoneNumber(e.target.value)}
+
+                />
+            </InputGroup>
+
+            <Form.Group controlId="formBasicCheckbox">
+                <div className={"d-flex flex-row"}>
+                    <Form.Check
+                        type="checkbox"
+                        label="I agree to the"
+                        onChange = {(e) => setTermsAgreement(e.target.checked)}
+                    />
+                    <a className={"ml-1"} href={"/terms"}> Terms and Conditions</a>
                 </div>
-                <div className="form-group row">
-                    <div className="col">
-                        <label htmlFor="firstname_input">First name</label>
-                        <input  id="firstname_input" name="firstName" type="text" />
-                    </div>
-                    <div className="col">
-                        <label htmlFor="lastname_input">Last name</label>
-                        <input name="lastName" id="lastname_input" type="text" />
-                    </div>
-                </div>
-                <div className="form-group row">
-                    <div className="col">
-                        <label htmlFor="phonenumber_input">Phone number</label>
-                        <input  id="phonenumber_input" name="phoneNumber" type="text" />
-                    </div>
-                    <div className="col">
-                        <label htmlFor="password_input">Password</label>
-                        <input name="password" id="password_input" type="password" />
-                    </div>
-                </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
-        );
-    }
 
+            </Form.Group>
 
-    render()
-    {
-        // return this.renderButton("dark","submit");
-        return this.renderForm();
-    }
+            <Button
+                variant="primary"
+                onClick={onFormSubmit}
+                className="w-50 mb-4"
+            >
+                Sign Up
+            </Button>
 
+        </Container>
+
+    );
 }
 
-export default Registration;
