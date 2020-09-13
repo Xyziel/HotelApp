@@ -10,7 +10,6 @@ import Authenticated from "./components/Authenticated";
 import Logout from "./components/Logout";
 import AdminPanelNavbar from "./components/AdminPanelNavbar";
 import AdminPanelUsers from "./components/AdminPanelUsers";
-import AdminPanel from "./components/AdminPanel";
 import Footer from "./components/Footer";
 import Reservation from "./components/rezervation/Reservation";
 
