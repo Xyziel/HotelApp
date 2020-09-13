@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReservationRepo extends JpaRepository<Reservation, Integer> {
 
-    //add query
-    @Query(value = "select * from reservation", nativeQuery = true)
+    @Query(value = "INSERT INTO reservations (id_user, id_room, date_from, date_to) VALUES (:idUser, :idRoom, :dateFrom, :dateTo)", nativeQuery = true)
     void addReservation(int idUser, int idRoom, String dateFrom, String dateTo);
 }
