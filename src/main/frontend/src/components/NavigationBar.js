@@ -11,16 +11,18 @@ class NavigationBar extends React.Component {
     {
         super(props);
         this.state={
-            login:'',
-            signUp:'',
+            login:'Login',
+            signUp:'Sign-up',
             logout: '',
+            adminPanel:''
         };
         this.isLoggedIn();
+        this.whatRole();
     }
 
     isLoggedIn()
     {
-        axios.get("/isLoggedIn").
+        axios.get("http://localhost:3000/isLoggedIn").
         then(res=>{
             console.log(res.data);
             if(res.data===true)
@@ -37,6 +39,24 @@ class NavigationBar extends React.Component {
                     login:'Login',
                     logout:'',
                     signUp:'Sign-up'
+                });
+            }
+        },e=>{
+            console.log(e);
+
+        });
+
+    }
+
+    whatRole()
+    {
+        axios.get("http://localhost:3000/getUserRole").
+        then(res=>{
+            console.log(res.data);
+            if(res.data==='admin')
+            {
+                this.setState({
+                    adminPanel:'Admin Panel'
                 });
             }
         },e=>{
@@ -84,6 +104,9 @@ class NavigationBar extends React.Component {
                             </Nav.Item>
                         </Nav>
                         <Nav>
+                            <Nav.Item>
+                                <Link to={"admin_panel"} className="nav-link">{this.state.adminPanel}</Link>
+                            </Nav.Item>
                             <Nav.Item>
                                 <Link to={"registration"} className="nav-link">{this.state.signUp}</Link>
                             </Nav.Item>

@@ -15,26 +15,30 @@ class Registration extends React.Component
         // Ta linijka wydaje mi sie niepotrzebna
     }
 
+    // TODO sprawdzanie danych przy rejestracji i wypisywanie odpowiednich bledow 
+    verifyEmail()
+    {
+
+    }
 
     sendFormData(event)
     {
-        // console.log(event.target);
         event.preventDefault();
+
         const data = new FormData(event.target);
-        // console.log(data);
-        // console.log(data.entries().next());
         var object = {};
         data.forEach((value,key)=>{
             object[key]=value;
         });
+
+        console.log(data);
+        console.log(object);
+        console.log(object['email']);
+
         var json = JSON.stringify(object);
-        // axios.get("/user/check").
-        //     then(res => {
-        //         console.log(res.data);
-        // });
         console.log(json);
-        //TODO po postawieniu wszystkiego na jednym serwerze, zmienic z pelnego
-        //urla na odpowiedni end point
+
+
         axios({
             method: 'post',
             url: 'http://localhost:8080/api/users/register',
