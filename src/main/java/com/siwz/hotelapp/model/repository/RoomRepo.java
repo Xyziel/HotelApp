@@ -10,18 +10,8 @@ import java.util.List;
 
 public interface RoomRepo extends JpaRepository<Room, Integer> {
 
-    @Query(value = "SELECT r.* FROM rooms r INNER JOIN reservations r2 on r.room_id = r2.id_room WHERE NOT ((:dateFrom >= date_from AND :dateFrom < date_to) OR (:dateTo > date_from and :dateTo <= date_to));", nativeQuery = true)
+    @Query(value = "select * from rooms " +
+            "where room_id not in (select id_room from reservations " +
+            "where (:dateFrom >= date_from and :dateFrom < date_to) or (:dateTo > date_from and :dateTo <= date_to))", nativeQuery = true)
     List<Room> findFreeRooms(String dateFrom,String dateTo);
-
-    List<Room> findByNumber(int number);
-
-    List<Room> findByFloor(int number);
-
-    List<Room> findByPriceBetween(double lowerPrice, double higherPrice);
-
-    List<Room> findByStandard(Standard standard);
-
-  //  List<Room> findByBedsCount(BedsCount bedsCount);
-
-
 }
