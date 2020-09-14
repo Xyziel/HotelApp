@@ -7,9 +7,9 @@ import TestPage from "./components/TestPage";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
 import Authenticated from "./components/Authenticated";
-import Logout from "./components/Logout";
 import AdminPanelNavbar from "./components/AdminPanelNavbar";
 import AdminPanelUsers from "./components/AdminPanelUsers";
+// import AdminPanel from "./components/AdminPanel";
 import AdminPanelReservations from "./components/AdminPanelReservations";
 import Footer from "./components/Footer";
 import Reservation from "./components/rezervation/Reservation";
@@ -24,7 +24,6 @@ function App() {
                 <Route path="/registration" exact component={Registration}/>
                 <Route path="/front_login" exact component={Login}/>
                 <Route path="/authenticated" exact component={Authenticated}/>
-                <Route path="/logout" exact component={Logout}/>
                 <Route path="/admin_panel" exact component={AdminPanelNavbar}/>
                 <Route path="/admin_panel/users" exact component={AdminPanelUsers}/>
                 <Route path="/admin_panel/reservations" exact component={AdminPanelReservations}/>
