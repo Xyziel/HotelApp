@@ -29,7 +29,7 @@ class Registration extends React.Component
     {
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         var emailTest= re.test(String(email).toLowerCase());
-        if(emailTest===false)
+        if(emailTest===false || new String(email).length>32)
         {
             this.setState({emailError:'Wrong email inserted'})
         }
@@ -42,7 +42,7 @@ class Registration extends React.Component
 
     verifyUserName(userName)
     {
-        if(userName==='')
+        if(userName==='' || new String(userName).length>32)
         {
             this.setState({userNameError:'Empty or wrong username'});
             return false;
@@ -58,7 +58,7 @@ class Registration extends React.Component
     verifyFirstName(firstName)
     {
         var regex=/^[a-zA-Z]+$/;
-        if(regex.test(firstName)===false)
+        if(regex.test(firstName)===false || new String(firstName).length>32)
         {
             this.setState({firstNameError:'Can\'t contain numbers or be empty'});
         }
@@ -72,7 +72,7 @@ class Registration extends React.Component
     verifyLastName(lastName)
     {
         var regex=/^[a-zA-Z]+$/;
-        if(regex.test(lastName)===false)
+        if(regex.test(lastName)===false || new String(lastName).length>32)
         {
             this.setState({lastNameError:'Can\'t contain numbers or be empty'});
         }
@@ -100,7 +100,7 @@ class Registration extends React.Component
     verifyPassword(password)
     {
         var regex=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-        if(regex.test(password)===false)
+        if(regex.test(password)===false || new String(password).length>32)
         {
             this.setState({passwordError:'Password must contain at least 8 characters, 1 number, 1 lowercase character, 1 uppercase character'});
         }
@@ -114,8 +114,6 @@ class Registration extends React.Component
     verifyRepeatedPassword(password,repeatedPassword)
     {
         var temp=false;
-        console.log(password);
-        console.log(repeatedPassword);
         if(password.localeCompare(repeatedPassword)===0)
         {
             this.setState({repeatedPasswordError:''});
@@ -183,14 +181,17 @@ class Registration extends React.Component
         // console.log(errorsTable['repeatedPasswordTest']);
 
         //sprawdzenie tabeli errorow
-        console.log(this.verifyErrorsTable(errorsTable));
+        var errorsTableFinalCheck=this.verifyErrorsTable(errorsTable);
 
+        if(errorsTableFinalCheck===false)
+        {
+            return null;
+        }
 
         //usuniecie powtorzonego hasla przed wyslaniem na backend
         delete object['repeated_password'];
 
         var json = JSON.stringify(object);
-        console.log(json);
 
         axios({
             method: 'post',
