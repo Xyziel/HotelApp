@@ -47,7 +47,11 @@ public class UserController
     @PostMapping("/register")
     ResponseEntity<?> registerUser(@RequestBody User user)
     {
-        if(userRepo.findUserByUserName(user.getUserName())!=null)
+//        if(userRepo.findUserByUserName(user.getUserName())!=null)
+//        {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//        }
+        if((userRepo.findUserByUserName(user.getUserName())!=null) || (userRepo.findUserByEmail(user.getEmail())!=null))
         {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -69,6 +73,8 @@ public class UserController
 
 
 
+
+
     @PostMapping("/hej")
     ResponseEntity<String> test(@RequestBody String test)
     {
@@ -78,10 +84,10 @@ public class UserController
         return ResponseEntity.status(HttpStatus.OK).body(test);
     }
 
-    @GetMapping("/user/check")
-    ResponseEntity<User> getUserByUserName()
+    @PostMapping("/user/check")
+    ResponseEntity<User> getUserByUserName(@RequestBody String userName)
     {
-        User user = userRepo.findUserByUserName("dupa");
+        User user = userRepo.findUserByUserName(userName);
         return ResponseEntity.ok().body(user);
     }
 

@@ -20,7 +20,7 @@ class AdminPanelNavbar extends React.Component
                 <Link className="btn btn-dark" to="/admin_panel/users">Users</Link>
             </div>
             <div>
-                <Link className="btn btn-dark" to="/admin_panel/reservation">Reservations</Link>
+                <Link className="btn btn-dark" to="/admin_panel/reservations">Reservations</Link>
             </div>
 
         </div>);

@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.csrf.CsrfFilter;
 
 @Configuration
@@ -21,6 +22,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
     @Autowired
     private MyUrlAuthenticationSuccessHandler myUrlAuthenticationSuccessHandler;
+
+    @Autowired
+    private MyUrlFailureLoginHandler myUrlFailureLoginHandler;
 
     @Autowired
     private MyUrlLogoutHandler myUrlLogoutHandler;
@@ -82,6 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 passwordParameter("password").
                 loginProcessingUrl("/perform_login").
                 successHandler(myUrlAuthenticationSuccessHandler).
+                failureHandler(myUrlFailureLoginHandler).
 //                defaultSuccessUrl("http://localhost:3000/test",true).
                 permitAll().
                 and().

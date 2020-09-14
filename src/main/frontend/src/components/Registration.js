@@ -11,30 +11,188 @@ class Registration extends React.Component
     constructor(props)
     {
         super(props);
-        // this.sendFormData=this.sendFormData.bind(this);
+        this.state={
+            emailError:'',
+            userNameError:'',
+            firstNameError:'',
+            lastNameError:'',
+            phoneNumberError:'',
+            passwordError:'',
+            repeatedPasswordError:''
+        }
+        this.sendFormData=this.sendFormData.bind(this);
         // Ta linijka wydaje mi sie niepotrzebna
+    }
+
+    // TODO sprawdzanie danych przy rejestracji i wypisywanie odpowiednich bledow
+    verifyEmail(email)
+    {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var emailTest= re.test(String(email).toLowerCase());
+        if(emailTest===false || new String(email).length>32)
+        {
+            this.setState({emailError:'Wrong email inserted'})
+        }
+        else
+        {
+            this.setState({emailError:' '});
+        }
+        return emailTest;
+    }
+
+    verifyUserName(userName)
+    {
+        if(userName==='' || new String(userName).length>32)
+        {
+            this.setState({userNameError:'Empty or wrong username'});
+            return false;
+        }
+        else
+        {
+            this.setState({userNameError:''});
+
+            return true;
+        }
+    }
+
+    verifyFirstName(firstName)
+    {
+        var regex=/^[a-zA-Z]+$/;
+        if(regex.test(firstName)===false || new String(firstName).length>32)
+        {
+            this.setState({firstNameError:'Can\'t contain numbers or be empty'});
+        }
+        else
+        {
+            this.setState({firstNameError:''});
+        }
+        return regex.test(firstName);
+    }
+
+    verifyLastName(lastName)
+    {
+        var regex=/^[a-zA-Z]+$/;
+        if(regex.test(lastName)===false || new String(lastName).length>32)
+        {
+            this.setState({lastNameError:'Can\'t contain numbers or be empty'});
+        }
+        else
+        {
+            this.setState({lastNameError:''});
+        }
+        return regex.test(lastName);
+    }
+
+    verifyPhoneNumber(phoneNumber)
+    {
+        var regex=/^[1-9]{9}/;
+        if(regex.test(phoneNumber)===false)
+        {
+            this.setState({phoneNumberError:'Empty or wrong phone number'});
+        }
+        else
+        {
+            this.setState({phoneNumberError:''});
+        }
+        return regex.test(phoneNumber);
+    }
+
+    verifyPassword(password)
+    {
+        var regex=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+        if(regex.test(password)===false || new String(password).length>32)
+        {
+            this.setState({passwordError:'Password must contain at least 8 characters, 1 number, 1 lowercase character, 1 uppercase character'});
+        }
+        else
+        {
+            this.setState({passwordError:''});
+        }
+        return regex.test(password);
+    }
+
+    verifyRepeatedPassword(password,repeatedPassword)
+    {
+        var temp=false;
+        if(password.localeCompare(repeatedPassword)===0)
+        {
+            this.setState({repeatedPasswordError:''});
+            temp=true;
+        }
+        else
+        {
+            this.setState({repeatedPasswordError:'Repeated password doesn\'t match password'});
+        }
+        return temp;
+    }
+
+    verifyErrorsTable(table)
+    {
+        var temp=true;
+        for(var key in table)
+        {
+            if(table[key]===false)
+            {
+                temp=false;
+                break;
+            }
+        }
+        return temp;
     }
 
 
     sendFormData(event)
     {
-        // console.log(event.target);
         event.preventDefault();
+
         const data = new FormData(event.target);
-        // console.log(data);
-        // console.log(data.entries().next());
         var object = {};
         data.forEach((value,key)=>{
             object[key]=value;
         });
+
+        // console.log(object);
+
+        var errorsTable={};
+
+        //Sprawdzanie skladni maila
+        errorsTable['emailTest']=this.verifyEmail(object['email']);
+        // console.log(errorsTable['emailTest']);
+
+        //Sprawdzanie userName'a
+        errorsTable['userNameTest']=this.verifyUserName(object['userName']);
+        // console.log(errorsTable['userNameTest']);
+
+        //sprawdzanie First name
+        errorsTable['firstNameTest']=this.verifyFirstName(object['firstName']);
+
+        //sprawdzanie Last name
+        errorsTable['lastNameTest']=this.verifyLastName(object['lastName']);
+
+        //sprawdzanie phone number
+        errorsTable['phoneNumberTest']=this.verifyPhoneNumber(object['phoneNumber']);
+
+        //sprawdzanie passworda
+        errorsTable['passwordTest']=this.verifyPassword(object['password']);
+        // console.log(errorsTable['passwordTest']);
+
+        //sprawdzanie repeatedPassworda
+        errorsTable['repeatedPasswordTest']=this.verifyRepeatedPassword(object['password'],object['repeated_password']);
+        // console.log(errorsTable['repeatedPasswordTest']);
+
+        //sprawdzenie tabeli errorow
+        var errorsTableFinalCheck=this.verifyErrorsTable(errorsTable);
+
+        if(errorsTableFinalCheck===false)
+        {
+            return null;
+        }
+
+        //usuniecie powtorzonego hasla przed wyslaniem na backend
+        delete object['repeated_password'];
+
         var json = JSON.stringify(object);
-        // axios.get("/user/check").
-        //     then(res => {
-        //         console.log(res.data);
-        // });
-        console.log(json);
-        //TODO po postawieniu wszystkiego na jednym serwerze, zmienic z pelnego
-        //urla na odpowiedni end point
+
         axios({
             method: 'post',
             url: 'http://localhost:8080/api/users/register',
@@ -62,32 +220,46 @@ class Registration extends React.Component
                     <div className="col">
                         <label htmlFor="email_input">Email</label>
                         <input id="email_input" name="email" type="text" className="form-control"/>
+                        <p>{this.state.emailError}</p>
                     </div>
                     <div className="col">
                         <label htmlFor="username_input">Username</label>
                         <input name="userName" id="username_input" type="text"  className="form-control"/>
+                        <p>{this.state.userNameError}</p>
                     </div>
                 </div>
                 <div className="form-group row">
                     <div className="col">
                         <label htmlFor="firstname_input">First name</label>
                         <input  id="firstname_input" name="firstName" type="text" />
+                        <p>{this.state.firstNameError}</p>
                     </div>
                     <div className="col">
                         <label htmlFor="lastname_input">Last name</label>
                         <input name="lastName" id="lastname_input" type="text" />
+                        <p>{this.state.lastNameError}</p>
                     </div>
                 </div>
                 <div className="form-group row">
                     <div className="col">
                         <label htmlFor="phonenumber_input">Phone number</label>
                         <input  id="phonenumber_input" name="phoneNumber" type="text" />
+                        <p>{this.state.phoneNumberError}</p>
                     </div>
+                </div>
+                <div className="form-group row">
                     <div className="col">
                         <label htmlFor="password_input">Password</label>
                         <input name="password" id="password_input" type="password" />
+                        <p>{this.state.passwordError}</p>
+                    </div>
+                    <div className="col">
+                        <label htmlFor="repeated_password_input">Repeat password</label>
+                        <input name="repeated_password" id="repeated_password_input" type="password" />
+                        <p>{this.state.repeatedPasswordError}</p>
                     </div>
                 </div>
+
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         );

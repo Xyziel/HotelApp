@@ -90,6 +90,14 @@ class AdminPanelUsers extends React.Component
         return (
             <div>
                 {this.renderAdminNaviationBar()}
+                <div className="d-flex flex-row">
+                    <p className="col">Email</p>
+                    <p className="col">Nazwa</p>
+                    <p className="col">Imie</p>
+                    <p className="col">Nazwisko</p>
+                    <p className="col">Numer telefonu</p>
+                    <p className="col">Usuń</p>
+                </div>
                 <hr style={{visibility:"hidden"}}/>
             {this.state.postData}
             <div className="row pageDiv">
