@@ -18,6 +18,9 @@ public interface UserRepo extends JpaRepository<User,Integer>
     @Query(value="select * from users where users.user_name=:name",nativeQuery=true)
     public User findUserByUserName(@Param("name") String name);
 
+    @Query(value="select * from users where users.email=:email",nativeQuery=true)
+    public User findUserByEmail(@Param("email") String email);
+
     @Transactional
     @Modifying
     @Query(value="delete from users where users.user_id=:userId",nativeQuery=true)
