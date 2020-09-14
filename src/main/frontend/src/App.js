@@ -10,6 +10,7 @@ import Authenticated from "./components/Authenticated";
 import AdminPanelNavbar from "./components/AdminPanelNavbar";
 import AdminPanelUsers from "./components/AdminPanelUsers";
 // import AdminPanel from "./components/AdminPanel";
+import AdminPanelReservations from "./components/AdminPanelReservations";
 import Footer from "./components/Footer";
 import Reservation from "./components/rezervation/Reservation";
 
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/authenticated" exact component={Authenticated}/>
                 <Route path="/admin_panel" exact component={AdminPanelNavbar}/>
                 <Route path="/admin_panel/users" exact component={AdminPanelUsers}/>
+                <Route path="/admin_panel/reservations" exact component={AdminPanelReservations}/>
                 <Route path="/reservation" exact component={Reservation}/>
             </Switch>
         <Footer/>
