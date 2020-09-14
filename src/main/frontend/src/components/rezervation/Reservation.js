@@ -58,11 +58,9 @@ class Reservation extends React.Component{
         const data = new FormData(event.target);
         var object = {};
         data.forEach((value,key)=>{
-            console.log(value, key);
             object[key]=value;
         });
         var json = JSON.stringify(object);
-        console.log(json);
 
         axios({
             method: 'post',
@@ -71,24 +69,36 @@ class Reservation extends React.Component{
             headers:{
                 'Content-Type': 'application/json',
             }
-        }).
-        then(res => {
-            console.log(res);
+        }).then(res => {
             this.setState({rooms: res.data});
             this.setState({displayCom: true});
         },e => {
-            console.log(e);
             this.setState({connectionError: e.message})
         });
     };
 
     loadImage(room) {
         try {
-            const url = require('../../styles/img/rooms/room'+room+'.jpg');
             return require('../../styles/img/rooms/room'+room+'.jpg');
         } catch(error) {
             return '';
         }
+    }
+
+    isUserLoggedIn(room_id) {
+        axios({
+            method: 'get',
+            url: 'http://localhost:8080/isLoggedIn',
+        }).then(res => {
+            if (res.data === false) {
+                alert("You must first log in to be able to make a reservation.");
+                window.location.href = "/front_login";
+            } else {
+                this.togglePopup(room_id);
+            }
+        },e => {
+            this.setState({connectionError: e.message});
+        });
     }
 
     togglePopup(room_id) {
@@ -120,11 +130,11 @@ class Reservation extends React.Component{
                     <Form.Row>
                         <Col>
                             <Form.Label>Room</Form.Label>
-                            <Form.Control type="number" defaultValue="1" name="numberOfRooms" onChange={this.handleChange}/>
+                            <Form.Control type="number" defaultValue="1" name="numberOfRooms" min="1" onChange={this.handleChange}/>
                         </Col>
                         <Col>
                             <Form.Label>Person</Form.Label>
-                            <Form.Control type="number" defaultValue="1" name="numberOfPersons" onChange={this.handleChange}/>
+                            <Form.Control type="number" defaultValue="1" name="numberOfPersons" min="1" onChange={this.handleChange}/>
                         </Col>
                     </Form.Row>
                     <Button type="submit" id="checkButton">Check</Button>
@@ -149,18 +159,19 @@ class Reservation extends React.Component{
                                     <p>Description : {room.description}</p>
                                 </div>
                             </div>
-                            <button type="submit" className="bookButton" onClick={()=>this.togglePopup(room.roomId)}>BOOK NOW</button>
+                            <button type="submit" className="bookButton" onClick={()=>this.isUserLoggedIn(room.roomId)}>BOOK NOW</button>
                         </div>
                     ))
                 }
+
                 {this.state.showPopup ?
                     <PopUp
-                        from={this.state.dateFrom.getDate() + '-' +
+                        from={this.state.dateFrom.getFullYear() + '-' +
                         ((this.state.dateFrom.getMonth() + 1) < 10 ? '0' + (this.state.dateFrom.getMonth() + 1) : (this.state.dateFrom.getMonth() + 1)) + '-' +
-                        this.state.dateFrom.getFullYear()}
-                        to={this.state.dateTo.getDate() + '-' +
+                        this.state.dateFrom.getDate()}
+                        to={this.state.dateTo.getFullYear() + '-' +
                         ((this.state.dateTo.getMonth() + 1) < 10 ? '0' + (this.state.dateTo.getMonth() + 1) : (this.state.dateTo.getMonth() + 1)) + '-' +
-                        this.state.dateTo.getFullYear()}
+                        this.state.dateTo.getDate()}
                         roomId={this.state.roomId}
                         closePopup={this.togglePopup.bind(this)}
                     />

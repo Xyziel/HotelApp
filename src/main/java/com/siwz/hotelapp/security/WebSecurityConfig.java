@@ -35,8 +35,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         return new MyUserDetailsService();
     }
 
-
-
     @Bean
     MyWebFilter myWebFilter()
     {
@@ -53,8 +51,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
-
-
 
 
 

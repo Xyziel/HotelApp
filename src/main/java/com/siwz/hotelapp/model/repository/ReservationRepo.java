@@ -15,10 +15,12 @@ import java.util.List;
 @Repository
 public interface ReservationRepo extends JpaRepository<Reservation, Integer> {
 
-    //add query
-    @Query(value = "select * from reservations", nativeQuery = true)
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO reservations (id_user, id_room, date_from, date_to) VALUES (:idUser, :idRoom, :dateFrom, :dateTo)", nativeQuery = true)
     void addReservation(int idUser, int idRoom, String dateFrom, String dateTo);
     List<Reservation> findAll();
+    
     @Transactional
     @Modifying
     @Query(value="delete from reservations where reservations.reservation_id=:reservationId",nativeQuery=true)

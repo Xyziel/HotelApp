@@ -22,7 +22,7 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @PutMapping("reservation/add")
+    @PostMapping("reservation/add")
     public void addReservation(@RequestBody JSONObject data) {
         this.reservationService.addReservation(Integer.parseInt(data.get("idUser").toString()), Integer.parseInt(data.get("idRoom").toString()), data.get("dateFrom").toString(), data.get("dateTo").toString());
     }
