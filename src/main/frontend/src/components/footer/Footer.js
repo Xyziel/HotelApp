@@ -9,7 +9,7 @@ export default function Footer(){
 
     return (
 
-        <Navbar fixed="bottom" bg="dark" collapseOnSelect expand="md" variant="dark">
+        <Navbar bg="dark" collapseOnSelect expand="md" variant="dark">
 
             <Navbar.Brand href="/">
                 <FontAwesomeIcon className={"hotelBrand"} id="username-icon" icon={faHotel}/>
