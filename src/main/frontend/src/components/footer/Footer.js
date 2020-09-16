@@ -1,5 +1,5 @@
 import React from "react";
-import {Navbar, Nav, Container} from "react-bootstrap";
+import {Navbar, Nav, Container} from "react-bootstrap/esm/index";
 import {Link} from "react-router-dom";
 
 class Footer extends React.Component {

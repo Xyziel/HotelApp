@@ -1,17 +1,16 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import MainPage from "./components/MainPage";
-import NavigationBar from "./components/NavigationBar";
-import TestPage from "./components/TestPage";
-import Registration from "./components/Registration";
-import Login from "./components/Login";
-import Authenticated from "./components/Authenticated";
-import AdminPanelNavbar from "./components/AdminPanelNavbar";
-import AdminPanelUsers from "./components/AdminPanelUsers";
+import MainPage from "./components/main/MainPage";
+import NavigationBar from "./components/navbar/NavigationBar";
+import TestPage from "./components/test/TestPage";
+import Registration from "./components/authentication/Registration";
+import Login from "./components/authentication/Login";
+import Authenticated from "./components/authentication/Authenticated";
+import AdminPanelNavbar from "./components/admin/AdminPanelNavbar";
+import AdminPanelUsers from "./components/admin/AdminPanelUsers";
 // import AdminPanel from "./components/AdminPanel";
-import AdminPanelReservations from "./components/AdminPanelReservations";
-import Footer from "./components/Footer";
+import AdminPanelReservations from "./components/admin/AdminPanelReservations";
+import Footer from "./components/footer/Footer";
 import Reservation from "./components/rezervation/Reservation";
 
 function App() {

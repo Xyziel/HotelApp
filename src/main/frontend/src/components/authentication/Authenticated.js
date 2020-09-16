@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios';
+import axios from 'axios/index';
 import querystring from 'querystring'
 
 class Authenticated extends React.Component

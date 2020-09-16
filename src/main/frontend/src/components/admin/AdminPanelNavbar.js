@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios"
+import axios from "axios/index"
 import ReactPaginate from 'react-paginate'
 import {Link} from "react-router-dom";
 

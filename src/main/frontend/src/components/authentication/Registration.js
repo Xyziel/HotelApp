@@ -1,10 +1,11 @@
 import React from "react";
-import "../styles/css/Registration.css";
-import Buttons from "./buttons/Buttons"
+import "../../styles/css/Registration.css";
+import Buttons from "../buttons/Buttons"
 import {Form} from "react-bootstrap"
 import {Row} from "react-bootstrap"
 import {Col} from "react-bootstrap"
 import axios from 'axios';
+import Button from "react-bootstrap/Button";
 
 class Registration extends React.Component
 {
@@ -260,7 +261,7 @@ class Registration extends React.Component
                     </div>
                 </div>
                 <div className="row justify-content-center">
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <Button type="submit" variant={"primary"} className="col-6">Submit</Button>
                 </div>
             </form>
         );

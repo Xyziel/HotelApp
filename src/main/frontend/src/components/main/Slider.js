@@ -1,5 +1,5 @@
 import React from 'react';
-import {Carousel, Container} from 'react-bootstrap';
+import {Carousel, Container} from 'react-bootstrap/esm/index';
 
 class Slider extends React.Component {
 
@@ -10,7 +10,7 @@ class Slider extends React.Component {
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
-                            src={require("../styles/img/first_slide_img.jpg")}
+                            src={require("../../styles/img/first_slide_img.jpg")}
                             alt="cos tam"
                         />
                         <Carousel.Caption>
@@ -21,7 +21,7 @@ class Slider extends React.Component {
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
-                            src={require("../styles/img/second_slide_img.jpg")}
+                            src={require("../../styles/img/second_slide_img.jpg")}
                             alt="cos tam"
                         />
                         <Carousel.Caption>
@@ -32,7 +32,7 @@ class Slider extends React.Component {
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
-                            src={require("../styles/img/third_slide_img.jpg")}
+                            src={require("../../styles/img/third_slide_img.jpg")}
                             alt="cos tam"
                         />
                         <Carousel.Caption>
