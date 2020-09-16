@@ -53,11 +53,12 @@ class AdminPanelUsers extends React.Component
                 const slice=data.slice(this.state.offset,this.state.offset+this.state.perPage);
                 const postData = slice.map(pd => <React.Fragment>
                     <div className="d-flex flex-row">
-                        <p className="col">{pd.email}</p>
+                        <p className="col ">{pd.email}</p>
                         <p className="col">{pd.userName}</p>
                         <p className="col">{pd.firstName}</p>
                         <p className="col">{pd.lastName}</p>
                         <p className="col">{pd.phoneNumber}</p>
+                        <p className="col">{pd.role_id}</p>
                         <button className="col btn-xsm btn-dark h-25" onClick={()=>this.deleteUser(pd.userName)}>Delete</button>
                     </div>
                 </React.Fragment>);
