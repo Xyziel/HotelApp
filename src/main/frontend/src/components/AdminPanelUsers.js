@@ -14,7 +14,7 @@ class AdminPanelUsers extends React.Component
         this.state={
             offset: 0,
             data: [],
-            perPage:2,
+            perPage:1,
             currentPage:0,
             admin: ['admin','client','cook','receptionist']
         };
@@ -82,16 +82,22 @@ class AdminPanelUsers extends React.Component
     test(number)
     {
         var temp=this.state.admin.length-1;
+        // console.log(temp);
+        console.log(number);
 
-        if(number>=temp)
+        if(number===0)
         {
-            number=0;
+            number=1;
         }
-        else
+        else if((number-3)%3<0)
         {
             number=number+1;
         }
-
+        else
+        {
+            number=number%3;
+        }
+        console.log(number);
         return this.state.admin[number];
     }
 
