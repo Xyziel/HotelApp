@@ -29,7 +29,7 @@ export default function NavigationBarUserNotLogged(props){
                     </Nav.Item>
 
                     <Nav.Item>
-                        <Link to={""} className="nav-link">Contact</Link>
+                        <Link to={"/contact"} className="nav-link">Contact</Link>
                     </Nav.Item>
 
                     <Nav.Item>

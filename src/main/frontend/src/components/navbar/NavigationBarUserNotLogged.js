@@ -30,7 +30,7 @@ export default function NavigationBarUserNotLogged(){
                     </Nav.Item>
 
                     <Nav.Item>
-                        <Link to={""} className="nav-link">Contact</Link>
+                        <Link to={"/contact"} className="nav-link">Contact</Link>
                     </Nav.Item>
 
                     <Nav.Item>
