@@ -41,57 +41,58 @@ class AdminPanelUsers extends React.Component
 
     componentDidMount()
     {
+        axios.get("http://localhost:8080/getUserRole").then(
+            res=>{
+                if(res.data!=='admin')
+                {
+                    window.location.replace("http://localhost:3000/");
+                }
+            },e=>{
+                // console.log(e);
+            }
+        );
         this.getData();
     }
 
     //nie wiem czemu state sie nie zmienia, do przerobienia jesli pojawiloby sie wiecej rol
-    getAllRoles()
-    {
-        var roles;
-        return axios.get("http://localhost:8080/api/roles/role/all").
-        then(res=>
-            {
-                roles=res.data;
-                console.log(roles[0]['name']);
-                console.log(roles.length);
-                var adminTemp=[];
-                for(var i=0;i<roles.length;i++)
-                {
-                    adminTemp[i]=roles[i]['name'];
-                }
-                return adminTemp;
-            },
-            e=>
-            {
-                console.log(e);
-            }
-        );
-
-    }
+    // getAllRoles()
+    // {
+    //     var roles;
+    //     return axios.get("http://localhost:8080/api/roles/role/all").
+    //     then(res=>
+    //         {
+    //             roles=res.data;
+    //             console.log(roles[0]['name']);
+    //             console.log(roles.length);
+    //             var adminTemp=[];
+    //             for(var i=0;i<roles.length;i++)
+    //             {
+    //                 adminTemp[i]=roles[i]['name'];
+    //             }
+    //             return adminTemp;
+    //         },
+    //         e=>
+    //         {
+    //             console.log(e);
+    //         }
+    //     );
+    //
+    // }
 
     test(number)
     {
         var temp=this.state.admin.length-1;
-        switch(number)
-        {
-            case 0:
-                number=1;
-                break;
-            case 1:
-                number=2;
-                break;
-            case 2:
-                number=3;
-                break;
-            case 3:
-                number=0;
-                break;
-            case 4:
-                number=0;
-                break;
 
+        if(number>=temp)
+        {
+            number=0;
         }
-        return number;
+        else
+        {
+            number=number+1;
+        }
+
+        return this.state.admin[number];
     }
 
     getData()
@@ -100,7 +101,7 @@ class AdminPanelUsers extends React.Component
         then(res=>
             {
                 // console.log(res.data._embedded.users[0]);
-                console.log(res.data);
+                // console.log(res.data);
                 // const data=res.data._embedded.users;
                 const data=res.data;
                 const slice=data.slice(this.state.offset,this.state.offset+this.state.perPage);
@@ -112,11 +113,12 @@ class AdminPanelUsers extends React.Component
                         <p className="col">{pd.lastName}</p>
                         <p className="col">{pd.phoneNumber}</p>
                         <select id="select">
-                            <option>{pd.role.name}</option>
-                            <option>{this.state.admin[this.test(pd.role.roleId)-1]}</option>
-                            <option>{this.state.admin[this.test(pd.role.roleId)]}</option>
-                            <option>{this.state.admin[this.test(pd.role.roleId)+1]}</option>
+                                <option>{pd.role.name}</option>
+                                <option>{this.test(pd.role.roleId-1)}</option>
+                                <option>{this.test(pd.role.roleId)}</option>
+                                <option>{this.test(pd.role.roleId+1)}</option>
                         </select>
+                        <button className="col btn-xsm btn-blue h-25" onClick={()=>this.updateUserRole(pd.userName,document.querySelector('#select'))}>Update</button>
                         <button className="col btn-xsm btn-dark h-25" onClick={()=>this.deleteUser(pd.userName)}>Delete</button>
                     </div>
                 </React.Fragment>);
@@ -141,7 +143,26 @@ class AdminPanelUsers extends React.Component
             })
     }
 
-    renderAdminNaviationBar()
+    updateUserRole(userName,role)
+    {
+        function findValue(temp)
+        {
+            return temp===role.value;
+        }
+
+        var roleValue=this.state.admin.findIndex(findValue)+1;
+        console.log(roleValue);
+        const url="http://localhost:8080/api/users/updateUserRole" + "?userName=" + userName + "&role=" + roleValue;
+        axios.patch(url).then(
+            res=>{
+                console.log(res);
+            },e=>{
+                console.log(e);
+            }
+        )
+    }
+
+    renderAdminNavigationBar()
     {
         return <AdminPanelNavbar></AdminPanelNavbar>;
     }
@@ -150,7 +171,7 @@ class AdminPanelUsers extends React.Component
     {
         return (
             <div>
-                {this.renderAdminNaviationBar()}
+                {this.renderAdminNavigationBar()}
                 <hr style={{visibility:"hidden"}}/>
             {this.state.postData}
             <div className="row pageDiv">

@@ -24,7 +24,7 @@ class NavigationBar extends React.Component {
     {
         axios.get("http://localhost:3000/isLoggedIn").
         then(res=>{
-            console.log(res.data);
+            // console.log(res.data);
             if(res.data===true)
             {
                 this.setState({
@@ -52,7 +52,7 @@ class NavigationBar extends React.Component {
     {
         axios.get("http://localhost:3000/getUserRole").
         then(res=>{
-            console.log(res.data);
+            // console.log(res.data);
             if(res.data==='admin')
             {
                 this.setState({
@@ -60,7 +60,7 @@ class NavigationBar extends React.Component {
                 });
             }
         },e=>{
-            console.log(e);
+            // console.log(e);
 
         });
     }
@@ -69,7 +69,7 @@ class NavigationBar extends React.Component {
     {
         axios.get("http://localhost:8080/logout").
         then(res=>{
-            console.log(res.data);
+            // console.log(res.data);
             window.location.replace("http://localhost:3000/");
         },e=>{
             console.log(e);
