@@ -61,7 +61,9 @@ class Login extends React.Component
                     <input className="form-control" type="password" id="password" name="password"/>
                     <p>{this.state.loginError}</p>
                 </div>
-                <button className="btn btn-primary">Login</button>
+                <div className="row justify-content-center">
+                    <button className="btn btn-primary">Login</button>
+                </div>
             </form>
         );
     }
