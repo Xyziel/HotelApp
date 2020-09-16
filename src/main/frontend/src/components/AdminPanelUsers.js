@@ -15,7 +15,8 @@ class AdminPanelUsers extends React.Component
             offset: 0,
             data: [],
             perPage:2,
-            currentPage:0
+            currentPage:0,
+            admin: ['admin','client','cook','receptionist']
         };
 
         this.handlePageClick = this
@@ -43,13 +44,65 @@ class AdminPanelUsers extends React.Component
         this.getData();
     }
 
-    getData()
+    //nie wiem czemu state sie nie zmienia, do przerobienia jesli pojawiloby sie wiecej rol
+    getAllRoles()
     {
-        axios.get("http://localhost:8080/dao/users").
+        var roles;
+        return axios.get("http://localhost:8080/api/roles/role/all").
         then(res=>
             {
-                console.log(res.data._embedded.users[0]);
-                const data=res.data._embedded.users;
+                roles=res.data;
+                console.log(roles[0]['name']);
+                console.log(roles.length);
+                var adminTemp=[];
+                for(var i=0;i<roles.length;i++)
+                {
+                    adminTemp[i]=roles[i]['name'];
+                }
+                return adminTemp;
+            },
+            e=>
+            {
+                console.log(e);
+            }
+        );
+
+    }
+
+    test(number)
+    {
+        var temp=this.state.admin.length-1;
+        switch(number)
+        {
+            case 0:
+                number=1;
+                break;
+            case 1:
+                number=2;
+                break;
+            case 2:
+                number=3;
+                break;
+            case 3:
+                number=0;
+                break;
+            case 4:
+                number=0;
+                break;
+
+        }
+        return number;
+    }
+
+    getData()
+    {
+        axios.get("http://localhost:8080/api/users/getAllUsers").
+        then(res=>
+            {
+                // console.log(res.data._embedded.users[0]);
+                console.log(res.data);
+                // const data=res.data._embedded.users;
+                const data=res.data;
                 const slice=data.slice(this.state.offset,this.state.offset+this.state.perPage);
                 const postData = slice.map(pd => <React.Fragment>
                     <div className="d-flex flex-row">
@@ -58,7 +111,12 @@ class AdminPanelUsers extends React.Component
                         <p className="col">{pd.firstName}</p>
                         <p className="col">{pd.lastName}</p>
                         <p className="col">{pd.phoneNumber}</p>
-                        <p className="col">{pd.role_id}</p>
+                        <select id="select">
+                            <option>{pd.role.name}</option>
+                            <option>{this.state.admin[this.test(pd.role.roleId)-1]}</option>
+                            <option>{this.state.admin[this.test(pd.role.roleId)]}</option>
+                            <option>{this.state.admin[this.test(pd.role.roleId)+1]}</option>
+                        </select>
                         <button className="col btn-xsm btn-dark h-25" onClick={()=>this.deleteUser(pd.userName)}>Delete</button>
                     </div>
                 </React.Fragment>);
@@ -68,6 +126,8 @@ class AdminPanelUsers extends React.Component
             },
             e=>{console.log(e)});
     }
+
+
 
     deleteUser(userName)
     {
