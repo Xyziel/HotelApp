@@ -121,7 +121,7 @@ class Registration extends React.Component
         }
         else
         {
-            this.setState({repeatedPasswordError:'Repeated password doesn\'t match password'});
+            this.setState({repeatedPasswordError:'Repeated password doesn\'t match primary password'});
         }
         return temp;
     }
@@ -217,50 +217,51 @@ class Registration extends React.Component
         return (
             <form onSubmit={this.sendFormData}>
                 <div className="form-group row">
-                    <div className="col">
-                        <label htmlFor="email_input">Email</label>
+                    <div className="col border-0">
+                        <label htmlFor="email_input" className="form-label">Email</label>
                         <input id="email_input" name="email" type="text" className="form-control"/>
-                        <p>{this.state.emailError}</p>
+                        <p className="p_error">{this.state.emailError}</p>
                     </div>
-                    <div className="col">
-                        <label htmlFor="username_input">Username</label>
+                    <div className="col border-0">
+                        <label htmlFor="username_input" className="form-label">Username</label>
                         <input name="userName" id="username_input" type="text"  className="form-control"/>
-                        <p>{this.state.userNameError}</p>
+                        <p className="p_error">{this.state.userNameError}</p>
                     </div>
                 </div>
                 <div className="form-group row">
-                    <div className="col">
-                        <label htmlFor="firstname_input">First name</label>
-                        <input  id="firstname_input" name="firstName" type="text" />
-                        <p>{this.state.firstNameError}</p>
+                    <div className="col border-0">
+                        <label htmlFor="firstname_input" className="form-label">First name</label>
+                        <input  className="form-control" id="firstname_input" name="firstName" type="text" />
+                        <p className="p_error">{this.state.firstNameError}</p>
                     </div>
-                    <div className="col">
-                        <label htmlFor="lastname_input">Last name</label>
-                        <input name="lastName" id="lastname_input" type="text" />
-                        <p>{this.state.lastNameError}</p>
-                    </div>
-                </div>
-                <div className="form-group row">
-                    <div className="col">
-                        <label htmlFor="phonenumber_input">Phone number</label>
-                        <input  id="phonenumber_input" name="phoneNumber" type="text" />
-                        <p>{this.state.phoneNumberError}</p>
+                    <div className="col border-0">
+                        <label htmlFor="lastname_input" className="form-label">Last name</label>
+                        <input className="form-control" name="lastName" id="lastname_input" type="text" />
+                        <p className="p_error">{this.state.lastNameError}</p>
                     </div>
                 </div>
                 <div className="form-group row">
-                    <div className="col">
-                        <label htmlFor="password_input">Password</label>
-                        <input name="password" id="password_input" type="password" />
-                        <p>{this.state.passwordError}</p>
-                    </div>
-                    <div className="col">
-                        <label htmlFor="repeated_password_input">Repeat password</label>
-                        <input name="repeated_password" id="repeated_password_input" type="password" />
-                        <p>{this.state.repeatedPasswordError}</p>
+                    <div className="col border-0">
+                        <label htmlFor="phonenumber_input" className="form-label">Phone number</label>
+                        <input  className="form-control" id="phonenumber_input" name="phoneNumber" type="text" />
+                        <p className="p_error">{this.state.phoneNumberError}</p>
                     </div>
                 </div>
-
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <div className="form-group row">
+                    <div className="col border-0">
+                        <label htmlFor="password_input" className="form-label">Password</label>
+                        <input className="form-control" name="password" id="password_input" type="password" />
+                        <p className="p_error">{this.state.passwordError}</p>
+                    </div>
+                    <div className="col border-0">
+                        <label htmlFor="repeated_password_input" className="form-label">Repeat password</label>
+                        <input className="form-control" name="repeated_password" id="repeated_password_input" type="password" />
+                        <p className="p_error">{this.state.repeatedPasswordError}</p>
+                    </div>
+                </div>
+                <div className="row justify-content-center">
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </div>
             </form>
         );
     }
