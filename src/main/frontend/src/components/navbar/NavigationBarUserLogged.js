@@ -3,6 +3,7 @@ import {Navbar, Nav, Container, Button} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {faHotel, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import Dropdown from "react-bootstrap/Dropdown";
 
 export default function NavigationBarUserNotLogged(props){
 
@@ -43,6 +44,31 @@ export default function NavigationBarUserNotLogged(props){
                 </Nav>
 
                 <Nav>
+
+                    <Nav.Item>
+
+                        <Dropdown className={"d-flex flex-column align-items-center"}>
+
+                            <Dropdown.Toggle as={"header"} className={"dataToggle"}>
+                                <Button variant={"outline-light"} className={"mr-3"}>My Profile</Button>
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu className={"dropdown-menu-center"}>
+
+                                <Dropdown.Item href="/user/profile">
+                                    See your profile
+                                </Dropdown.Item>
+
+
+                                <Dropdown.Item href="/user/reservations">
+                                    Reservations
+                                </Dropdown.Item>
+
+                            </Dropdown.Menu>
+
+                        </Dropdown>
+
+                    </Nav.Item>
 
                     <Nav.Item>
                         <Button

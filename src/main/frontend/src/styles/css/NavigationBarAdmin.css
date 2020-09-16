@@ -1,0 +1,9 @@
+.profile-icon{
+    color: white !important;
+    font-size: 2em;
+
+}
+.dataToggle::after{
+
+    display:none !important;
+}

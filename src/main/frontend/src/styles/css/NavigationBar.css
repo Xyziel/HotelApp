@@ -50,3 +50,6 @@ img {
     box-shadow: 0 0 0 0.2rem lightgray;
 }
 
+.profile-icon{
+    color: green !important;
+}
