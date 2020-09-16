@@ -83,6 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 and().csrf().disable().
         addFilterBefore(myWebFilter(), CsrfFilter.class).authorizeRequests()
                 .antMatchers("/**").permitAll().
+//                antMatchers("/api/users/admin/**").hasAuthority("admin").anyRequest().authenticated().
 //                .antMatchers("/dao/**").hasAuthority("admin").anyRequest().authenticated().
                 and().
                 formLogin().

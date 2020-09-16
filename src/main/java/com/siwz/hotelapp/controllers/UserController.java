@@ -37,11 +37,6 @@ public class UserController
     }
 
 
-//    @PostMapping("/login")
-//    ResponseEntity<?> login(@RequestBody String username, @RequestBody String password)
-//    {
-//
-//    }
 
     @CrossOrigin(origins = "*")
     @PostMapping("/register")
@@ -83,14 +78,14 @@ public class UserController
 
 
 
-    @PostMapping("/hej")
-    ResponseEntity<String> test(@RequestBody String test)
-    {
-//        HttpHeaders responseHeaders = new HttpHeaders();
-//        responseHeaders.set("Access-Control-Allow-Origin","*");
-
-        return ResponseEntity.status(HttpStatus.OK).body(test);
-    }
+//    @PostMapping("/hej")
+//    ResponseEntity<String> test(@RequestBody String test)
+//    {
+////        HttpHeaders responseHeaders = new HttpHeaders();
+////        responseHeaders.set("Access-Control-Allow-Origin","*");
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(test);
+//    }
 
     @PostMapping("/user/check")
     ResponseEntity<User> getUserByUserName(@RequestBody String userName)
