@@ -71,6 +71,14 @@ public class UserController
     }
 
 
+    @CrossOrigin(origins ="*")
+    @GetMapping("/getAllUsers")
+    ResponseEntity<List<User>> getAllUsers()
+    {
+        return ResponseEntity.ok(userRepo.findAllUsers());
+    }
+
+
 
 
 
@@ -89,6 +97,19 @@ public class UserController
     {
         User user = userRepo.findUserByUserName(userName);
         return ResponseEntity.ok().body(user);
+    }
+
+    @PatchMapping("/updateUserRole")
+    ResponseEntity<?> updateUserRoleByUserName(@RequestParam("userName") String userName,@RequestParam("role") String role)
+    {
+        User user = userRepo.findUserByUserName(userName);
+        if(user!=null)
+        {
+            userRepo.updateUserRoleById(user.getUserId(), Integer.valueOf(role));
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.ok(false);
+
     }
 
     @DeleteMapping("")
