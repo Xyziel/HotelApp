@@ -25,4 +25,7 @@ public interface ReservationRepo extends JpaRepository<Reservation, Integer> {
     @Modifying
     @Query(value="delete from reservations where reservations.reservation_id=:reservationId",nativeQuery=true)
     public void deleteUserByUserId(@Param("reservationId") int id);
+
+    @Query(value="select * from reservations where reservations.id_user:id_user",nativeQuery = true)
+    public List<Reservation> getAllReservationsByUserId(@Param("id_user") int id);
 }
