@@ -101,7 +101,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 loginProcessingUrl("/perform_login").
                 successHandler(myUrlAuthenticationSuccessHandler).
                 failureHandler(myUrlFailureLoginHandler).
-//                defaultSuccessUrl("http://localhost:3000/test",true).
                 permitAll().
                 and().
                 logout().
