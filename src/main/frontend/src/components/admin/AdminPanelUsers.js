@@ -3,6 +3,7 @@ import axios from "axios/index"
 import ReactPaginate from 'react-paginate'
 import '../../styles/css/admin/AdminPanel.css'
 import AdminPanelNavbar from "./AdminPanelNavbar";
+import Select from 'react-select';
 
 
 
@@ -14,9 +15,12 @@ class AdminPanelUsers extends React.Component
         this.state={
             offset: 0,
             data: [],
-            perPage:1,
+            perPage:5,
             currentPage:0,
-            admin: ['admin','client','cook','receptionist']
+            admin: ['admin','client','cook','receptionist'],
+            selectId:0,
+            selectIdTable:[],
+            selectedRole:{}
         };
 
         this.handlePageClick = this
@@ -83,7 +87,7 @@ class AdminPanelUsers extends React.Component
     {
         var temp=this.state.admin.length-1;
         // console.log(temp);
-        console.log(number);
+        // console.log(number);
 
         if(number===0)
         {
@@ -97,7 +101,7 @@ class AdminPanelUsers extends React.Component
         {
             number=number%3;
         }
-        console.log(number);
+        // console.log(number);
         return this.state.admin[number];
     }
 
@@ -107,7 +111,7 @@ class AdminPanelUsers extends React.Component
         then(res=>
             {
                 // console.log(res.data._embedded.users[0]);
-                // console.log(res.data);
+                console.log(res.data);
                 // const data=res.data._embedded.users;
                 const data=res.data;
                 const slice=data.slice(this.state.offset,this.state.offset+this.state.perPage);
@@ -118,13 +122,15 @@ class AdminPanelUsers extends React.Component
                         <p className="col">{pd.firstName}</p>
                         <p className="col">{pd.lastName}</p>
                         <p className="col">{pd.phoneNumber}</p>
-                        <select id="select">
+
+                        <select id={this.getSelectId()} onChange={(e)=>{this.handleChange(e,pd.userName)}} autoFocus={true}>
                                 <option>{pd.role.name}</option>
                                 <option>{this.test(pd.role.roleId-1)}</option>
                                 <option>{this.test(pd.role.roleId)}</option>
                                 <option>{this.test(pd.role.roleId+1)}</option>
                         </select>
-                        <button className="col btn-xsm btn-blue h-25" onClick={()=>this.updateUserRole(pd.userName,document.querySelector('#select'))}>Update</button>
+                        {/*<button className="col btn-xsm btn-blue h-25" onClick={()=>this.updateUserRole(pd.userName,document.querySelector('#'+{this.state.selectId}))}>Update</button>*/}
+                        <button className="col btn-xsm btn-blue h-25" onClick={()=>this.updateUserRole(pd.userName,this.state.selectedRole)}>Update</button>
                         <button className="col btn-xsm btn-dark h-25" onClick={()=>this.deleteUser(pd.userName)}>Delete</button>
                     </div>
                 </React.Fragment>);
@@ -133,6 +139,29 @@ class AdminPanelUsers extends React.Component
                 });
             },
             e=>{console.log(e)});
+    }
+
+    handleChange(event,userName)
+    {
+        console.log(userName);
+        console.log(event.target.value);
+        console.log(event.target.id);
+        this.state.selectedRole[userName]=event.target.value;
+        console.log(this.state.selectedRole);
+    }
+
+    getSelectId()
+    {
+        if(this.state.selectId>this.state.perPage)
+        {
+            this.setState({selectId:0});
+        }
+        else
+        {
+            this.setState({selectId:this.state.selectId+1});
+        }
+        console.log(this.state.selectId);
+        return 'select-'+this.state.selectId;
     }
 
 
@@ -151,9 +180,14 @@ class AdminPanelUsers extends React.Component
 
     updateUserRole(userName,role)
     {
+        var role2=role[userName];
+        console.log(role2);
+        console.log(userName);
+        console.log(this.state.selectId);
+        // console.log(role2);
         function findValue(temp)
         {
-            return temp===role.value;
+            return temp===role2;
         }
 
         var roleValue=this.state.admin.findIndex(findValue)+1;

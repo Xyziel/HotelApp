@@ -16,6 +16,7 @@ import "../../styles/css/navbar/NavigationBarAdmin.css"
 
 export default function NavigationBarUserNotLogged(props){
 
+
     return (
 
         <Navbar sticky="top" bg="dark" collapseOnSelect expand="md" variant="dark" className={"mb-5"}>
@@ -85,6 +86,7 @@ export default function NavigationBarUserNotLogged(props){
                             className={"mt-md-0 mt-3 mr-3"}
                             id="signUpButton"
                             variant="outline-light"
+                            href="/admin_panel"
                         >Admin Panel</Button>
                     </Nav.Item>
 

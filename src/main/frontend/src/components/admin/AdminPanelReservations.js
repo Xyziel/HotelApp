@@ -14,7 +14,7 @@ class AdminPanelReservations extends React.Component
         this.state={
             offset: 0,
             data: [],
-            perPage:2,
+            perPage:5,
             currentPage:0
         };
 

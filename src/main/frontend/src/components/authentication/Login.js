@@ -59,7 +59,7 @@ class Login extends React.Component
                 <div className="form-group row">
                     <label className="form-label" htmlFor="password_id">Password</label>
                     <input className="form-control" type="password" id="password" name="password"/>
-                    <p>{this.state.loginError}</p>
+                    <p className="login_error">{this.state.loginError}</p>
                 </div>
                 <div className="row justify-content-center">
                     <button className="btn btn-primary">Login</button>
