@@ -143,11 +143,11 @@ class AdminPanelUsers extends React.Component
 
     handleChange(event,userName)
     {
-        console.log(userName);
-        console.log(event.target.value);
-        console.log(event.target.id);
+        // console.log(userName);
+        // console.log(event.target.value);
+        // console.log(event.target.id);
         this.state.selectedRole[userName]=event.target.value;
-        console.log(this.state.selectedRole);
+        // console.log(this.state.selectedRole);
     }
 
     getSelectId()
@@ -160,7 +160,7 @@ class AdminPanelUsers extends React.Component
         {
             this.setState({selectId:this.state.selectId+1});
         }
-        console.log(this.state.selectId);
+        // console.log(this.state.selectId);
         return 'select-'+this.state.selectId;
     }
 
@@ -169,7 +169,7 @@ class AdminPanelUsers extends React.Component
     deleteUser(userName)
     {
         const url="http://localhost:8080/api/users" + "?userName=" + userName;
-        console.log(url);
+        // console.log(url);
         axios.delete(url,userName)
             .then(res=>{
                 console.log(res.data)
@@ -181,9 +181,9 @@ class AdminPanelUsers extends React.Component
     updateUserRole(userName,role)
     {
         var role2=role[userName];
-        console.log(role2);
-        console.log(userName);
-        console.log(this.state.selectId);
+        // console.log(role2);
+        // console.log(userName);
+        // console.log(this.state.selectId);
         // console.log(role2);
         function findValue(temp)
         {
