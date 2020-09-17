@@ -14,6 +14,7 @@ import Footer from "./components/footer/Footer";
 import Reservation from "./components/rezervation/Reservation";
 import ContactPage from "./components/contact/ContactPage";
 import UserProfilePage from "./components/profile/UserProfilePage";
+import UserReservationPage from "./components/profile/UserReservationPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/reservation" exact component={Reservation}/>
                 <Route path="/contact" exact component={ContactPage}/>
                 <Route path="/user/profile" exact component={UserProfilePage}/>
+                <Route path="/user/reservations" exact component={UserReservationPage}/>
             </Switch>
         <Footer/>
     </Router>

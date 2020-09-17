@@ -1,0 +1,76 @@
+.Reservation{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+    background: white;
+    height: 12em;
+    border: 2px solid #000;
+    box-sizing: border-box;
+    margin-top: 2em;
+    width: 80%;
+}
+
+.reservationImage{
+    display: flex;
+    width: 7em;
+    height: 7em;
+    margin-left: 1em;
+    margin-right: 2em;
+
+}
+
+.reservationInformation{
+
+
+}
+
+.reservationRoomNumber{
+    font-weight: bold;
+    color: #1B75BC;
+    font-size: 1.2em;
+}
+
+.reservationLocalization{
+    color: black;
+    opacity: 0.6;
+    font-size: 1.1em;
+}
+
+.reservationLocalizationItem,
+.reservationBedCount,
+.reservationDateItem {
+    margin-right: 0.5em;
+}
+
+.reservationLocalizationIcon{
+    color: green;
+}
+
+.reservationDateIcon{
+    color: green;
+}
+
+.reservationPeopleIcon{
+    color: green;
+}
+
+.eventBadge{
+    position: absolute;
+    right: 1em;
+    top: 1em;
+}
+
+.eventBadgeHeader{
+    font-size: 1.2em;
+}
+
+.eventDetailsButton{
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+}
+
+.reservationPeopleIcon{
+    margin-right: 0.5em;
+}
