@@ -122,15 +122,16 @@ class AdminPanelUsers extends React.Component
                         <p className="col">{pd.firstName}</p>
                         <p className="col">{pd.lastName}</p>
                         <p className="col">{pd.phoneNumber}</p>
-
-                        <select id={this.getSelectId()} onChange={(e)=>{this.handleChange(e,pd.userName)}} autoFocus={true}>
-                                <option>{pd.role.name}</option>
-                                <option>{this.test(pd.role.roleId-1)}</option>
-                                <option>{this.test(pd.role.roleId)}</option>
-                                <option>{this.test(pd.role.roleId+1)}</option>
-                        </select>
+                        <div className="col">
+                            <select id={this.getSelectId()} onChange={(e)=>{this.handleChange(e,pd.userName)}} autoFocus={true}>
+                                    <option>{pd.role.name}</option>
+                                    <option>{this.test(pd.role.roleId-1)}</option>
+                                    <option>{this.test(pd.role.roleId)}</option>
+                                    <option>{this.test(pd.role.roleId+1)}</option>
+                            </select>
+                        </div>
                         {/*<button className="col btn-xsm btn-blue h-25" onClick={()=>this.updateUserRole(pd.userName,document.querySelector('#'+{this.state.selectId}))}>Update</button>*/}
-                        <button className="col btn-xsm btn-blue h-25" onClick={()=>this.updateUserRole(pd.userName,this.state.selectedRole)}>Update</button>
+                        <button className="col btn-xsm btn-primary h-25" onClick={()=>this.updateUserRole(pd.userName,this.state.selectedRole)}>Update</button>
                         <button className="col btn-xsm btn-dark h-25" onClick={()=>this.deleteUser(pd.userName)}>Delete</button>
                     </div>
                 </React.Fragment>);
@@ -212,8 +213,20 @@ class AdminPanelUsers extends React.Component
         return (
             <div>
                 {this.renderAdminNavigationBar()}
+                <div className="d-flex flex-row pt-5 ">
+                    <p className="col">Email</p>
+                    <p className="col">Username</p>
+                    <p className="col">First name</p>
+                    <p className="col">Last name</p>
+                    <p className="col">Phone number</p>
+                    <p className="col">Role/Select role</p>
+                    <p className="col">Update role</p>
+                    <p className="col">Delete user</p>
+                </div>
                 <hr style={{visibility:"hidden"}}/>
                 {this.state.postData}
+                <hr style={{visibility:"hidden"}}/>
+                <hr style={{visibility:"hidden"}}/>
                 <div className="row pageDiv">
                     <ReactPaginate
                         className="page"
@@ -229,6 +242,7 @@ class AdminPanelUsers extends React.Component
                         subContainerClassName={"pages pagination"}
                         activeClassName={"active"}/>
                 </div>
+                <hr style={{visibility:"hidden"}}/>
             </div>);
 
     }

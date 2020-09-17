@@ -15,14 +15,13 @@ class AdminPanelNavbar extends React.Component
 
     render()
     {
-        return(<div className="d-flex flex-row justify-content-center">
+        return(<div className="d-flex justify-content-center">
             <div>
-                <Link className="btn btn-dark" to="/admin_panel/users">Users</Link>
+                <Link className="btn btn-dark btn-lg m-4" to="/admin_panel/users">Users</Link>
             </div>
             <div>
-                <Link className="btn btn-dark" to="/admin_panel/reservations">Reservations</Link>
+                <Link className="btn btn-dark btn-lg m-4" to="/admin_panel/reservations">Reservations</Link>
             </div>
-
         </div>);
     }
 
