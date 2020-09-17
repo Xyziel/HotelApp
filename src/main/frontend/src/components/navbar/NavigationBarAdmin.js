@@ -12,7 +12,7 @@ import {
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Dropdown from "react-bootstrap/Dropdown";
 
-import "../../styles/css/NavigationBarAdmin.css"
+import "../../styles/css/navbar/NavigationBarAdmin.css"
 
 export default function NavigationBarUserNotLogged(props){
 

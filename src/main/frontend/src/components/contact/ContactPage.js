@@ -1,9 +1,9 @@
 import React, {Component, useState} from "react";
-import "../../styles/css/ContactPage.css";
+import "../../styles/css/contact/ContactPage.css";
 import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
-import "../../styles/css/ContactPage.css"
+import "../../styles/css/contact/ContactPage.css"
 
 export default function ContactPage(){
 

@@ -1,5 +1,5 @@
 import React from "react";
-import '../../styles/css/About.css';
+import '../../styles/css/about/About.css';
 import {Container} from "react-bootstrap";
 
 class About extends React.Component {

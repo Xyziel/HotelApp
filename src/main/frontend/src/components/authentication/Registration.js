@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/css/Registration.css";
+import "../../styles/css/authentication/Registration.css";
 import Buttons from "../buttons/Buttons"
 import {Form} from "react-bootstrap"
 import {Row} from "react-bootstrap"
