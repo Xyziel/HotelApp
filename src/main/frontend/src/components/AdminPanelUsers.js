@@ -135,8 +135,10 @@ class AdminPanelUsers extends React.Component
                     pageCount: Math.ceil(data.length/this.state.perPage),postData
                 });
             },
-            e=>{console.log(e)});
-        window.location.replace("http://localhost:3000/notAuthenticated");
+            e=>{
+            console.log(e)
+            window.location.replace("http://localhost:3000/not_authenticated");
+            });
     }
 
 
