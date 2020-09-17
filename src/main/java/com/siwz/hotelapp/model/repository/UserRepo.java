@@ -25,6 +25,12 @@ public interface UserRepo extends JpaRepository<User,Integer>
     @Query(value="select * from users",nativeQuery=true)
     public List<User> findAllUsers();
 
+
+    @Transactional
+    @Modifying
+    @Query(value="update users set id_role=:role where users.user_id=:userId",nativeQuery=true)
+    public void updateUserRoleById(@Param("userId") int userId,@Param("role") int role);
+
     @Transactional
     @Modifying
     @Query(value="delete from users where users.user_id=:userId",nativeQuery=true)

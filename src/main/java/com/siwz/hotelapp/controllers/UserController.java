@@ -37,11 +37,6 @@ public class UserController
     }
 
 
-//    @PostMapping("/login")
-//    ResponseEntity<?> login(@RequestBody String username, @RequestBody String password)
-//    {
-//
-//    }
 
     @CrossOrigin(origins = "*")
     @PostMapping("/register")
@@ -71,24 +66,45 @@ public class UserController
     }
 
 
-
-
-
-
-    @PostMapping("/hej")
-    ResponseEntity<String> test(@RequestBody String test)
+    @CrossOrigin(origins ="*")
+    @GetMapping("/getAllUsers")
+    ResponseEntity<List<User>> getAllUsers()
     {
-//        HttpHeaders responseHeaders = new HttpHeaders();
-//        responseHeaders.set("Access-Control-Allow-Origin","*");
-
-        return ResponseEntity.status(HttpStatus.OK).body(test);
+        return ResponseEntity.ok(userRepo.findAllUsers());
     }
+
+
+
+
+
+
+//    @PostMapping("/hej")
+//    ResponseEntity<String> test(@RequestBody String test)
+//    {
+////        HttpHeaders responseHeaders = new HttpHeaders();
+////        responseHeaders.set("Access-Control-Allow-Origin","*");
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(test);
+//    }
 
     @PostMapping("/user/check")
     ResponseEntity<User> getUserByUserName(@RequestBody String userName)
     {
         User user = userRepo.findUserByUserName(userName);
         return ResponseEntity.ok().body(user);
+    }
+
+    @PatchMapping("/updateUserRole")
+    ResponseEntity<?> updateUserRoleByUserName(@RequestParam("userName") String userName,@RequestParam("role") String role)
+    {
+        User user = userRepo.findUserByUserName(userName);
+        if(user!=null)
+        {
+            userRepo.updateUserRoleById(user.getUserId(), Integer.valueOf(role));
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.ok(false);
+
     }
 
     @DeleteMapping("")

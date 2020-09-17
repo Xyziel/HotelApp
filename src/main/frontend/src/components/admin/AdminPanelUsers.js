@@ -14,8 +14,9 @@ class AdminPanelUsers extends React.Component
         this.state={
             offset: 0,
             data: [],
-            perPage:2,
-            currentPage:0
+            perPage:1,
+            currentPage:0,
+            admin: ['admin','client','cook','receptionist']
         };
 
         this.handlePageClick = this
@@ -40,16 +41,75 @@ class AdminPanelUsers extends React.Component
 
     componentDidMount()
     {
+        axios.get("http://localhost:8080/getUserRole").then(
+            res=>{
+                if(res.data!=='admin')
+                {
+                    window.location.replace("http://localhost:3000/");
+                }
+            },e=>{
+                // console.log(e);
+            }
+        );
         this.getData();
+    }
+
+    //nie wiem czemu state sie nie zmienia, do przerobienia jesli pojawiloby sie wiecej rol
+    // getAllRoles()
+    // {
+    //     var roles;
+    //     return axios.get("http://localhost:8080/api/roles/role/all").
+    //     then(res=>
+    //         {
+    //             roles=res.data;
+    //             console.log(roles[0]['name']);
+    //             console.log(roles.length);
+    //             var adminTemp=[];
+    //             for(var i=0;i<roles.length;i++)
+    //             {
+    //                 adminTemp[i]=roles[i]['name'];
+    //             }
+    //             return adminTemp;
+    //         },
+    //         e=>
+    //         {
+    //             console.log(e);
+    //         }
+    //     );
+    //
+    // }
+
+    test(number)
+    {
+        var temp=this.state.admin.length-1;
+        // console.log(temp);
+        console.log(number);
+
+        if(number===0)
+        {
+            number=1;
+        }
+        else if((number-3)%3<0)
+        {
+            number=number+1;
+        }
+        else
+        {
+            number=number%3;
+        }
+        console.log(number);
+        return this.state.admin[number];
     }
 
     getData()
     {
-        axios.get("http://localhost:8080/dao/users").
+        axios.get("http://localhost:8080/api/users/getAllUsers").
         then(res=>
             {
-                console.log(res.data._embedded.users[0]);
-                const data=res.data._embedded.users;
+                // console.log(res.data._embedded.users[0]);
+                // console.log(res.data);
+                // const data=res.data._embedded.users;
+                const data=res.data;
                 const slice=data.slice(this.state.offset,this.state.offset+this.state.perPage);
                 const postData = slice.map(pd => <React.Fragment>
                     <div className="d-flex flex-row">
@@ -58,7 +118,13 @@ class AdminPanelUsers extends React.Component
                         <p className="col">{pd.firstName}</p>
                         <p className="col">{pd.lastName}</p>
                         <p className="col">{pd.phoneNumber}</p>
-                        <p className="col">{pd.role_id}</p>
+                        <select id="select">
+                                <option>{pd.role.name}</option>
+                                <option>{this.test(pd.role.roleId-1)}</option>
+                                <option>{this.test(pd.role.roleId)}</option>
+                                <option>{this.test(pd.role.roleId+1)}</option>
+                        </select>
+                        <button className="col btn-xsm btn-blue h-25" onClick={()=>this.updateUserRole(pd.userName,document.querySelector('#select'))}>Update</button>
                         <button className="col btn-xsm btn-dark h-25" onClick={()=>this.deleteUser(pd.userName)}>Delete</button>
                     </div>
                 </React.Fragment>);
@@ -68,6 +134,8 @@ class AdminPanelUsers extends React.Component
             },
             e=>{console.log(e)});
     }
+
+
 
     deleteUser(userName)
     {
@@ -81,7 +149,26 @@ class AdminPanelUsers extends React.Component
             })
     }
 
-    renderAdminNaviationBar()
+    updateUserRole(userName,role)
+    {
+        function findValue(temp)
+        {
+            return temp===role.value;
+        }
+
+        var roleValue=this.state.admin.findIndex(findValue)+1;
+        console.log(roleValue);
+        const url="http://localhost:8080/api/users/updateUserRole" + "?userName=" + userName + "&role=" + roleValue;
+        axios.patch(url).then(
+            res=>{
+                console.log(res);
+            },e=>{
+                console.log(e);
+            }
+        )
+    }
+
+    renderAdminNavigationBar()
     {
         return <AdminPanelNavbar></AdminPanelNavbar>;
     }
@@ -90,33 +177,25 @@ class AdminPanelUsers extends React.Component
     {
         return (
             <div>
-                {this.renderAdminNaviationBar()}
-                <div className="d-flex flex-row">
-                    <p className="col">Email</p>
-                    <p className="col">Nazwa</p>
-                    <p className="col">Imie</p>
-                    <p className="col">Nazwisko</p>
-                    <p className="col">Numer telefonu</p>
-                    <p className="col">Usuń</p>
-                </div>
+                {this.renderAdminNavigationBar()}
                 <hr style={{visibility:"hidden"}}/>
-            {this.state.postData}
-            <div className="row pageDiv">
-                <ReactPaginate
-                    className="page"
-                    previousLabel={"prev"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={this.handlePageClick}
-                    containerClassName={"pagination"}
-                    subContainerClassName={"pages pagination"}
-                    activeClassName={"active"}/>
-            </div>
-        </div>);
+                {this.state.postData}
+                <div className="row pageDiv">
+                    <ReactPaginate
+                        className="page"
+                        previousLabel={"prev"}
+                        nextLabel={"next"}
+                        breakLabel={"..."}
+                        breakClassName={"break-me"}
+                        pageCount={this.state.pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={this.handlePageClick}
+                        containerClassName={"pagination"}
+                        subContainerClassName={"pages pagination"}
+                        activeClassName={"active"}/>
+                </div>
+            </div>);
 
     }
 }

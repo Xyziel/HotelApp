@@ -28,7 +28,7 @@ public class MyWebFilter implements Filter
         //TODO dlaczego getReader niszczy te funkcje ?
 
         httpServletResponse.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-        httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE,PATCH");
         httpServletResponse.setHeader("Access-Control-Allow-Headers", "Content-Type");
         httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
         chain.doFilter(httpServletRequest,httpServletResponse);
