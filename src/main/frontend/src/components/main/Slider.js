@@ -17,7 +17,7 @@ class Slider extends React.Component {
                         />
                         <Carousel.Caption>
                             <h3 className={"SliderHeader"}>Be our guest</h3>
-                            <p className={"SliderParagraph"}>Professional personnel, modern rooms, beautiful view, this is what our hotel is about.</p>
+                         <p className={"SliderParagraph"}>Professional personnel, modern rooms, beautiful view, this is what our hotel is about.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
