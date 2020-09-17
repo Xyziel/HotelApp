@@ -41,16 +41,16 @@ class AdminPanelUsers extends React.Component
 
     componentDidMount()
     {
-        axios.get("http://localhost:8080/getUserRole").then(
-            res=>{
-                if(res.data!=='admin')
-                {
-                    window.location.replace("http://localhost:3000/");
-                }
-            },e=>{
-                // console.log(e);
-            }
-        );
+        // axios.get("http://localhost:8080/getUserRole").then(
+        //     res=>{
+        //         if(res.data!=='admin')
+        //         {
+        //             window.location.replace("http://localhost:3000/");
+        //         }
+        //     },e=>{
+        //         // console.log(e);
+        //     }
+        // );
         this.getData();
     }
 
@@ -103,13 +103,16 @@ class AdminPanelUsers extends React.Component
 
     getData()
     {
-        axios.get("http://localhost:8080/api/users/getAllUsers").
+        axios.get("http://localhost:8080/api/users/admin/getAllUsers").
         then(res=>
             {
                 // console.log(res.data._embedded.users[0]);
                 // console.log(res.data);
                 // const data=res.data._embedded.users;
                 const data=res.data;
+                console.log(res.data);
+                console.log(res.status);
+                console.log(res.headers);
                 const slice=data.slice(this.state.offset,this.state.offset+this.state.perPage);
                 const postData = slice.map(pd => <React.Fragment>
                     <div className="d-flex flex-row">
@@ -133,13 +136,14 @@ class AdminPanelUsers extends React.Component
                 });
             },
             e=>{console.log(e)});
+        window.location.replace("http://localhost:3000/notAuthenticated");
     }
 
 
 
     deleteUser(userName)
     {
-        const url="http://localhost:8080/api/users" + "?userName=" + userName;
+        const url="http://localhost:8080/api/users/admin" + "?userName=" + userName;
         console.log(url);
         axios.delete(url,userName)
             .then(res=>{
@@ -158,7 +162,7 @@ class AdminPanelUsers extends React.Component
 
         var roleValue=this.state.admin.findIndex(findValue)+1;
         console.log(roleValue);
-        const url="http://localhost:8080/api/users/updateUserRole" + "?userName=" + userName + "&role=" + roleValue;
+        const url="http://localhost:8080/api/users/admin/updateUserRole" + "?userName=" + userName + "&role=" + roleValue;
         axios.patch(url).then(
             res=>{
                 console.log(res);

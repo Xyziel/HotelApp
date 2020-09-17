@@ -29,6 +29,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Autowired
     private MyUrlLogoutHandler myUrlLogoutHandler;
 
+    @Autowired
+    private MyCustomAuthenticationEntryPoint myCustomAuthenticationEntryPoint;
+
     @Bean
     public UserDetailsService userDetailsService()
     {
@@ -81,9 +84,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS).
                 and().csrf().disable().
-        addFilterBefore(myWebFilter(), CsrfFilter.class).authorizeRequests()
-                .antMatchers("/**").permitAll().
-//                antMatchers("/api/users/admin/**").hasAuthority("admin").anyRequest().authenticated().
+        addFilterBefore(myWebFilter(), CsrfFilter.class).
+                authorizeRequests().
+                antMatchers("/*").permitAll().
+                antMatchers("/api/users/*").permitAll().
+                antMatchers("/reservation/check").permitAll().
+                antMatchers("/reservation/add").hasAnyAuthority().
+                antMatchers("/api/roles/**").hasAuthority("admin").
+                antMatchers("/dao/**").hasAuthority("admin").
+                antMatchers("/api/users/admin/**").hasAuthority("admin").anyRequest().authenticated().
+//                antMatchers("/**").permitAll().
+//                antMatchers("/api/users/admin/**").hasAuthority("admin").anyRequest().authenticated().and().
 //                .antMatchers("/dao/**").hasAuthority("admin").anyRequest().authenticated().
                 and().
                 formLogin().
@@ -97,6 +108,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 and().
                 logout().
                 logoutSuccessHandler(myUrlLogoutHandler).
-                permitAll();
+                permitAll().and().exceptionHandling().authenticationEntryPoint(myCustomAuthenticationEntryPoint);
     }
 }

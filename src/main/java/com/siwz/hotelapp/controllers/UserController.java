@@ -67,7 +67,7 @@ public class UserController
 
 
     @CrossOrigin(origins ="*")
-    @GetMapping("/getAllUsers")
+    @GetMapping("/admin/getAllUsers")
     ResponseEntity<List<User>> getAllUsers()
     {
         return ResponseEntity.ok(userRepo.findAllUsers());
@@ -94,7 +94,7 @@ public class UserController
         return ResponseEntity.ok().body(user);
     }
 
-    @PatchMapping("/updateUserRole")
+    @PatchMapping("/admin/updateUserRole")
     ResponseEntity<?> updateUserRoleByUserName(@RequestParam("userName") String userName,@RequestParam("role") String role)
     {
         User user = userRepo.findUserByUserName(userName);
@@ -107,7 +107,7 @@ public class UserController
 
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/admin")
     ResponseEntity<?> deleteUserById(@RequestParam("userName") String userName)
     {
         User user = userRepo.findUserByUserName(userName);
