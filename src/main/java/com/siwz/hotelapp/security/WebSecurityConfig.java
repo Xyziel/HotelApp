@@ -94,8 +94,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 antMatchers("/dao/**").hasAuthority("admin").
                 antMatchers("/api/users/admin/**").hasAuthority("admin").anyRequest().authenticated().
 //                antMatchers("/**").permitAll().
-//                antMatchers("/api/users/admin/**").hasAuthority("admin").anyRequest().authenticated().and().
-//                .antMatchers("/dao/**").hasAuthority("admin").anyRequest().authenticated().
                 and().
                 formLogin().
                 usernameParameter("username").
@@ -108,6 +106,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 and().
                 logout().
                 logoutSuccessHandler(myUrlLogoutHandler).
-                permitAll().and().exceptionHandling().authenticationEntryPoint(myCustomAuthenticationEntryPoint);
+                permitAll().
+                and().httpBasic().authenticationEntryPoint(myCustomAuthenticationEntryPoint);
+//                and().exceptionHandling().authenticationEntryPoint(myCustomAuthenticationEntryPoint);
     }
 }

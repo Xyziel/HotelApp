@@ -94,6 +94,8 @@ public class UserController
         return ResponseEntity.ok().body(user);
     }
 
+
+    @CrossOrigin(origins = "*")
     @PatchMapping("/admin/updateUserRole")
     ResponseEntity<?> updateUserRoleByUserName(@RequestParam("userName") String userName,@RequestParam("role") String role)
     {
