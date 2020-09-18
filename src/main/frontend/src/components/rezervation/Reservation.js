@@ -92,7 +92,7 @@ class Reservation extends React.Component{
         }).then(res => {
             if (res.data === false) {
                 alert("You must first log in to be able to make a reservation.");
-                window.location.href = "/front_login";
+                window.location.href = "/login";
             } else {
                 this.togglePopup(room_id);
             }
