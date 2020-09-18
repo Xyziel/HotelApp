@@ -73,6 +73,19 @@ public class SessionController
         return ResponseEntity.ok(-1);
     }
 
+    @GetMapping("getUser")
+    ResponseEntity<User> getUser()
+    {
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getPrincipal());
+        if(authentication.getPrincipal() instanceof UserDetails)
+        {
+            User user=userRepo.findUserByUserName(authentication.getName());
+            return ResponseEntity.ok(user);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 
 
 }

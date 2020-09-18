@@ -17,7 +17,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 
-//TODO ten CORS trzeba bd sciagnac potem dla zabezpieczenia
 @RestController
 @RequestMapping("/api/users")
 //@CrossOrigin(origins = "http://localhost:3000/")
@@ -87,12 +86,13 @@ public class UserController
 //        return ResponseEntity.status(HttpStatus.OK).body(test);
 //    }
 
-    @PostMapping("/user/check")
-    ResponseEntity<User> getUserByUserName(@RequestBody String userName)
-    {
-        User user = userRepo.findUserByUserName(userName);
-        return ResponseEntity.ok().body(user);
-    }
+//    @GetMapping("/user/check")
+//    ResponseEntity<User> getUserByUserName(@RequestBody String userName)
+//    {
+//        User user = userRepo.findUserByUserName(userName);
+//        return ResponseEntity.ok().body(user);
+//    }
+
 
     @PatchMapping("/updateUserRole")
     ResponseEntity<?> updateUserRoleByUserName(@RequestParam("userName") String userName,@RequestParam("role") String role)
