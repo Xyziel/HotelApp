@@ -17,7 +17,6 @@ public class MyUrlFailureLoginHandler implements AuthenticationFailureHandler
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException
     {
-        System.out.println(request.getRequestURL());
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
     }
 }

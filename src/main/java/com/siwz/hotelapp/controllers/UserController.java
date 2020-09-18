@@ -119,13 +119,9 @@ public class UserController
     ResponseEntity<?> deleteUserById(@RequestParam("userName") String userName)
     {
         User user = userRepo.findUserByUserName(userName);
-        System.out.println(user.getUserName());
         if(user!=null)
         {
-            System.out.println(userName);
-            System.out.println(user.getUserId());
             userRepo.deleteUserByUserId(user.getUserId());
-            System.out.println(user.getUserId());
             return ResponseEntity.ok(true);
         }
         return ResponseEntity.ok(false);

@@ -46,7 +46,7 @@ class Reservation extends React.Component{
         if(dateFrom.length === 0 || dateTo.length === 0) {
             this.setState({dateError: 'Wrong date!'});
         }
-        else if(dateFrom.getDate() < currentTime.getDate() || dateTo.getTime() <= dateFrom.getTime()){
+        else if((dateFrom.getDate() < currentTime.getDate() && dateFrom.getMonth() < currentTime.getMonth()) || dateTo.getTime() <= dateFrom.getTime()){
             this.setState({dateError: 'Wrong date!'});
         } else {
             this.setState({dateError: ''});
@@ -125,16 +125,6 @@ class Reservation extends React.Component{
                         <Col>
                             <Form.Label>Check out</Form.Label>
                             <Form.Control type="date" name="dateTo" onChange={this.handleChange}/>
-                        </Col>
-                    </Form.Row>
-                    <Form.Row>
-                        <Col>
-                            <Form.Label>Room</Form.Label>
-                            <Form.Control type="number" defaultValue="1" name="numberOfRooms" min="1" onChange={this.handleChange}/>
-                        </Col>
-                        <Col>
-                            <Form.Label>Person</Form.Label>
-                            <Form.Control type="number" defaultValue="1" name="numberOfPersons" min="1" onChange={this.handleChange}/>
                         </Col>
                     </Form.Row>
                     <Button type="submit" id="checkButton">Check</Button>

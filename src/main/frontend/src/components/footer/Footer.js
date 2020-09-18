@@ -1,9 +1,8 @@
 import React from "react";
-import {Navbar, Nav, Container} from "react-bootstrap/esm/index";
+import {Navbar, Nav} from "react-bootstrap/esm/index";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHotel} from "@fortawesome/free-solid-svg-icons";
-import {Button} from "react-bootstrap";
 
 export default function Footer(){
 
