@@ -127,16 +127,6 @@ class Reservation extends React.Component{
                             <Form.Control type="date" name="dateTo" onChange={this.handleChange}/>
                         </Col>
                     </Form.Row>
-                    <Form.Row>
-                        <Col>
-                            <Form.Label>Room</Form.Label>
-                            <Form.Control type="number" defaultValue="1" name="numberOfRooms" min="1" onChange={this.handleChange}/>
-                        </Col>
-                        <Col>
-                            <Form.Label>Person</Form.Label>
-                            <Form.Control type="number" defaultValue="1" name="numberOfPersons" min="1" onChange={this.handleChange}/>
-                        </Col>
-                    </Form.Row>
                     <Button type="submit" id="checkButton">Check</Button>
                 </Form>
                 {this.state.connectionError.length !== 0 ?
