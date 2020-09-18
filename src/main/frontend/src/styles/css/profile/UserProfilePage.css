@@ -1,0 +1,49 @@
+.ImageColumn{
+    border-right: 1px solid black;
+    margin-right: 2em;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.userProfileImage{
+    border-radius: 20%;
+    width: 70%;
+}
+
+.informationTitle{
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+
+
+
+
+
+}
+
+.informationText{
+    position: absolute;
+    left: 50%;
+    font-size: 1.4em;
+
+
+}
+
+.ProfileContainer{
+    padding: 1em;
+    border: 2px black solid;
+    margin-bottom: 6em;
+}
+
+.informationColumn{
+
+
+}
+
+.profileHeader{
+
+
+
+ }

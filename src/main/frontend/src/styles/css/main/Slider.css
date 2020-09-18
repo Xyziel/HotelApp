@@ -1,0 +1,26 @@
+.SliderParagraph{
+    font-size: 1.4em;
+    color: #7f7f7f;
+}
+
+.SliderHeader{
+
+    font-weight: bold;
+    color: #4a4a4a;
+    opacity: 0.6;
+
+}
+
+.SliderTwoParagraph{
+
+    font-size: 1.2em;
+    color: #fafafa;
+
+}
+
+.SliderTwoHeader{
+    opacity: 0.6;
+    font-weight: bold;
+
+}
+

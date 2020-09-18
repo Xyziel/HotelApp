@@ -1,0 +1,643 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Title",
+    "description": "Title",
+    "version": "1.0.0"
+  },
+  "host": "www",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/reservation/user/add": {
+      "post": {
+        "tags": [
+          "reservation"
+        ],
+        "description": "Add new reservation for specific user",
+        "operationId": "addReservation",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/reservationAdd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success with add reservation"
+          },
+          "400": {
+            "description": "Reservation cannot be processed"
+          }
+        }
+      }
+    },
+    "/reservations/admin/all": {
+      "get": {
+        "tags": [
+          "reservation",
+          "admin"
+        ],
+        "description": "Get all reservations for admin panel",
+        "operationId": "getAllReservations",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns array of reservations",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/reservation"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reservations/admin": {
+      "delete": {
+        "tags": [
+          "admin"
+        ],
+        "description": "This endpoint delete reservation witch have id similar to request id",
+        "operationId": "deleteReservationById",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "reservationId",
+            "description": "Identifier of reservation",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservation successfully deleted"
+          },
+          "400": {
+            "description": "Request cannot be processed"
+          }
+        }
+      }
+    },
+    "/reservation/user/getAllReservationsByUserId": {
+      "get": {
+        "tags": [
+          "user",
+          "reservation"
+        ],
+        "description": "Returns array of reservations for user",
+        "operationId": "getAllReservationsByUserId",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "userId",
+            "description": "Identifier in DB",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of data",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/reservation"
+              }
+            }
+          },
+          "400": {
+            "description": "Request cannot be processed"
+          }
+        }
+      }
+    },
+    "/role/all": {
+      "get": {
+        "tags": [
+          "role"
+        ],
+        "description": "Returns all rules",
+        "operationId": "findAllRoles",
+        "responses": {
+          "200": {
+            "description": "Array of roles",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/role"
+              }
+            }
+          },
+          "400": {
+            "description": "Request cannot be processed"
+          }
+        }
+      }
+    },
+    "/reservation/check": {
+      "post": {
+        "tags": [
+          "reservation",
+          "room"
+        ],
+        "description": "Returns list of free rooms in time",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Date first and last day of reservation",
+            "schema": {
+              "$ref": "#/definitions/reservationsData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of data",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/reservation"
+              }
+            }
+          },
+          "400": {
+            "description": "Request cannot be processed"
+          }
+        }
+      }
+    },
+    "/isLoggedIn": {
+      "get": {
+        "tags": [
+          "user",
+          "session"
+        ],
+        "description": "Return true if user is logged into system",
+        "responses": {
+          "200": {
+            "description": "Returns true if user is logged",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "400": {
+            "description": "Request cannot be processed"
+          }
+        }
+      }
+    },
+    "/getUserRole": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "description": "Returns user role",
+        "responses": {
+          "200": {
+            "description": "Returns user role",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Request cannot be processed"
+          }
+        }
+      }
+    },
+    "/getUserId": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "description": "Return user id",
+        "responses": {
+          "200": {
+            "description": "Returns user role",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "400": {
+            "description": "Request cannot be processed"
+          }
+        }
+      }
+    },
+    "/getUser": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "description": "Return user",
+        "responses": {
+          "200": {
+            "description": "Returns user",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "400": {
+            "description": "Request cannot be processed"
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "description": "Register user into system",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User created"
+          },
+          "400": {
+            "description": "Request cannot be processed"
+          }
+        }
+      }
+    },
+    "/admin/getAllUsers": {
+      "get": {
+        "tags": [
+          "user",
+          "admin"
+        ],
+        "description": "Returns all users",
+        "responses": {
+          "200": {
+            "description": "User created",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          },
+          "400": {
+            "description": "Request cannot be processed"
+          }
+        }
+      }
+    },
+    "/user/check": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "description": "Return user by user name",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User created",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          },
+          "400": {
+            "description": "Request cannot be processed"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "reservationsData": {
+      "type": "object",
+      "required": [
+        "dateFrom",
+        "dateTo"
+      ],
+      "properties": {
+        "dateFrom": {
+          "type": "string",
+          "description": "First day of reservation",
+          "pattern": "DD:MM:YYYY",
+          "example": "12:05:2021"
+        },
+        "dateTo": {
+          "type": "string",
+          "description": "Last day of reservation",
+          "pattern": "DD:MM:YYYY",
+          "example": "17:05:2021"
+        }
+      }
+    },
+    "reservation": {
+      "type": "object",
+      "required": [
+        "ReservationId",
+        "dateFrom",
+        "dateTo",
+        "user",
+        "room"
+      ],
+      "properties": {
+        "ReservationId": {
+          "type": "integer",
+          "description": "Reservation identifier",
+          "example": 672
+        },
+        "dateFrom": {
+          "type": "string",
+          "description": "First day of reservation",
+          "pattern": "DD:MM:YYYY",
+          "example": "12:05:2021"
+        },
+        "dateTo": {
+          "type": "string",
+          "description": "Last day of reservation",
+          "pattern": "DD:MM:YYYY",
+          "example": "17:05:2021"
+        },
+        "user": {
+          "type": "object",
+          "description": "Reservation owner",
+          "$ref": "#/definitions/user"
+        },
+        "room": {
+          "type": "object",
+          "description": "Reservation room",
+          "$ref": "#/definitions/room"
+        }
+      }
+    },
+    "room": {
+      "type": "object",
+      "required": [
+        "roomId",
+        "number",
+        "price"
+      ],
+      "properties": {
+        "roomId": {
+          "type": "integer",
+          "description": "Identifier of room in DB",
+          "example": 53
+        },
+        "number": {
+          "type": "integer",
+          "description": "number iof room in hotel",
+          "example": 66
+        },
+        "floor": {
+          "type": "integer",
+          "description": "number of floor in building",
+          "example": 3
+        },
+        "price": {
+          "type": "number",
+          "description": "Coast of room per day",
+          "example": 5.76
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description of room",
+          "example": "This room is the best room in ours hotel."
+        },
+        "bedsCount": {
+          "type": "object",
+          "description": "Count of beds in room",
+          "$ref": "#/definitions/bedsCount"
+        },
+        "building": {
+          "type": "object",
+          "description": "Building where room is placed",
+          "$ref": "#/definitions/building"
+        },
+        "standard": {
+          "type": "object",
+          "description": "Standard of room",
+          "$ref": "#/definitions/Standard"
+        }
+      }
+    },
+    "bedsCount": {
+      "type": "object",
+      "required": [
+        "bedsCountsId",
+        "single",
+        "double",
+        "additionalSingle",
+        "additionalDouble"
+      ],
+      "properties": {
+        "bedsCountsId": {
+          "type": "integer",
+          "description": "Identifier in DB",
+          "example": 5
+        },
+        "single": {
+          "type": "integer",
+          "description": "Count of single beds in room",
+          "example": 2
+        },
+        "double": {
+          "type": "integer",
+          "description": "Count of double beds in room",
+          "example": 2
+        },
+        "additionalSingle": {
+          "type": "integer",
+          "description": "Count of single beds that could be add to room",
+          "example": 2
+        },
+        "additionalDouble": {
+          "type": "integer",
+          "description": "Count of single beds that could be add to room",
+          "example": 2
+        }
+      }
+    },
+    "building": {
+      "type": "object",
+      "properties": {
+        "buildingId": {
+          "type": "integer",
+          "description": "Identifier in DB",
+          "example": 12
+        },
+        "address": {
+          "type": "string",
+          "description": "Address of building",
+          "example": "Warszawska 2"
+        },
+        "city": {
+          "type": "string",
+          "description": "City where building is placed",
+          "example": "Kraków"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country where building is placed",
+          "example": "Poland"
+        }
+      }
+    },
+    "Standard": {
+      "type": "object",
+      "required": [
+        "standardId",
+        "name"
+      ],
+      "properties": {
+        "standardId": {
+          "type": "integer",
+          "description": "Identifier in DB",
+          "example": 13
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of standard",
+          "example": "Normalny"
+        }
+      }
+    },
+    "user": {
+      "type": "object",
+      "required": [
+        "userId",
+        "userName",
+        "password",
+        "firstName",
+        "lastName",
+        "email",
+        "phoneNumber",
+        "role"
+      ],
+      "properties": {
+        "userId": {
+          "type": "integer",
+          "description": "Identifier in DB",
+          "example": 12
+        },
+        "userName": {
+          "type": "string",
+          "description": "User nick name",
+          "example": "Maciek13"
+        },
+        "password": {
+          "type": "string",
+          "description": "User password",
+          "example": "idsahuioiuhfgr2390"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "User first name",
+          "example": "Marek"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "User last name",
+          "example": "Kowal"
+        },
+        "email": {
+          "type": "string",
+          "description": "User email",
+          "example": "lubie@to.pl"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "User phone number",
+          "example": "123456789"
+        },
+        "role": {
+          "type": "object",
+          "description": "Role of user in system",
+          "$ref": "#/definitions/role"
+        }
+      }
+    },
+    "role": {
+      "type": "object",
+      "required": [
+        "name",
+        "roleId"
+      ],
+      "properties": {
+        "roleId": {
+          "type": "integer",
+          "description": "Identifier in DB",
+          "example": 13
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of role",
+          "example": "Admin"
+        }
+      }
+    },
+    "reservationAdd": {
+      "type": "object",
+      "required": [
+        "idUser",
+        "idRoom",
+        "dateFrom",
+        "dateTo"
+      ],
+      "properties": {
+        "idUser": {
+          "type": "integer",
+          "description": "Identifier number of user",
+          "example": 764
+        },
+        "idRoom": {
+          "type": "integer",
+          "description": "Identifier number of room",
+          "example": 764
+        },
+        "dateFrom": {
+          "type": "string",
+          "description": "First day of reservation",
+          "pattern": "DD:MM:YYYY",
+          "example": "12:05:2021"
+        },
+        "dateTo": {
+          "type": "string",
+          "description": "Last day of reservation",
+          "pattern": "DD:MM:YYYY",
+          "example": "17:05:2021"
+        }
+      }
+    }
+  }
+}
