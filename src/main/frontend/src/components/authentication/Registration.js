@@ -200,7 +200,8 @@ class Registration extends React.Component
             then(res => {
                 console.log(res);
                 console.log(res.data);
-                window.location.replace("http://localhost:3000")
+                window.location.replace("http://localhost:3000");
+                alert("You have been successfully registered.");
 
         },e => {
                 console.log(e);
