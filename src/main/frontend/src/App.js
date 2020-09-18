@@ -13,6 +13,7 @@ import Reservation from "./components/rezervation/Reservation";
 import ContactPage from "./components/contact/ContactPage";
 import UserProfilePage from "./components/profile/UserProfilePage";
 import UserReservationPage from "./components/profile/UserReservationPage";
+import NotAuthenticated from "./components/NotAuthenticated";
 
 function App() {
   return (
