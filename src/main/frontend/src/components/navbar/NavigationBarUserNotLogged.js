@@ -50,7 +50,7 @@ export default function NavigationBarUserNotLogged(){
                             className={"mt-md-0 mt-3 mr-3"}
                             id="signInButton"
                             variant="outline-light"
-                            href={"/front_login"}
+                            href={"/login"}
 
                         >
                             Sign In</Button>

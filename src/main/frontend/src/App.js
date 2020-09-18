@@ -22,7 +22,7 @@ function App() {
             <Switch>
                 <Route path="/" exact component={MainPage}/>
                 <Route path="/registration" exact component={Registration}/>
-                <Route path="/front_login" exact component={Login}/>
+                <Route path="/login" exact component={Login}/>
                 <Route path="/admin_panel" exact component={AdminPanelNavbar}/>
                 <Route path="/admin_panel/users" exact component={AdminPanelUsers}/>
                 <Route path="/admin_panel/reservations" exact component={AdminPanelReservations}/>
