@@ -15,7 +15,6 @@ import Reservation from "./components/rezervation/Reservation";
 import ContactPage from "./components/contact/ContactPage";
 import UserProfilePage from "./components/profile/UserProfilePage";
 import UserReservationPage from "./components/profile/UserReservationPage";
-import ReservationBy from "./components/profile/ReservationBy";
 
 function App() {
   return (
@@ -34,7 +33,6 @@ function App() {
                 <Route path="/contact" exact component={ContactPage}/>
                 <Route path="/user/profile" exact component={UserProfilePage}/>
                 <Route path="/user/reservations" exact component={UserReservationPage}/>
-                <Route path="/reservationBy" exact component={ReservationBy}/>
             </Switch>
         <Footer/>
     </Router>
