@@ -44,7 +44,6 @@ public class SessionController
     }
 
 
-
     @CrossOrigin("*")
     @GetMapping("getUserRole")
     ResponseEntity<?> getUserRole()

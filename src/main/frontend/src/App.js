@@ -14,6 +14,7 @@ import ContactPage from "./components/contact/ContactPage";
 import UserProfilePage from "./components/profile/UserProfilePage";
 import UserReservationPage from "./components/profile/UserReservationPage";
 import NotAuthenticated from "./components/NotAuthenticated";
+import AboutPage from "./components/about-page/AboutPage";
 
 function App() {
   return (
@@ -31,8 +32,8 @@ function App() {
                 <Route path="/user/profile" exact component={UserProfilePage}/>
                 <Route path="/user/reservations" exact component={UserReservationPage}/>
                 <Route path="/not_authenticated" exact component={NotAuthenticated}/>
+                <Route path="/about" exact component={AboutPage}/>
             </Switch>
-        <Footer/>
     </Router>
   );
 }
