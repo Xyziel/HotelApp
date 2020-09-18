@@ -3,7 +3,6 @@ import axios from "axios/index"
 import ReactPaginate from 'react-paginate'
 import '../../styles/css/admin/AdminPanel.css'
 import AdminPanelNavbar from "./AdminPanelNavbar";
-import Select from 'react-select';
 
 
 
@@ -85,10 +84,6 @@ class AdminPanelUsers extends React.Component
 
     test(number)
     {
-        var temp=this.state.admin.length-1;
-        // console.log(temp);
-        // console.log(number);
-
         if(number===0)
         {
             number=1;
@@ -101,7 +96,6 @@ class AdminPanelUsers extends React.Component
         {
             number=number%3;
         }
-        // console.log(number);
         return this.state.admin[number];
     }
 
@@ -110,13 +104,7 @@ class AdminPanelUsers extends React.Component
         axios.get("http://localhost:8080/api/users/admin/getAllUsers").
         then(res=>
             {
-                // console.log(res.data._embedded.users[0]);
-                console.log(res.data);
-                // const data=res.data._embedded.users;
                 const data=res.data;
-                console.log(res.data);
-                console.log(res.status);
-                console.log(res.headers);
                 const slice=data.slice(this.state.offset,this.state.offset+this.state.perPage);
                 const postData = slice.map(pd => <React.Fragment>
                     <div className="d-flex flex-row">
@@ -149,11 +137,7 @@ class AdminPanelUsers extends React.Component
 
     handleChange(event,userName)
     {
-        // console.log(userName);
-        // console.log(event.target.value);
-        // console.log(event.target.id);
         this.state.selectedRole[userName]=event.target.value;
-        // console.log(this.state.selectedRole);
     }
 
     getSelectId()
@@ -166,7 +150,6 @@ class AdminPanelUsers extends React.Component
         {
             this.setState({selectId:this.state.selectId+1});
         }
-        // console.log(this.state.selectId);
         return 'select-'+this.state.selectId;
     }
 
@@ -174,9 +157,7 @@ class AdminPanelUsers extends React.Component
 
     deleteUser(userName)
     {
-        // console.log(url);
         const url="http://localhost:8080/api/users/admin" + "?userName=" + userName;
-        console.log(url);
         axios.delete(url,userName)
             .then(res=>{
                 console.log(res.data)
@@ -188,17 +169,12 @@ class AdminPanelUsers extends React.Component
     updateUserRole(userName,role)
     {
         var role2=role[userName];
-        // console.log(role2);
-        // console.log(userName);
-        // console.log(this.state.selectId);
-        // console.log(role2);
         function findValue(temp)
         {
             return temp===role2;
         }
 
         var roleValue=this.state.admin.findIndex(findValue)+1;
-        console.log(roleValue);
         const url="http://localhost:8080/api/users/admin/updateUserRole" + "?userName=" + userName + "&role=" + roleValue;
         axios.patch(url).then(
             res=>{
