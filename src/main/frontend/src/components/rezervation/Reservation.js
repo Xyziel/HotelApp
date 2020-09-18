@@ -46,7 +46,7 @@ class Reservation extends React.Component{
         if(dateFrom.length === 0 || dateTo.length === 0) {
             this.setState({dateError: 'Wrong date!'});
         }
-        else if(dateFrom.getDate() < currentTime.getDate() || dateTo.getTime() <= dateFrom.getTime()){
+        else if((dateFrom.getDate() < currentTime.getDate() && dateFrom.getMonth() < currentTime.getMonth()) || dateTo.getTime() <= dateFrom.getTime()){
             this.setState({dateError: 'Wrong date!'});
         } else {
             this.setState({dateError: ''});
