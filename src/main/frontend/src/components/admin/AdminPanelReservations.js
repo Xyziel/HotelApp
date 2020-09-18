@@ -42,7 +42,13 @@ class AdminPanelReservations extends React.Component
     {
         this.getData();
     }
+    extractingDate(date)
+    {
+        date=date.replace('T',' ');
+        date=date.slice(0,16);
+        return date;
 
+    }
     getData()
     {
         axios.get("http://localhost:8080/reservations/admin/all")
@@ -55,8 +61,8 @@ class AdminPanelReservations extends React.Component
                 const postData = res.data.map(pd => <React.Fragment>
                     <div className="d-flex flex-row">
                         <p className="col">{pd.reservationId}</p>
-                        <p className="col">{pd.dateFrom}</p>
-                        <p className="col">{pd.dateTo}</p>
+                        <p className="col">{this.extractingDate(pd.dateFrom)}</p>
+                        <p className="col">{this.extractingDate(pd.dateTo)}</p>
                         <p className="col">{pd.user.userName}</p>
                         <p className="col">{pd.user.lastName}</p>
                         <p className="col">{pd.room.number}</p>
