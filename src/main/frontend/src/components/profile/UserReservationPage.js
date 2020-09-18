@@ -3,155 +3,48 @@ import React from "react";
 import UserReservation from "./UserReservation";
 import axios from "axios";
 
-// export default function USerReservationPage() {
-//
-//     return(
-//
-//         <Container className={"d-flex  flex-column align-items-center"}>
-//
-//             <UserReservation
-//                 number={"1662"}
-//                 standard={"Single Room"}
-//                 city={"Aya Napa"}
-//                 street={"Polna"}
-//                 building={"Main Building"}
-//                 floor={"Third Floor"}
-//                 dateFrom = {"01.04.2020"}
-//                 dateTo={"05.04.2020"}
-//                 beds={3}
-//
-//             />
-//
-//             <UserReservation
-//                 number={"1662"}
-//                 standard={"Single Room"}
-//                 city={"Aya Napa"}
-//                 street={"Polna"}
-//                 building={"Main Building"}
-//                 floor={"Third Floor"}
-//                 dateFrom = {"01.04.2020"}
-//                 dateTo={"05.04.2020"}
-//                 beds={3}
-//
-//             />
-//
-//             <UserReservation
-//                 number={"1662"}
-//                 standard={"Single Room"}
-//                 city={"Aya Napa"}
-//                 street={"Polna"}
-//                 building={"Main Building"}
-//                 floor={"Third Floor"}
-//                 dateFrom = {"01.04.2020"}
-//                 dateTo={"05.04.2020"}
-//                 beds={3}
-//
-//             />
-//
-//             <UserReservation
-//                 number={"1662"}
-//                 standard={"Single Room"}
-//                 city={"Aya Napa"}
-//                 street={"Polna"}
-//                 building={"Main Building"}
-//                 floor={"Third Floor"}
-//                 dateFrom = {"01.04.2020"}
-//                 dateTo={"05.04.2020"}
-//                 beds={3}
-//
-//             />
-//
-//             <UserReservation
-//                 number={"1662"}
-//                 standard={"Single Room"}
-//                 city={"Aya Napa"}
-//                 street={"Polna"}
-//                 building={"Main Building"}
-//                 floor={"Third Floor"}
-//                 dateFrom = {"01.04.2020"}
-//                 dateTo={"05.04.2020"}
-//                 beds={3}
-//
-//             />
-//
-//             <UserReservation
-//                 number={"1662"}
-//                 standard={"Single Room"}
-//                 city={"Aya Napa"}
-//                 street={"Polna"}
-//                 building={"Main Building"}
-//                 floor={"Third Floor"}
-//                 dateFrom = {"01.04.2020"}
-//                 dateTo={"05.04.2020"}
-//                 beds={3}
-//
-//             />
-//
-//
-//
-//
-//
-//
-//
-//         </Container>
-//
-//
-//
-//
-//
-//
-//     );
-//
-// }
+class UserReservationPage extends React.Component {
 
-class UserReservationPage extends React.Component
-{
-
-    componentDidMount()
-    {
-        axios.get('http://localhost:8080/getUser').then(res=>{
-            this.setState({userId:res.data['userId']});
-            axios.get("http://localhost:8080/reservation/user/getAllReservationsByUserId?userId="+this.state.userId).then(
-                res2=>{
+    componentDidMount() {
+        axios.get('http://localhost:8080/getUser').then(res => {
+            this.setState({userId: res.data['userId']});
+            axios.get("http://localhost:8080/reservation/user/getAllReservationsByUserId?userId=" + this.state.userId).then(
+                res2 => {
                     console.log(res2.data);
-                    var table=[];
-                    for(var i=0;i<res2.data.length;i++)
-                    {
+                    var table = [];
+                    for (var i = 0; i < res2.data.length; i++) {
                         table.push(res2.data[i]);
                     }
-                    this.setState({reservations:table});
+                    this.setState({reservations: table});
                     // this.state.reservations.map(pd=>console.log(pd.dateFrom));
-                },e=>{
+                }, e => {
                     console.log(e);
                 }
             );
-        },e=>{
+        }, e => {
             console.log(e);
         });
 
     }
 
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
-        this.state={
-            userId:0,
-            reservations:[]
+        this.state = {
+            userId: 0,
+            reservations: []
         }
     }
 
-    extractingDate(date)
-    {
-        date=date.replace('T',' ');
-        date=date.slice(0,16);
-       return date;
+    extractingDate(date) {
+        date = date.replace('T', ' ');
+        date = date.slice(0, 16);
+        return date;
 
     }
 
-    render()
-    {
-        return (this.state.reservations.map(pd=>
-                <Container className={"d-flex  flex-column align-items-center"}>
+    render() {
+        return (this.state.reservations.map(pd =>
+            <Container className={"d-flex  flex-column align-items-center"}>
                 <UserReservation
                     number={pd.room.number}
                     standard={pd.room.standard.name}
@@ -159,9 +52,9 @@ class UserReservationPage extends React.Component
                     street={pd.room.building.address}
                     building={pd.room.building.city}
                     floor={pd.room['floor']}
-                    dateFrom = {this.extractingDate(pd.dateFrom)}
+                    dateFrom={this.extractingDate(pd.dateFrom)}
                     dateTo={this.extractingDate(pd.dateTo)}
-                    beds={'3'}
+                    beds={pd.room.bedsCount['single'] + pd.room.bedsCount['doublee'] + pd.room.bedsCount['doublee']}
                 />
             </Container>));
 
