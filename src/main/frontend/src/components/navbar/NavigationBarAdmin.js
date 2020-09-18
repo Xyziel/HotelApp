@@ -1,14 +1,7 @@
-import React, {useState} from 'react';
-import {Navbar, Nav, Container, Button} from "react-bootstrap";
+import React from 'react';
+import {Navbar, Nav, Button} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {
-    faCalendarCheck,
-    faGlobeEurope,
-    faHotel,
-    faMapMarkerAlt, faSignOutAlt,
-    faUser,
-    faUserCircle
-} from "@fortawesome/free-solid-svg-icons";
+import {faHotel} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Dropdown from "react-bootstrap/Dropdown";
 

@@ -2,7 +2,6 @@ import React from "react";
 import "../../styles/css/authentication/Login.css";
 import axios from 'axios';
 import querystring from 'querystring'
-import Cookies from 'js-cookie'
 
 class Login extends React.Component
 {
@@ -35,18 +34,12 @@ class Login extends React.Component
                 'Content-Type': 'application/x-www-form-urlencoded',
             }
         }).then(res=>{
-            console.log(res.status);
-            console.log(res.headers);
             window.location.replace("http://localhost:3000/");
-
-            // Cookies.set('JSESSIONID',res.data)
         },e=>{
            console.log(e);
            this.setState({loginError: 'Wrong username or password'});
         });
-        // sessionStorage.setItem('')
-        // window.location.replace("http://localhost:3000/");
-    }
+    };
 
 
     renderFormLogin()

@@ -45,8 +45,8 @@ class AdminPanelReservations extends React.Component
 
     getData()
     {
-        axios.get("http://localhost:8080/reservations/admin/all").
-        then(res=>
+        axios.get("http://localhost:8080/reservations/admin/all")
+            .then(res=>
             {
                 console.log(res.data);
                 // console.log(res.data._embedded.reservations[0]);
