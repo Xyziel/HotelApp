@@ -12,10 +12,24 @@ class AdminPanelNavbar extends React.Component
         super(props);
     }
 
+    checkRole()
+    {
+        axios.get('http://localhost:8080/getUserRole').then(
+            res=>{
+                if(res.data!=='admin')
+                {
+                    window.location.replace("http://localhost:3000/not_authenticated");
+                }
+            },e=>{
+                console.log(e);
+            }
+        )
+    }
 
     render()
     {
-        return(<div className="d-flex justify-content-center">
+        this.checkRole();
+        return(<div className="d-flex flex-row justify-content-center">
             <div>
                 <Link className="btn btn-dark btn-lg m-4" to="/admin_panel/users">Users</Link>
             </div>

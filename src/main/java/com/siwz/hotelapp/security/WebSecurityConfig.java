@@ -29,6 +29,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Autowired
     private MyUrlLogoutHandler myUrlLogoutHandler;
 
+    @Autowired
+    private MyCustomAuthenticationEntryPoint myCustomAuthenticationEntryPoint;
+
     @Bean
     public UserDetailsService userDetailsService()
     {
@@ -77,10 +80,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS).
                 and().csrf().disable().
-        addFilterBefore(myWebFilter(), CsrfFilter.class).authorizeRequests()
-                .antMatchers("/**").permitAll().
-//                antMatchers("/api/users/admin/**").hasAuthority("admin").anyRequest().authenticated().
-//                .antMatchers("/dao/**").hasAuthority("admin").anyRequest().authenticated().
+        addFilterBefore(myWebFilter(), CsrfFilter.class).
+                authorizeRequests().
+                antMatchers("/*").permitAll().
+                antMatchers("/api/users/*").permitAll().
+                antMatchers("/reservation/check").permitAll().
+                antMatchers("/reservation/add").hasAnyAuthority().
+                antMatchers("/api/roles/**").hasAuthority("admin").
+                antMatchers("/dao/**").hasAuthority("admin").
+                antMatchers("/api/users/admin/**").hasAuthority("admin").anyRequest().authenticated().
+//                antMatchers("/**").permitAll().
                 and().
                 formLogin().
                 usernameParameter("username").
@@ -88,11 +97,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 loginProcessingUrl("/perform_login").
                 successHandler(myUrlAuthenticationSuccessHandler).
                 failureHandler(myUrlFailureLoginHandler).
-//                defaultSuccessUrl("http://localhost:3000/test",true).
                 permitAll().
                 and().
                 logout().
                 logoutSuccessHandler(myUrlLogoutHandler).
-                permitAll();
+                permitAll().
+                and().httpBasic().authenticationEntryPoint(myCustomAuthenticationEntryPoint);
+//                and().exceptionHandling().authenticationEntryPoint(myCustomAuthenticationEntryPoint);
     }
 }
