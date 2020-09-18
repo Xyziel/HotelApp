@@ -1,9 +1,5 @@
 import React from "react";
 import "../../styles/css/authentication/Registration.css";
-import Buttons from "../buttons/Buttons"
-import {Form} from "react-bootstrap"
-import {Row} from "react-bootstrap"
-import {Col} from "react-bootstrap"
 import axios from 'axios';
 import Button from "react-bootstrap/Button";
 
@@ -152,8 +148,6 @@ class Registration extends React.Component
             object[key]=value;
         });
 
-        // console.log(object);
-
         var errorsTable={};
 
         //Sprawdzanie skladni maila
@@ -206,7 +200,6 @@ class Registration extends React.Component
             then(res => {
                 console.log(res);
                 console.log(res.data);
-                // window.location.replace("/");
         },e => {
                 console.log(e);
         });

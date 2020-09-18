@@ -50,7 +50,6 @@ public class SessionController
     ResponseEntity<?> getUserRole()
     {
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication.getName());
         String role="none";
         if(authentication.getPrincipal() instanceof UserDetails)
         {
@@ -80,7 +79,6 @@ public class SessionController
     ResponseEntity<User> getUser()
     {
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication.getPrincipal());
         if(authentication.getPrincipal() instanceof UserDetails)
         {
             User user=userRepo.findUserByUserName(authentication.getName());
