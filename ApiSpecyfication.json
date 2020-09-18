@@ -397,7 +397,7 @@
         "room": {
           "type": "object",
           "description": "Reservation room",
-          "$ref": "#/definitions/user"
+          "$ref": "#/definitions/room"
         }
       }
     },
