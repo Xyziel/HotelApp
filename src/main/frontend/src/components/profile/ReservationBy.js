@@ -22,7 +22,7 @@ class ReservationBy extends React.Component
 
         axios.get("http://localhost:8080/getAllReservationsByUserId?userId="+1).then(
             res=>{
-                console.log(res);
+                console.log(res.data);
             },e=>{
                 console.log(e);
             }
