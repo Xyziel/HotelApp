@@ -45,16 +45,16 @@ class AdminPanelUsers extends React.Component
 
     componentDidMount()
     {
-        // axios.get("http://localhost:8080/getUserRole").then(
-        //     res=>{
-        //         if(res.data!=='admin')
-        //         {
-        //             window.location.replace("http://localhost:3000/");
-        //         }
-        //     },e=>{
-        //         // console.log(e);
-        //     }
-        // );
+        axios.get("http://localhost:8080/getUserRole").then(
+            res=>{
+                if(res.data!=='admin')
+                {
+                    window.location.replace("http://localhost:3000/not_authenticated");
+                }
+            },e=>{
+                // console.log(e);
+            }
+        );
         this.getData();
     }
 
@@ -144,7 +144,6 @@ class AdminPanelUsers extends React.Component
             },
             e=>{
             console.log(e)
-            window.location.replace("http://localhost:3000/not_authenticated");
             });
     }
 
