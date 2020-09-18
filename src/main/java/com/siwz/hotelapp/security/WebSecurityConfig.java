@@ -85,7 +85,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 antMatchers("/*").permitAll().
                 antMatchers("/api/users/*").permitAll().
                 antMatchers("/reservation/check").permitAll().
-                antMatchers("/reservation/add").hasAnyAuthority().
+                antMatchers("/reservation/add").hasAnyAuthority("admin","cook","receptionist","client").
                 antMatchers("/api/roles/**").hasAuthority("admin").
                 antMatchers("/dao/**").hasAuthority("admin").
                 antMatchers("/api/users/admin/**").hasAuthority("admin").anyRequest().authenticated().

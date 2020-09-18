@@ -22,7 +22,7 @@ class PopUp extends React.Component{
 
         axios({
             method: 'post',
-            url: 'http://localhost:8080/reservation/add',
+            url: 'http://localhost:8080/reservation/user/add',
             data: json,
             headers:{
                 'Content-Type': 'application/json',

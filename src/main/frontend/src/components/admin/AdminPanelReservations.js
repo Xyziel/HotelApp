@@ -45,7 +45,7 @@ class AdminPanelReservations extends React.Component
 
     getData()
     {
-        axios.get("http://localhost:8080/reservations/all").
+        axios.get("http://localhost:8080/reservations/admin/all").
         then(res=>
             {
                 console.log(res.data);
@@ -74,7 +74,7 @@ class AdminPanelReservations extends React.Component
     deleteReservation(id)
     {
         console.log(id);
-        const url="http://localhost:8080/reservations?reservationId="+id;
+        const url="http://localhost:8080/reservations/admin?reservationId="+id;
         axios.delete(url);
 
     }
