@@ -36,10 +36,6 @@ export default function NavigationBarUserNotLogged(){
                     </Nav.Item>
 
                     <Nav.Item>
-                        <Link to={""} className="nav-link">Gallery</Link>
-                    </Nav.Item>
-
-                    <Nav.Item>
                         <Link to={"/reservation"} className="nav-link">Reservation</Link>
                     </Nav.Item>
 
