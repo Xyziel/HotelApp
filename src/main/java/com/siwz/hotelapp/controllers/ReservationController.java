@@ -22,21 +22,21 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @PostMapping("reservation/add")
+    @PostMapping("/reservation/user/add")
     public void addReservation(@RequestBody JSONObject data) {
         this.reservationService.addReservation(Integer.parseInt(data.get("idUser").toString()), Integer.parseInt(data.get("idRoom").toString()), data.get("dateFrom").toString(), data.get("dateTo").toString());
     }
-    @GetMapping("reservations/all")
+    @GetMapping("/reservations/admin/all")
     public ResponseEntity<List<Reservation>> getReservation(){
         return ResponseEntity.ok(reservationService.findAll());
     }
-    @DeleteMapping("reservations")
+    @DeleteMapping("reservations/admin")
     public void deleteReservationById(@RequestParam("reservationId") Integer id)
     {
         reservationService.delete(id);
     }
 
-    @GetMapping("getAllReservationsByUserId")
+    @GetMapping("/reservation/user/getAllReservationsByUserId")
     public ResponseEntity<List<Reservation>> getAllReservationsByUserId(@RequestParam("userId") int userId)
     {
         List<Reservation> reservationList=reservationService.findAllByUserId(userId);
