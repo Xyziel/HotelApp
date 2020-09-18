@@ -36,4 +36,11 @@ public class ReservationController {
         reservationService.delete(id);
     }
 
+    @GetMapping("getAllReservationsByUserId")
+    public ResponseEntity<List<Reservation>> getAllReservationsByUserId(@RequestParam("userId") int userId)
+    {
+        List<Reservation> reservationList=reservationService.findAllByUserId(userId);
+        return ResponseEntity.ok(reservationList);
+    }
+
 }

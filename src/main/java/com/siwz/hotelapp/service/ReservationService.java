@@ -30,4 +30,8 @@ public class ReservationService {
         this.reservationRepo.deleteUserByUserId(integer);
     }
 
+    public List<Reservation> findAllByUserId(int userId){
+        return reservationRepo.getAllReservationsByUserId(userId);
+    }
+
 }
