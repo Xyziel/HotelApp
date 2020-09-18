@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import {faHotel} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
+import "../../styles/css/navbar/NavBarHeader.css"
+
 export default function NavigationBarUserNotLogged(){
 
     return (
@@ -12,6 +14,7 @@ export default function NavigationBarUserNotLogged(){
 
             <Navbar.Brand href="/">
                 <FontAwesomeIcon className={"hotelBrand"} id="username-icon" icon={faHotel}/>
+                <h className={"navBarHeader"}>Hotel Paradise</h>
             </Navbar.Brand>
 
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -25,7 +28,7 @@ export default function NavigationBarUserNotLogged(){
                     </Nav.Item>
 
                     <Nav.Item>
-                        <Link to={"test"} className="nav-link">About</Link>
+                        <Link to={"/about"} className="nav-link">About</Link>
                     </Nav.Item>
 
                     <Nav.Item>

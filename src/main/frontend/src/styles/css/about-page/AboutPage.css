@@ -1,0 +1,47 @@
+.aboutPageHeader{
+
+    font-size: 2em;
+
+
+
+}
+
+.AboutTabs{
+    margin-top: 2em;
+}
+
+
+.AboutTabs  > a{
+
+    font-size: 1.3em;
+
+}
+
+.aboutTabText{
+
+    font-size: 1.3em;
+
+
+
+}
+
+.aboutTabImage{
+    width: 100%;
+}
+
+.aboutTab{
+    padding: 1em;
+    border: #1B75BC solid 2px;
+    margin-bottom: 2em;
+}
+
+.aboutRow{
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4em;
+}
+
+.aboutRowLast{
+    align-items: center;
+    justify-content: center;
+}
