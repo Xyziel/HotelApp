@@ -135,7 +135,7 @@
                             <outputDirectory>target/classes/static</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>src/main/frontend/build</directory>
+                                    <directory>src/main/frontend</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
