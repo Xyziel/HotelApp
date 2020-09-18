@@ -140,7 +140,13 @@ class UserReservationPage extends React.Component
         }
     }
 
+    extractingDate(date)
+    {
+        date=date.replace('T',' ');
+        date=date.slice(0,16);
+       return date;
 
+    }
 
     render()
     {
@@ -153,8 +159,8 @@ class UserReservationPage extends React.Component
                     street={pd.room.building.address}
                     building={pd.room.building.city}
                     floor={pd.room['floor']}
-                    dateFrom = {pd.dateFrom}
-                    dateTo={pd.dateTo}
+                    dateFrom = {this.extractingDate(pd.dateFrom)}
+                    dateTo={this.extractingDate(pd.dateTo)}
                     beds={'3'}
                 />
             </Container>));
