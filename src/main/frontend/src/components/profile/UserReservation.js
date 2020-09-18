@@ -49,11 +49,11 @@ export default function UserReservation(props){
             </h2>
 
 
-            <Button className={"eventDetailsButton"} variant={"secondary"}>
+            {/*<Button className={"eventDetailsButton"} variant={"secondary"}>*/}
 
-                See reservation details
+            {/*    See reservation details*/}
 
-            </Button>
+            {/*</Button>*/}
 
         </div>
 

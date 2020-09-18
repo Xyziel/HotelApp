@@ -7,83 +7,107 @@ import Container from "react-bootstrap/Container";
 
 import "../../styles/css/profile/UserProfilePage.css"
 
-export default function UserProfilePage() {
+import axios from "axios/index";
 
-    return(
+class UserProfilePage extends React.Component
+{
+    componentDidMount()
+    {
+        this.getUser();
+    }
 
-        <Container>
+    constructor(props)
+    {
+        super(props);
+        this.state= {
+            user: []
+        }
+    }
 
-            <h1 className={"profileHeader mb-5"}>Welcome on profile of PinkDarek69! </h1>
-
-        <Container className={"ProfileContainer"}>
-
-
-
-
-            <Row>
-
-                <Col className={"ImageColumn d-flex align-items-center col-4 "}>
-
-                    <img
-                        className={"userProfileImage"}
-                        src={userImage}
-                        alt="User profile image"
-                    />
-
-                </Col>
+    getUser()
+    {
+        axios.get('http://localhost:8080/getUser').then(res=>{
+            this.setState({user:res.data});
+        },e=>{
+            console.log(e);
+        });
+    }
 
 
-                <Col className={"informationColumn d-flex flex-column justify-content-center"}>
 
-                   <Row>
-                       <h className={"informationTitle"}>Username:</h>
-                       <h className={"informationText"}>PinkDarek69</h>
-                   </Row>
+    render()
+    {
+        // console.log(this.state.user);
+        return(
+            <Container>
+                <h1 className={"profileHeader mb-5"}>Welcome on profile of {this.state.user['userName']}! </h1>
+
+                <Container className={"ProfileContainer"}>
+
+
+
 
                     <Row>
-                        <h className={"informationTitle"}>First name:</h>
-                        <h className={"informationText"}>Paweł</h>
+
+                        <Col className={"ImageColumn d-flex align-items-center col-4 "}>
+
+                            <img
+                                className={"userProfileImage"}
+                                src={userImage}
+                                alt="User profile image"
+                            />
+
+                        </Col>
+
+
+                        <Col className={"informationColumn d-flex flex-column justify-content-center"}>
+
+                            <Row>
+                                <h className={"informationTitle"}>Username:</h>
+                                <h className={"informationText"}>{this.state.user['userName']}</h>
+                            </Row>
+
+                            <Row>
+                                <h className={"informationTitle"}>First name:</h>
+                                <h className={"informationText"}>{this.state.user['firstName']}</h>
+                            </Row>
+
+                            <Row>
+                                <h className={"informationTitle"}>Last name:</h>
+                                <h className={"informationText"}>{this.state.user['lastName']}</h>
+                            </Row>
+
+                            <Row>
+                                <h className={"informationTitle"}>Email:</h>
+                                <h className={"informationText"}>{this.state.user['email']}</h>
+                            </Row>
+
+                            <Row>
+                                <h className={"informationTitle"}>Phone Number:</h>
+                                <h className={"informationText"}>{this.state.user['phoneNumber']}</h>
+                            </Row>
+
+
+
+
+
+
+
+
+                        </Col>
+
                     </Row>
 
-                    <Row>
-                        <h className={"informationTitle"}>Second name:</h>
-                        <h className={"informationText"}>Formatter</h>
-                    </Row>
+                </Container>
 
-                    <Row>
-                        <h className={"informationTitle"}>Last name:</h>
-                        <h className={"informationText"}>Błaszczak</h>
-                    </Row>
-
-                    <Row>
-                        <h className={"informationTitle"}>Email:</h>
-                        <h className={"informationText"}>pblaszczak@landrynka.com</h>
-                    </Row>
-
-                    <Row>
-                        <h className={"informationTitle"}>Phone Number:</h>
-                        <h className={"informationText"}>110 921 377</h>
-                    </Row>
+            </Container>
 
 
 
 
 
-
-
-
-                </Col>
-
-            </Row>
-
-        </Container>
-
-        </Container>
-
-
-
-
-
-    );
-
+        );
+    }
 }
+
+export default UserProfilePage;
